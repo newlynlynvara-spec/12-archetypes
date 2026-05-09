@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<title>Dream Weaver</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+font-family:'Cormorant Garamond',serif;
+background:
+radial-gradient(circle at top,#ff4fa355,transparent 40%),
+radial-gradient(circle at bottom,#ffb6d555,transparent 40%),
+linear-gradient(to bottom,#160016,#2b002d,#120014);
+min-height:100vh;
+overflow:hidden;
+display:flex;
+align-items:center;
+justify-content:center;
+color:white;
+padding:20px;
+}
+
+.bg-glow{
+position:absolute;
+width:300px;
+height:300px;
+background:#ff4fa3;
+filter:blur(120px);
+opacity:.25;
+border-radius:50%;
+top:-100px;
+left:-50px;
+}
+
+.bg-glow2{
+position:absolute;
+width:300px;
+height:300px;
+background:#ffb6d5;
+filter:blur(120px);
+opacity:.2;
+border-radius:50%;
+bottom:-100px;
+right:-50px;
+}
+
+.card{
+position:relative;
+width:100%;
+max-width:420px;
+padding:28px;
+border-radius:40px;
+background:rgba(255,255,255,.08);
+backdrop-filter:blur(30px);
+border:1px solid rgba(255,255,255,.15);
+box-shadow:
+0 0 80px rgba(255,105,180,.25);
+overflow:hidden;
+}
+
+.card::before{
+content:'';
+position:absolute;
+inset:0;
+background:linear-gradient(to bottom right,
+rgba(255,255,255,.2),
+transparent);
+pointer-events:none;
+}
+
+.title{
+font-size:52px;
+line-height:0.95;
+text-align:center;
+margin-bottom:30px;
+background:linear-gradient(to bottom,
+#fff,
+#ffd6f0,
+#ffe9b5);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+text-shadow:0 0 25px rgba(255,255,255,.2);
+}
+
+.progress-text{
+display:flex;
+justify-content:space-between;
+font-size:14px;
+letter-spacing:2px;
+margin-bottom:10px;
+color:rgba(255,255,255,.7);
+}
+
+.progress{
+height:16px;
+background:rgba(255,255,255,.08);
+border-radius:999px;
+overflow:hidden;
+border:1px solid rgba(255,255,255,.1);
+margin-bottom:30px;
+}
+
+.progress-fill{
+height:100%;
+width:33%;
+background:linear-gradient(to right,
+#ff70b8,
+#ffb6d5,
+#ffe7a3);
+border-radius:999px;
+box-shadow:0 0 25px hotpink;
+}
+
+.question{
+padding:28px;
+border-radius:28px;
+background:rgba(255,255,255,.08);
+backdrop-filter:blur(20px);
+border:1px solid rgba(255,255,255,.1);
+margin-bottom:25px;
+font-size:28px;
+line-height:1.4;
+text-align:center;
+}
+
+.answers{
+display:flex;
+flex-direction:column;
+gap:15px;
+}
+
+.answer{
+padding:20px;
+border-radius:24px;
+background:rgba(255,255,255,.08);
+border:1px solid rgba(255,255,255,.1);
+backdrop-filter:blur(20px);
+font-size:20px;
+cursor:pointer;
+transition:.3s;
+}
+
+.answer:hover{
+transform:translateY(-3px) scale(1.02);
+background:rgba(255,255,255,.15);
+box-shadow:0 0 30px rgba(255,255,255,.1);
+}
+
+.footer{
+margin-top:25px;
+text-align:center;
+font-size:14px;
+color:rgba(255,255,255,.45);
+letter-spacing:1px;
+}
+
+.particle{
+position:absolute;
+width:6px;
+height:6px;
+background:#ffd6f0;
+border-radius:50%;
+opacity:.4;
+animation:float 6s infinite ease-in-out;
+}
+
+@keyframes float{
+0%{transform:translateY(0)}
+50%{transform:translateY(-20px)}
+100%{transform:translateY(0)}
+}
+
+</style>
+</head>
+<body>
+
+<div class="bg-glow"></div>
+<div class="bg-glow2"></div>
+
+<div class="particle" style="top:10%;left:20%"></div>
+<div class="particle" style="top:30%;left:80%"></div>
+<div class="particle" style="top:70%;left:10%"></div>
+<div class="particle" style="top:80%;left:70%"></div>
+
+<div class="card">
+
+<div class="title">
+Find Your<br>Inner Archetype
+</div>
+
+<div class="progress-text">
+<span>Question 1</span>
+<span>33%</span>
+</div>
+
+<div class="progress">
+<div class="progress-fill"></div>
+</div>
+
+<div class="question">
+อะไรทำให้คุณรู้สึกมีชีวิตที่สุด?
+</div>
+
+<div class="answers">
+
+<div class="answer">
+การถูกรักอย่างลึกซึ้ง
+</div>
+
+<div class="answer">
+การค้นพบสิ่งใหม่
+</div>
+
+<div class="answer">
+การเอาชนะบางอย่าง
+</div>
+
+<div class="answer">
+การเข้าใจตัวเอง
+</div>
+
+</div>
+
+<div class="footer">
+Some truths only appear in dreams.
+</div>
+
+</div>
+
+</body>
+</html>
+
+
+      

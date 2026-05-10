@@ -1,1041 +1,191 @@
-divPE html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="th">
 <head>
-<meta charset="UTF-8" />
+<meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-
-<title>Dream Weaver</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&display=swap" rel="stylesheet">
-
+<title>12 Archetypes Jungian</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=Anuphan:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
+*{margin:0;padding:0;box-sizing:border-box;}
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
+:root{
+  --pink-deep:#1a0010;
+  --pink-mid:#2d0020;
+  --pink-accent:#ff2d78;
+  --pink-bright:#ff4fa3;
+  --pink-soft:#ffb3d6;
+  --gold:#d4a847;
+  --gold-light:#f0c860;
+  --cream:#fff8f0;
+  --white:rgba(255,255,255,0.95);
+  --white-dim:rgba(255,255,255,0.6);
+  --white-faint:rgba(255,255,255,0.25);
 }
+
+html,body{height:100%;overflow:hidden;}
 
 body{
-font-family:'Cormorant Garamond',serif;
-background:
-radial-gradient(circle at top,#ff4fa355,transparent 40%),
-radial-gradient(circle at bottom,#ffb6d555,transparent 40%),
-linear-gradient(to bottom,#160016,#2b002d,#120014);
-min-height:100vh;
-overflow:hidden;
-display:flex;
-align-items:center;
-justify-content:center;
-color:white;
-padding:20px;
+  font-family:'Anuphan',sans-serif;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 0%, #3d0028 0%, transparent 70%),
+    radial-gradient(ellipse 60% 40% at 80% 100%, #2a0035 0%, transparent 60%),
+    radial-gradient(ellipse 50% 50% at 20% 60%, #1f001a 0%, transparent 55%),
+    linear-gradient(160deg, #110008 0%, #1e0016 35%, #16000e 65%, #0e000a 100%);
+  min-height:100vh;
+  color:#fff;
+  overflow:hidden;
+  position:relative;
 }
 
-.bg-glow{
-position:absolute;
-width:300px;
-height:300px;
-background:#ff4fa3;
-filter:blur(120px);
-opacity:.25;
-border-radius:50%;
-top:-100px;
-left:-50px;
+/* ambient orbs */
+.orb{
+  position:fixed;border-radius:50%;pointer-events:none;z-index:0;
+  animation:orbFloat 18s ease-in-out infinite;
+}
+.orb1{
+  width:500px;height:500px;
+  background:radial-gradient(circle,rgba(255,45,120,0.18) 0%,transparent 65%);
+  top:-150px;left:-100px;animation-delay:0s;
+}
+.orb2{
+  width:600px;height:600px;
+  background:radial-gradient(circle,rgba(212,168,71,0.12) 0%,transparent 65%);
+  bottom:-200px;right:-150px;animation-delay:-9s;
+}
+.orb3{
+  width:350px;height:350px;
+  background:radial-gradient(circle,rgba(255,79,163,0.14) 0%,transparent 65%);
+  top:40%;left:60%;animation-delay:-5s;
+}
+@keyframes orbFloat{
+  0%,100%{transform:translate(0,0);}
+  33%{transform:translate(30px,20px);}
+  66%{transform:translate(-20px,35px);}
 }
 
-.bg-glow2{
-position:absolute;
-width:300px;
-height:300px;
-background:#ffb6d5;
-filter:blur(120px);
-opacity:.2;
-border-radius:50%;
-bottom:-100px;
-right:-50px;
+/* page system */
+.page{
+  position:fixed;inset:0;
+  display:flex;align-items:center;justify-content:center;
+  padding:20px;
+  transition:opacity .5s ease, transform .5s ease;
+  overflow-y:auto;
+  z-index:1;
+}
+.page.hidden{opacity:0;pointer-events:none;transform:translateY(20px);}
+.page.active{opacity:1;pointer-events:all;transform:translateY(0);}
+
+/* ── LANDING PAGE ── */
+#page-home{flex-direction:column;gap:0;}
+.home-inner{
+  display:flex;flex-direction:column;align-items:center;
+  max-width:480px;width:100%;
+  gap:0;
 }
 
-.card{
-position:relative;
-width:100%;
-max-width:420px;
-padding:28px;
-border-radius:40px;
-background:rgba(255,255,255,.08);
-backdrop-filter:blur(30px);
-border:1px solid rgba(255,255,255,.15);
-box-shadow:
-0 0 80px rgba(255,105,180,.25);
-overflow:hidden;
+.title-glass{
+  position:relative;
+  padding:32px 40px 28px;
+  border-radius:28px;
+  background:linear-gradient(135deg,rgba(255,255,255,0.13) 0%,rgba(255,255,255,0.06) 50%,rgba(255,200,180,0.08) 100%);
+  backdrop-filter:blur(24px);
+  border:1px solid rgba(255,255,255,0.18);
+  box-shadow:
+    0 0 60px rgba(255,45,120,0.18),
+    0 0 0 1px rgba(255,255,255,0.06) inset,
+    0 20px 60px rgba(0,0,0,0.4);
+  text-align:center;
+  margin-bottom:28px;
+  overflow:hidden;
+}
+.title-glass::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(140deg,rgba(255,255,255,0.18) 0%,transparent 40%);
+  pointer-events:none;border-radius:28px;
+}
+.title-glass::after{
+  content:'';position:absolute;
+  top:-60%;left:-60%;width:220%;height:220%;
+  background:radial-gradient(circle,rgba(255,255,255,0.06) 0%,transparent 55%);
+  pointer-events:none;
 }
 
-.card::before{
-content:'';
-position:absolute;
-inset:0;
-background:linear-gradient(to bottom right,
-rgba(255,255,255,.2),
-transparent);
-pointer-events:none;
+.title-main{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(38px,8vw,58px);
+  line-height:1.05;
+  letter-spacing:-0.01em;
+  position:relative;z-index:1;
+}
+.title-find{
+  color:var(--pink-bright);
+  text-shadow:0 0 30px rgba(255,79,163,0.5);
+  display:block;
+}
+.title-inner{
+  color:var(--gold-light);
+  text-shadow:0 0 30px rgba(240,200,96,0.4);
+  display:block;
 }
 
-.title{
-font-size:52px;
-line-height:0.95;
-text-align:center;
-margin-bottom:30px;
-background:linear-gradient(to bottom,
-#fff,
-#ffd6f0,
-#ffe9b5);
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
-text-shadow:0 0 25px rgba(255,255,255,.2);
+.tagline{
+  font-family:'Anuphan',sans-serif;
+  font-size:16px;
+  font-weight:400;
+  color:rgba(255,255,255,0.82);
+  letter-spacing:0.02em;
+  margin-bottom:28px;
+  line-height:1.6;
 }
 
-.progress-text{
-display:flex;
-justify-content:space-between;
-font-size:14px;
-letter-spacing:2px;
-margin-bottom:10px;
-color:rgba(255,255,255,.7);
+.btn-start{
+  display:inline-block;
+  padding:16px 52px;
+  border-radius:999px;
+  background:linear-gradient(120deg,#ff2d78,#ff6ba8);
+  border:none;
+  color:#fff;
+  font-family:'Anuphan',sans-serif;
+  font-size:18px;
+  font-weight:600;
+  letter-spacing:0.05em;
+  cursor:pointer;
+  box-shadow:
+    0 0 40px rgba(255,45,120,0.45),
+    0 4px 20px rgba(0,0,0,0.3);
+  transition:all .25s ease;
+  margin-bottom:18px;
+}
+.btn-start:hover{
+  transform:translateY(-2px) scale(1.03);
+  box-shadow:0 0 60px rgba(255,45,120,0.6),0 8px 30px rgba(0,0,0,0.35);
 }
 
-.progress{
-height:16px;
-background:rgba(255,255,255,.08);
-border-radius:999px;
-overflow:hidden;
-border:1px solid rgba(255,255,255,.1);
-margin-bottom:30px;
+.link-about{
+  font-size:13px;
+  color:rgba(255,255,255,0.45);
+  cursor:pointer;
+  letter-spacing:0.05em;
+  transition:color .2s;
+  background:none;border:none;
+  font-family:'Anuphan',sans-serif;
 }
+.link-about:hover{color:rgba(255,255,255,0.75);}
 
-.progress-fill{
-height:100%;
-width:33%;
-background:linear-gradient(to right,
-#ff70b8,
-#ffb6d5,
-#ffe7a3);
-border-radius:999px;
-box-shadow:0 0 25px hotpink;
-}
+/* ── ABOUT MODAL ── */
+#modal-about{
+  position:fixed;inset:0;z-index:100;
+  background:rgba(0,0,0,0.7);backdrop-fil
 
-.question{
-padding:28px;
-border-radius:28px;
-background:rgba(255,255,255,.08);
-backdrop-filter:blur(20px);
-border:1px solid rgba(255,255,255,.1);
-margin-bottom:25px;
-font-size:28px;
-line-height:1.4;
-text-align:center;
-}
 
-.answers{
-display:flex;
-flex-direction:column;
-gap:15px;
-}
+      
 
-.answer{
-padding:20px;
-border-radius:24px;
-background:rgba(255,255,255,.08);
-border:1px solid rgba(255,255,255,.1);
-backdrop-filter:blur(20px);
-font-size:20px;
-cursor:pointer;
-transition:.3s;
-}
 
-.answer:hover{
-transform:translateY(-3px) scale(1.02);
-background:rgba(255,255,255,.15);
-box-shadow:0 0 30px rgba(255,255,255,.1);
-}
 
-.footer{
-margin-top:25px;
-text-align:center;
-font-size:14px;
-color:rgba(255,255,255,.45);
-letter-spacing:1px;
-}
 
-.particle{
-position:absolute;
-width:6px;
-height:6px;
-background:#ffd6f0;
-border-radius:50%;
-opacity:.4;
-animation:float 6s infinite ease-in-out;
-}
 
-@keyframes float{
-0%{transform:translateY(0)}
-50%{transform:translateY(-20px)}
-100%{transform:translateY(0)}
-}
-
-</stexport type ArchetypeKey =
-  | "innocent" | "sage" | "explorer" | "outlaw"
-  | "magician" | "hero" | "lover" | "jester"
-  | "everyman" | "caregiver" | "ruler" | "creator";
-
-export interface Archetype {
-  key: ArchetypeKey;
-  name: string;        // English label
-  nameTh: string;      // Thai label
-  tagline: string;     // Thai tagline
-  summary: string;     // Thai short personality summary
-  desire: string;      // Thai core desire
-  fear: string;        // Thai core fear
-  quote: string;       // Thai aesthetic quote
-  colors: string[];    // matching color hex codes
-  symbol: string;
-  gradient: string;
-}
-
-export const archetypes: Record<ArchetypeKey, Archetype> = {
-  innocent: {
-    key: "innocent", name: "The Innocent", nameTh: "ผู้บริสุทธิ์",
-    tagline: "หัวใจที่ยังเชื่อในแสงสว่าง",
-    summary: "คุณมองโลกด้วยสายตาที่ยังไม่ถูกทำลาย เชื่อในความดี ความงาม และความเรียบง่ายของชีวิต ความบริสุทธิ์ของคุณคือเกราะที่อ่อนโยนที่สุดและทรงพลังที่สุด",
-    desire: "อยู่ในโลกที่ปลอดภัย บริสุทธิ์ และเปี่ยมความสุข",
-    fear: "การถูกลงโทษ ถูกหักหลัง หรือทำสิ่งผิดพลาดร้ายแรง",
-    quote: "“ในโลกที่ขมขื่น การยังเชื่อก็คือการกบฏที่งดงามที่สุด”",
-    colors: ["#FCE7E9", "#FFF6E5", "#F8D7DA"],
-    symbol: "✿",
-    gradient: "linear-gradient(135deg, oklch(0.95 0.04 30), oklch(0.88 0.08 350))",
-  },
-  sage: {
-    key: "sage", name: "The Sage", nameTh: "นักปราชญ์",
-    tagline: "ผู้แสวงหาความจริงในความเงียบ",
-    summary: "คุณกระหายความเข้าใจมากกว่าความสบาย จิตของคุณเป็นห้องสมุดที่ไม่มีวันปิด ความจริงคือเข็มทิศ และความกระจ่างคือของขวัญที่คุณมอบให้โลก",
-    desire: "เข้าใจความจริงของโลกและของตัวเอง",
-    fear: "ถูกหลอก หรือใช้ชีวิตอยู่ในความไม่รู้",
-    quote: "“ความเงียบของฉันไม่ได้ว่างเปล่า — มันเต็มไปด้วยคำตอบ”",
-    colors: ["#E9E4D8", "#C9B98C", "#3D3A36"],
-    symbol: "☾",
-    gradient: "linear-gradient(135deg, oklch(0.9 0.06 60), oklch(0.85 0.1 30))",
-  },
-  explorer: {
-    key: "explorer", name: "The Explorer", nameTh: "นักแสวงหา",
-    tagline: "วิญญาณที่ไม่เคยหยุดเดิน",
-    summary: "ขอบฟ้าเรียกคุณเสมอ คุณยอมเหงาเพื่อจะได้เป็นตัวเอง ทุกย่างก้าวคือคำประกาศอิสรภาพ และทุกความเคว้งคว้างคือคำตอบที่ยังไม่ได้พบ",
-    desire: "อิสรภาพในการค้นพบและเป็นตัวของตัวเอง",
-    fear: "ถูกขังอยู่ในกรอบ กิจวัตร หรือชีวิตที่ไร้ความหมาย",
-    quote: "“ฉันไม่ได้หลงทาง ฉันแค่ยังไม่ถูกจองจำ”",
-    colors: ["#C8A97E", "#7A6F5D", "#E8DCC4"],
-    symbol: "✺",
-    gradient: "linear-gradient(135deg, oklch(0.88 0.1 80), oklch(0.78 0.14 40))",
-  },
-  outlaw: {
-    key: "outlaw", name: "The Outlaw", nameTh: "ผู้ทำลายกฎ",
-    tagline: "ไฟใต้ผิวหนังของผู้ที่ไม่ยอมจำนน",
-    summary: "คุณมองทะลุภาพลวง และไม่ยอมเคารพกฎที่ทำร้ายคน การปฏิวัติคือศาสนาส่วนตัวของคุณ — บางครั้งคุณเผาบ้านเพื่อให้แสงเข้ามาได้",
-    desire: "โค่นล้มสิ่งที่บิดเบี้ยวและทวงคืนเสรีภาพ",
-    fear: "ไร้พลัง ถูกควบคุม หรือกลายเป็นผู้สมรู้ร่วมคิดเงียบ ๆ",
-    quote: "“ฉันไม่ได้โกรธโลก ฉันแค่ปฏิเสธจะแกล้งทำเป็นไม่เห็น”",
-    colors: ["#3B0A0A", "#8B1E2C", "#1A1A1A"],
-    symbol: "✦",
-    gradient: "linear-gradient(135deg, oklch(0.7 0.18 10), oklch(0.6 0.2 350))",
-  },
-  magician: {
-    key: "magician", name: "The Magician", nameTh: "นักเล่นแร่แปรธาตุ",
-    tagline: "ผู้ถักทอความเป็นจริงด้วยเจตนา",
-    summary: "คุณมองเห็นรูปแบบที่ซ่อนอยู่ใต้ผิวของสิ่งต่าง ๆ และเข้าใจว่าจินตนาการคือพลังที่สร้างโลก คุณไม่ได้รอให้สิ่งใดเกิดขึ้น คุณเรียกมันออกมา",
-    desire: "เข้าใจกฎของจักรวาลและใช้มันเปลี่ยนความเป็นจริง",
-    fear: "ผลที่ไม่ได้คาดคิด การสูญเสียการควบคุมพลังของตัวเอง",
-    quote: "“โลกนี้คือกระจก ฉันแค่เปลี่ยนสิ่งที่ฉันมองเห็นในนั้น”",
-    colors: ["#2A0A3E", "#7A3FB8", "#D4AF37"],
-    symbol: "✶",
-    gradient: "linear-gradient(135deg, oklch(0.78 0.14 320), oklch(0.72 0.18 5))",
-  },
-  hero: {
-    key: "hero", name: "The Hero", nameTh: "วีรบุรุษ",
-    tagline: "หัวใจที่ก้าวเข้าหาไฟ",
-    summary: "ความท้าทายเรียกคุณออกมาจากเงา คุณเชื่อในการพิสูจน์คุณค่าด้วยการกระทำ และไม่ยอมให้ความกลัวเป็นคนเขียนเรื่องราวของคุณ",
-    desire: "พิสูจน์คุณค่าผ่านการกระทำที่กล้าหาญ",
-    fear: "ความอ่อนแอ ความขลาด หรือถูกมองว่าไร้ความสามารถ",
-    quote: "“ฉันไม่ได้ไร้ความกลัว ฉันแค่เดินไปข้างหน้าทั้ง ๆ ที่กลัว”",
-    colors: ["#B8860B", "#3D2914", "#F4E4BC"],
-    symbol: "✧",
-    gradient: "linear-gradient(135deg, oklch(0.82 0.14 60), oklch(0.7 0.18 20))",
-  },
-  lover: {
-    key: "lover", name: "The Lover", nameTh: "ผู้รัก",
-    tagline: "หัวใจที่หลอมรวมเป็นโลกได้ทั้งใบ",
-    summary: "คุณรู้สึกลึก รักแรง และเห็นความศักดิ์สิทธิ์ในความใกล้ชิด ทุกสายตา ทุกสัมผัส และทุกบทเพลง คือบทสวดของคุณต่อชีวิต",
-    desire: "ได้รักและถูกรักอย่างหมดหัวใจ",
-    fear: "ถูกทอดทิ้ง ไม่เป็นที่ต้องการ หรืออยู่คนเดียว",
-    quote: "“ฉันไม่ได้รักเพื่อจะถูกรัก — ฉันรักเพราะวิญญาณฉันถูกสร้างมาแบบนั้น”",
-    colors: ["#D4707E", "#F5C2C7", "#7A2E3A"],
-    symbol: "♥",
-    gradient: "linear-gradient(135deg, oklch(0.82 0.14 0), oklch(0.78 0.16 350))",
-  },
-  jester: {
-    key: "jester", name: "The Jester", nameTh: "ผู้เริงร่า",
-    tagline: "ปัญญาที่ซ่อนอยู่ในเสียงหัวเราะ",
-    summary: "คุณเชื่อว่าชีวิตนี้สั้นเกินกว่าจะจริงจังตลอดเวลา ความสนุกของคุณคือคำเตือนเงียบ ๆ ว่าทุกสิ่งจะผ่านไป — แม้แต่ความเจ็บปวด",
-    desire: "อยู่ในปัจจุบัน เพลิดเพลินกับชีวิตเต็มที่",
-    fear: "ความน่าเบื่อ ความว่างเปล่า การไม่ถูกมองเห็น",
-    quote: "“ฉันหัวเราะ เพราะฉันเข้าใจดีเกินกว่าจะร้องไห้”",
-    colors: ["#FFB347", "#FF6F61", "#FFE66D"],
-    symbol: "✸",
-    gradient: "linear-gradient(135deg, oklch(0.88 0.12 90), oklch(0.82 0.16 20))",
-  },
-  everyman: {
-    key: "everyman", name: "The Everyman", nameTh: "สามัญชน",
-    tagline: "ความจริงในความธรรมดา",
-    summary: "คุณเป็นที่พักใจของคนรอบข้าง ไม่ต้องสวมหน้ากาก ไม่ต้องพิสูจน์อะไร ความอบอุ่นและความสัตย์ซื่อของคุณทำให้โลกใจดีขึ้น",
-    desire: "ได้รู้สึกเป็นส่วนหนึ่ง ไม่ถูกตัดสิน",
-    fear: "ถูกแยก โดดเดี่ยว หรือดู ‘แตกต่าง’ จนเกินไป",
-    quote: "“ฉันไม่ใช่ใครคนพิเศษ — และนั่นคือของขวัญของฉัน”",
-    colors: ["#A89F91", "#D9C9A8", "#5C5247"],
-    symbol: "❋",
-    gradient: "linear-gradient(135deg, oklch(0.86 0.06 50), oklch(0.78 0.08 30))",
-  },
-  caregiver: {
-    key: "caregiver", name: "The Caregiver", nameTh: "ผู้โอบอุ้ม",
-    tagline: "หัวใจที่กว้างพอจะแบกทั้งโลก",
-    summary: "คุณรู้สึกถึงความเจ็บของผู้อื่นได้ก่อนที่พวกเขาจะรู้ตัว ความรักของคุณคือยา แต่บางครั้งคุณก็ลืมเก็บไว้ดูแลตัวเอง",
-    desire: "ปกป้องและดูแลผู้อื่นอย่างไม่มีเงื่อนไข",
-    fear: "เห็นแก่ตัว ไม่เป็นที่ต้องการ หรือไม่สามารถช่วยใครได้",
-    quote: "“ฉันโอบกอดรอยแผลของคนอื่น เพราะรู้ว่ามันรู้สึกอย่างไร”",
-    colors: ["#F4D5D8", "#C97B84", "#FFF1E6"],
-    symbol: "✿",
-    gradient: "linear-gradient(135deg, oklch(0.9 0.08 20), oklch(0.82 0.12 350))",
-  },
-  ruler: {
-    key: "ruler", name: "The Ruler", nameTh: "ผู้ปกครอง",
-    tagline: "ผู้สถาปนาระเบียบอันงดงาม",
-    summary: "คุณถูกเรียกมาเพื่อสร้างความมั่นคง ความรุ่งโรจน์ และมรดกที่ยั่งยืน อำนาจในมือของคุณคือเครื่องมือ ไม่ใช่รางวัล",
-    desire: "สร้างอาณาจักรแห่งความรุ่งเรืองและความเป็นระเบียบ",
-    fear: "ความวุ่นวาย การสูญเสียอำนาจ หรือถูกล้มล้าง",
-    quote: "“ฉันไม่ได้ครอง — ฉันรับผิดชอบ”",
-    colors: ["#1B1B3A", "#D4AF37", "#6B0F1A"],
-    symbol: "✷",
-    gradient: "linear-gradient(135deg, oklch(0.78 0.14 75), oklch(0.65 0.16 50))",
-  },
-  creator: {
-    key: "creator", name: "The Creator", nameTh: "ผู้สร้างสรรค์",
-    tagline: "วิญญาณที่ต้องสร้าง มิฉะนั้นจะตาย",
-    summary: "คุณไม่สามารถหยุดสร้างสิ่งใหม่ได้ — มันคือลมหายใจ ทุกสิ่งที่คุณสัมผัสกลายเป็นรูปแบบ ความหมาย หรือบทกวีบางประการ",
-    desire: "สร้างบางสิ่งที่งดงาม คงอยู่ และเป็นของคุณคนเดียว",
-    fear: "ความธรรมดา การลอกเลียน หรือไม่สามารถถ่ายทอดสิ่งภายในออกมาได้",
-    quote: "“สิ่งที่ฉันสร้างคือสิ่งเดียวที่ฉันแน่ใจว่ามีอยู่จริง”",
-    colors: ["#2D1B69", "#E8B4B8", "#F4E1D2"],
-    symbol: "❈",
-    gradient: "linear-gradient(135deg, oklch(0.85 0.1 320), oklch(0.78 0.14 60))",
-  },
-};
-
-export const archetypeOrder: ArchetypeKey[] = [
-  "innocent","sage","explorer","outlaw","magician","hero",
-  "lover","jester","everyman","caregiver","ruler","creator",
-];
-
-      import { motion } from "framer-motion";
-import { Roach } from "./Roach";
-
-/**
- * Bright luxe pink atmosphere:
- *  - drifting hot-pink + gold fog orbs
- *  - tiny glowing roaches floating like fireflies
- *  - soft smoke gradient + grain + vignette
- */
-export function DreamyBackground() {
-  return (
-    <>
-      <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden bg-gradient-dream">
-        {/* Soft drifting orbs */}
-        <motion.div
-          className="absolute -top-48 -left-32 h-[600px] w-[600px] rounded-full blur-[130px] opacity-70"
-          style={{ background: "radial-gradient(circle, #FF4FA3 0%, transparent 70%)" }}
-          animate={{ x: [0, 80, 0], y: [0, 50, 0] }}
-          transition={{ duration: 22, repeat: Infinity, ease: "easeInOut" }}
-        />
-        <motion.div
-          className="absolute top-1/4 -right-40 h-[700px] w-[700px] rounded-full blur-[140px] opacity-50"
-          style={{ background: "radial-gradient(circle, #F2C572 0%, transparent 70%)" }}
-          animate={{ x: [0, -60, 0], y: [0, 80, 0] }}
-          transition={{ duration: 26, repeat: Infinity, ease: "easeInOut" }}
-        />
-        <motion.div
-          className="absolute bottom-[-200px] left-1/3 h-[600px] w-[600px] rounded-full blur-[140px] opacity-65"
-          style={{ background: "radial-gradient(circle, #D61F75 0%, transparent 70%)" }}
-          animate={{ x: [0, 50, 0], y: [0, -60, 0] }}
-          transition={{ duration: 28, repeat: Infinity, ease: "easeInOut" }}
-        />
-        <motion.div
-          className="absolute top-1/2 left-1/2 h-[520px] w-[520px] -translate-x-1/2 -translate-y-1/2 rounded-full blur-[160px] opacity-35"
-          style={{ background: "radial-gradient(circle, #FFB3D6 0%, transparent 70%)" }}
-          animate={{ scale: [1, 1.2, 1] }}
-          transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
-        />
-
-        {/* Floating little roaches like fireflies */}
-        {Array.from({ length: 12 }).map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute"
-            style={{
-              top: `${(i * 47) % 95}%`,
-              left: `${(i * 31) % 95}%`,
-            }}
-            animate={{
-              x: [0, 20, -10, 0],
-              y: [0, -15, 10, 0],
-              opacity: [0.25, 0.7, 0.3],
-              rotate: [0, 12, -8, 0],
-            }}
-            transition={{ duration: 10 + (i % 5) * 2, repeat: Infinity, delay: (i * 0.4) % 5, ease: "easeInOut" }}
-          >
-            <Roach size={i % 3 === 0 ? 16 : 11} />
-          </motion.div>
-        ))}
-      </div>
-
-      {/* Texture layers */}
-      <div className="smoke-overlay" />
-      <div className="grain-overlay" />
-      <div className="vignette-overlay" />
-    </>
-  );
-      }
-
-                         
-https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Prompt:wght@300;400;500;600;700&family=IBM+Plex+Sans+Thai:wght@300;400;500;600&family=Anuphan:wght@300;400;500;600&display=swap
-
-
-                         import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import {
-  Outlet,
-  Link,
-  createRootRouteWithContext,
-  useRouter,
-  HeadContent,
-  Scripts,
-} from "@tanstack/react-router";
-
-import appCss from "../styles.css?url";
-
-function NotFoundComponent() {
-  return (
-    <div className="flex min-h-screen items-center justify-center bg-background px-4">
-      <div className="max-w-md text-center">
-        <h1 className="text-7xl font-bold text-foreground">404</h1>
-        <h2 className="mt-4 text-xl font-semibold text-foreground">Page not found</h2>
-        <p className="mt-2 text-sm text-muted-foreground">
-          The page you're looking for doesn't exist or has been moved.
-        </p>
-        <div className="mt-6">
-          <Link
-            to="/"
-            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
-          >
-            Go home
-          </Link>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
-  console.error(error);
-  const router = useRouter();
-
-  return (
-    <div className="flex min-h-screen items-center justify-center bg-background px-4">
-      <div className="max-w-md text-center">
-        <h1 className="text-xl font-semibold tracking-tight text-foreground">
-          This page didn't load
-        </h1>
-        <p className="mt-2 text-sm text-muted-foreground">
-          Something went wrong on our end. You can try refreshing or head back home.
-        </p>
-        <div className="mt-6 flex flex-wrap justify-center gap-2">
-          <button
-            onClick={() => {
-              router.invalidate();
-              reset();
-            }}
-            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
-          >
-            Try again
-          </button>
-          <a
-            href="/"
-            className="inline-flex items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent"
-          >
-            Go home
-          </a>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
-  head: () => ({
-    meta: [
-      { charSet: "utf-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Lovable" },
-    ],
-    links: [
-      { rel: "stylesheet", href: appCss },
-      { rel: "preconnect", href: "https://fonts.googleapis.com" },
-      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      {
-        rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Prompt:wght@300;400;500;600;700&family=IBM+Plex+Sans+Thai:wght@300;400;500;600&family=Anuphan:wght@300;400;500;600&display=swap",
-      },
-    ],
-  }),
-  shellComponent: RootShell,
-  component: RootComponent,
-  notFoundComponent: NotFoundComponent,
-  errorComponent: ErrorComponent,
-});
-
-function RootShell({ children }: { children: React.ReactNode }) {
-  return (
-    <html lang="en">
-      <head>
-        <HeadContent />
-      </head>
-      <body>
-        {children}
-        <Scripts />
-      </body>
-    </html>
-  );
-}
-
-function RootComponent() {
-  const { queryClient } = Route.useRouteContext();
-
-  return (
-    <QueryClientProvider client={queryClient}>
-      <Outlet />
-    </QueryClientProvider>
-  );
-      }
-
-import { createFileRoute, Link } from "@tanstack/react-router";
-import { DreamyBackground } from "@/components/DreamyBackground";
-import { Roach } from "@/components/Roach";
-import { motion } from "framer-motion";
-
-export const Route = createFileRoute("/about")({
-  head: () => ({
-    meta: [
-      { title: "อาร์คีไทป์คืออะไร — Mythos" },
-      { name: "description", content: "ทำความรู้จัก 12 อาร์คีไทป์ของคาร์ล ยุง — ตัวตนภายในที่หล่อหลอมเรา" },
-    ],
-  }),
-  component: About,
-});
-
-function About() {
-  return (
-    <>
-      <DreamyBackground />
-      <main className="min-h-screen px-5 py-20 flex justify-center relative z-10">
-        <motion.article
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
-          className="max-w-2xl rounded-[2rem] tarot-frame glass-rose p-8 sm:p-12"
-        >
-          <Link to="/" className="font-body text-sm text-foreground/55 hover:text-gold">← กลับหน้าแรก</Link>
-
-          <div className="ornate-divider mt-6 mb-4 text-[10px] tracking-[0.4em] uppercase font-display">
-            <span className="shimmer-gold">About · Archetype</span>
-          </div>
-
-          <h1 className="font-display text-4xl sm:text-5xl mb-8 text-gradient-rose text-center">
-            อาร์คีไทป์คืออะไร?
-          </h1>
-          <div className="space-y-5 font-body text-foreground/85 leading-relaxed text-base sm:text-lg">
-            <p>
-              คาร์ล ยุง นักจิตวิทยาคนสำคัญของโลก เชื่อว่าลึกลงไปในตัวเราทุกคน
-              มีชุดของตัวละครที่ซ่อนอยู่ — เขาเรียกมันว่า <span className="text-gold">อาร์คีไทป์</span>
-              พวกมันคือต้นแบบเก่าแก่ที่ปรากฏซ้ำในนิทาน หนัง ความฝัน
-              และในความรู้สึกของเราเองโดยที่บางทีเราก็ไม่รู้ตัว
-            </p>
-            <p>
-              12 อาร์คีไทป์ไม่ใช่กล่องที่จะมาแบ่งว่าคุณเป็นใคร
-              แต่เป็นเสียงหลายเสียงที่อยู่ในตัวคุณ — บางเสียงดัง บางเสียงเงียบ
-              บางเสียงแค่กำลังรอให้คุณได้ยินมัน
-            </p>
-            <p className="font-display text-foreground/95 border-l-2 border-gold/60 pl-5 text-xl">
-              ตอบจากเสียงในใจ ไม่ใช่จากคนที่อยากเป็น
-              ผลลัพธ์ที่ออกมา ไม่ได้บอกว่าคุณคือใคร
-              มันแค่บอกว่าตอนนี้ ใครกำลังพูดดังที่สุดในตัวคุณ
-            </p>
-          </div>
-          <div className="mt-10 text-center">
-            <Link
-              to="/quiz"
-              className="inline-flex items-center gap-2 rounded-full px-9 py-3.5 text-white shadow-glow hover:scale-105 transition tracking-[0.15em] text-sm"
-              style={{ background: "var(--gradient-rose)" }}
-            >
-              <Roach size={16} /> เริ่มค้นหาอาร์คีไทป์ <Roach size={16} />
-            </Link>
-          </div>
-        </motion.article>
-      </main>
-    </>
-  );
-       }
-
-
-      import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { useEffect, useMemo, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
-import { questions } from "@/lib/questions";
-import { archetypeOrder, type ArchetypeKey } from "@/lib/archetypes";
-import { DreamyBackground } from "@/components/DreamyBackground";
-import { Roach } from "@/components/Roach";
-
-const STORAGE_KEY = "mythos.answers.v2";
-const INDEX_KEY = "mythos.index.v2";
-
-export const Route = createFileRoute("/quiz")({
-  head: () => ({
-    meta: [
-      { title: "แบบทดสอบ — Mythos" },
-      { name: "description", content: "แบบทดสอบ 24 ข้อ ค้นหาอาร์คีไทป์ของคุณ" },
-    ],
-  }),
-  component: Quiz,
-});
-
-type AnswersMap = Record<number, number>;
-
-function Quiz() {
-  const navigate = useNavigate();
-  const [index, setIndex] = useState(0);
-  const [answers, setAnswers] = useState<AnswersMap>({});
-  const [direction, setDirection] = useState(1);
-  const [hydrated, setHydrated] = useState(false);
-  const [revealing, setRevealing] = useState(false);
-
-  useEffect(() => {
-    try {
-      const a = localStorage.getItem(STORAGE_KEY);
-      const i = localStorage.getItem(INDEX_KEY);
-      if (a) setAnswers(JSON.parse(a));
-      if (i) setIndex(Math.min(parseInt(i, 10) || 0, questions.length - 1));
-    } catch {}
-    setHydrated(true);
-  }, []);
-
-  useEffect(() => {
-    if (!hydrated) return;
-    try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(answers));
-      localStorage.setItem(INDEX_KEY, String(index));
-    } catch {}
-  }, [answers, index, hydrated]);
-
-  const q = questions[index];
-  const answeredCount = Object.keys(answers).length;
-  const progress = (answeredCount / questions.length) * 100;
-
-  const handleAnswer = (answerIdx: number) => {
-    const next = { ...answers, [q.id]: answerIdx };
-    setAnswers(next);
-    setTimeout(() => {
-      if (index < questions.length - 1) {
-        setDirection(1);
-        setIndex(index + 1);
-      } else {
-        finish(next);
-      }
-    }, 380);
-  };
-
-  const finish = (final: AnswersMap) => {
-    const scores: Record<ArchetypeKey, number> = Object.fromEntries(
-      archetypeOrder.map((k) => [k, 0]),
-    ) as Record<ArchetypeKey, number>;
-    for (const question of questions) {
-      const pickIdx = final[question.id];
-      if (pickIdx == null) continue;
-      const ans = question.answers[pickIdx];
-      if (!ans) continue;
-      const weight = 1 / ans.archetypes.length;
-      for (const key of ans.archetypes) scores[key] += weight;
-    }
-    try {
-      localStorage.setItem("mythos.scores.v2", JSON.stringify(scores));
-    } catch {}
-    const sorted = [...archetypeOrder].sort((a, b) => scores[b] - scores[a]);
-    setRevealing(true);
-    setTimeout(() => {
-      navigate({ to: "/result/$archetype", params: { archetype: sorted[0] } });
-    }, 2400);
-  };
-
-  const goBack = () => {
-    if (index > 0) {
-      setDirection(-1);
-      setIndex(index - 1);
-    }
-  };
-
-  const reset = () => {
-    setAnswers({});
-    setIndex(0);
-    setDirection(1);
-    try {
-      localStorage.removeItem(STORAGE_KEY);
-      localStorage.removeItem(INDEX_KEY);
-    } catch {}
-  };
-
-  const current = answers[q.id];
-
-  const variants = useMemo(
-    () => ({
-      enter: (dir: number) => ({ opacity: 0, y: dir > 0 ? 40 : -40, scale: 0.95, filter: "blur(8px)" }),
-      center: { opacity: 1, y: 0, scale: 1, filter: "blur(0px)" },
-      exit: (dir: number) => ({ opacity: 0, y: dir > 0 ? -40 : 40, scale: 0.95, filter: "blur(8px)" }),
-    }),
-    [],
-  );
-
-  if (revealing) {
-    return (
-      <>
-        <DreamyBackground />
-        <main className="min-h-screen flex items-center justify-center px-6 relative z-10">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.7 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1 }}
-            className="text-center"
-          >
-            <motion.div
-              animate={{ y: [0, -16, 0], rotate: [-8, 8, -8] }}
-              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-              className="mb-8 inline-block"
-            >
-              <Roach size={88} />
-            </motion.div>
-            <motion.div
-              animate={{ opacity: [0.5, 1, 0.5] }}
-              transition={{ duration: 2, repeat: Infinity }}
-              className="font-display text-2xl sm:text-3xl text-gradient-rose mb-3"
-            >
-              กำลังอ่านใจคุณอยู่…
-            </motion.div>
-            <p className="font-body text-foreground/65 tracking-wide text-sm">
-              อีกแป๊บนึงนะ
-            </p>
-          </motion.div>
-        </main>
-      </>
-    );
-  }
-
-  return (
-    <>
-      <DreamyBackground />
-      <main className="min-h-screen px-4 sm:px-6 py-10 sm:py-16 flex flex-col items-center relative z-10">
-        <div className="w-full max-w-2xl">
-          {/* Progress */}
-          <div className="mb-8">
-            <div className="ornate-divider mb-4 text-[10px] tracking-[0.4em] uppercase font-display">
-              <span className="shimmer-gold">ข้อ {index + 1} / {questions.length}</span>
-            </div>
-            <div className="relative h-[6px] rounded-full bg-mauve/40 overflow-hidden border border-gold/20">
-              <motion.div
-                className="absolute inset-y-0 left-0 rounded-full"
-                style={{
-                  background: "linear-gradient(90deg, #F2C572, #FF4FA3, #F2C572)",
-                  backgroundSize: "200% 100%",
-                  boxShadow: "0 0 20px rgba(255, 79, 163, 0.6), 0 0 10px rgba(242, 197, 114, 0.6)",
-                }}
-                animate={{ width: `${progress}%`, backgroundPosition: ["0% 50%", "200% 50%"] }}
-                transition={{
-                  width: { type: "spring", stiffness: 80, damping: 20 },
-                  backgroundPosition: { duration: 4, repeat: Infinity, ease: "linear" },
-                }}
-              />
-            </div>
-            <div className="mt-2 text-right text-[10px] tracking-[0.25em] shimmer-gold font-display">
-              {Math.round(progress)}%
-            </div>
-          </div>
-
-          <AnimatePresence mode="wait" custom={direction}>
-            <motion.div
-              key={q.id}
-              custom={direction}
-              variants={variants}
-              initial="enter"
-              animate="center"
-              exit="exit"
-              transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-              className="relative rounded-[2rem] tarot-frame glass-rose p-6 sm:p-12"
-            >
-              <div className="text-center mb-9 sm:mb-10 relative">
-                <motion.div
-                  animate={{ y: [0, -6, 0], rotate: [-6, 6, -6] }}
-                  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                  className="mb-5 inline-block"
-                >
-                  <Roach size={28} />
-                </motion.div>
-                <div className="text-[10px] tracking-[0.4em] uppercase text-gold/80 mb-4 font-display">
-                  ข้อที่ {String(index + 1).padStart(2, "0")}
-                </div>
-                <h2 className="font-display text-[1.45rem] sm:text-[1.9rem] leading-[1.45] text-foreground">
-                  {q.question_th}
-                </h2>
-              </div>
-
-              <div className="space-y-3">
-                {q.answers.map((opt, i) => {
-                  const selected = current === i;
-                  const letter = ["ก", "ข", "ค", "ง"][i];
-                  return (
-                    <motion.button
-                      key={i}
-                      onClick={() => handleAnswer(i)}
-                      whileHover={{ scale: 1.015, y: -2 }}
-                      whileTap={{ scale: 0.985 }}
-                      transition={{ type: "spring", stiffness: 300, damping: 22 }}
-                      className={`group w-full relative flex items-start gap-4 rounded-2xl px-5 sm:px-6 py-4 sm:py-5 text-left transition-all overflow-hidden border ${
-                        selected
-                          ? "border-transparent text-white shadow-glow"
-                          : "border-gold/25 bg-gradient-to-br from-white/[0.07] to-white/[0.01] hover:border-gold/60 backdrop-blur-md"
-                      }`}
-                      style={selected ? { background: "var(--gradient-rose)" } : undefined}
-                    >
-                      {!selected && (
-                        <span
-                          className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                          style={{
-                            background:
-                              "radial-gradient(circle at 50% 100%, rgba(255, 79, 163, 0.25), transparent 70%)",
-                          }}
-                        />
-                      )}
-
-                      <span
-                        className={`shrink-0 mt-0.5 flex h-9 w-9 items-center justify-center rounded-full border font-display text-sm ${
-                          selected
-                            ? "border-white/60 bg-white/15 text-white"
-                            : "border-gold/40 text-gold bg-mauve/20"
-                        }`}
-                      >
-                        {letter}
-                      </span>
-
-                      <span className={`font-body text-[1.02rem] sm:text-[1.08rem] leading-relaxed flex-1 ${selected ? "text-white" : "text-foreground/90"}`}>
-                        {opt.text_th}
-                      </span>
-
-                      {selected && (
-                        <motion.span
-                          initial={{ scale: 0, rotate: -90 }}
-                          animate={{ scale: 1, rotate: 0 }}
-                          className="shrink-0 mt-1"
-                        >
-                          <Roach size={20} />
-                        </motion.span>
-                      )}
-                    </motion.button>
-                  );
-                })}
-              </div>
-            </motion.div>
-          </AnimatePresence>
-
-          <div className="mt-7 flex justify-between items-center px-2">
-            <button
-              onClick={goBack}
-              disabled={index === 0}
-              className="font-body text-sm text-foreground/55 disabled:opacity-20 hover:text-gold transition"
-            >
-              ← ย้อนกลับ
-            </button>
-            <button
-              onClick={reset}
-              className="font-body text-xs text-foreground/45 hover:text-gold transition"
-            >
-              ↻ เริ่มใหม่
-            </button>
-          </div>
-          <p className="mt-5 text-center font-body text-xs sm:text-sm text-foreground/55">
-            ตอบจากใจที่คิดได้ตอนแรก ไม่ต้องคิดเยอะ
-          </p>
-        </div>
-      </main>
-    </>
-  );
-      }
-
-
-      import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
-import { archetypes, archetypeOrder, type ArchetypeKey } from "@/lib/archetypes";
-import { DreamyBackground } from "@/components/DreamyBackground";
-import { Roach } from "@/components/Roach";
-
-export const Route = createFileRoute("/result/$archetype")({
-  head: ({ params }) => {
-    const a = archetypes[params.archetype as ArchetypeKey];
-    if (!a) return { meta: [{ title: "ผลลัพธ์ — Mythos" }] };
-    return {
-      meta: [
-        { title: `${a.nameTh} — ไพ่แห่งวิญญาณของคุณ | Mythos` },
-        { name: "description", content: `${a.tagline} — ${a.summary.slice(0, 100)}` },
-        { property: "og:title", content: `ฉันคือ ${a.nameTh}` },
-        { property: "og:description", content: a.tagline },
-      ],
-    };
-  },
-  loader: ({ params }) => {
-    if (!archetypes[params.archetype as ArchetypeKey]) throw notFound();
-    return null;
-  },
-  notFoundComponent: () => (
-    <div className="min-h-screen flex items-center justify-center">
-      <div className="text-center">
-        <h1 className="font-display text-3xl mb-4 text-gradient-rose">ไม่พบไพ่ใบนี้</h1>
-        <Link to="/quiz" className="text-gold underline">เริ่มทำแบบทดสอบ</Link>
-      </div>
-    </div>
-  ),
-  errorComponent: ({ error }) => <div className="p-8">เกิดข้อผิดพลาด: {error.message}</div>,
-  component: Result,
-});
-
-function Result() {
-  const { archetype } = Route.useParams();
-  const primary = archetypes[archetype as ArchetypeKey];
-  const [scores, setScores] = useState<Record<ArchetypeKey, number> | null>(null);
-
-  useEffect(() => {
-    try {
-      const raw = localStorage.getItem("mythos.scores.v2");
-      if (raw) setScores(JSON.parse(raw));
-    } catch {}
-  }, []);
-
-  const ranked = scores
-    ? [...archetypeOrder].sort((a, b) => scores[b] - scores[a])
-    : archetypeOrder;
-  const secondaryKey = ranked.find((k) => k !== primary.key) ?? "sage";
-  const secondary = archetypes[secondaryKey];
-
-  const total = scores ? Object.values(scores).reduce((s, v) => s + v, 0) || 1 : 1;
-  const percent = (k: ArchetypeKey) =>
-    scores ? Math.round(((scores[k] ?? 0) / total) * 100) : 0;
-
-  return (
-    <>
-      <DreamyBackground />
-      <main className="min-h-screen px-4 sm:px-6 py-12 sm:py-20 flex justify-center relative z-10">
-        <div className="w-full max-w-2xl">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9 }}
-            className="text-center mb-10"
-          >
-            <div className="ornate-divider text-[10px] tracking-[0.4em] uppercase mb-6 font-display">
-              <span className="shimmer-gold">อาร์คีไทป์ของคุณคือ</span>
-            </div>
-          </motion.div>
-
-          {/* Tarot Card — primary archetype */}
-          <motion.div
-            initial={{ opacity: 0, y: 60, scale: 0.85, rotateX: -15 }}
-            animate={{ opacity: 1, y: 0, scale: 1, rotateX: 0 }}
-            transition={{ duration: 1.2, delay: 0.3, type: "spring", damping: 18 }}
-            className="relative mx-auto mb-12 w-full max-w-sm aspect-[2/3.2] rounded-[2rem] tarot-frame overflow-hidden animate-glow-pulse"
-            style={{ background: primary.gradient, perspective: "1000px" }}
-          >
-            {/* Inner film */}
-            <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at 50% 0%, oklch(1 0 0 / 0.25), transparent 60%)" }} />
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/40" />
-
-            {/* Floating particles inside card */}
-            {Array.from({ length: 14 }).map((_, i) => (
-              <motion.div
-                key={i}
-                className="absolute h-1 w-1 rounded-full bg-white/80"
-                style={{
-                  top: `${(i * 47) % 100}%`,
-                  left: `${(i * 31) % 100}%`,
-                  boxShadow: "0 0 8px oklch(0.95 0.1 85)",
-                }}
-                animate={{ opacity: [0.2, 1, 0.2], y: [0, -10, 0] }}
-                transition={{ duration: 3 + (i % 4), repeat: Infinity, delay: i * 0.2 }}
-              />
-            ))}
-
-            {/* Card content */}
-            <div className="relative h-full flex flex-col items-center justify-between py-8 px-6 text-white">
-              <div className="text-center">
-                <div className="text-[10px] tracking-[0.5em] opacity-80 mb-2">— {primary.romanNumeral} —</div>
-                <div className="text-xs tracking-[0.4em] uppercase opacity-90 font-display">{primary.name}</div>
-              </div>
-
-              <motion.div
-                initial={{ scale: 0, rotate: -180, opacity: 0 }}
-                animate={{ scale: 1, rotate: 0, opacity: 1 }}
-                transition={{ duration: 1.5, delay: 0.8, type: "spring", damping: 14 }}
-                style={{ filter: "drop-shadow(0 0 30px rgba(242,197,114,0.7))" }}
-              >
-                <Roach size={120} />
-              </motion.div>
-
-              <div className="text-center">
-                <motion.h1
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 1, delay: 1.2 }}
-                  className="font-display text-5xl sm:text-6xl mb-2 leading-none"
-                  style={{ textShadow: "0 4px 30px rgba(0,0,0,0.4)" }}
-                >
-                  {primary.nameTh}
-                </motion.h1>
-                <div className="mt-3 inline-flex"><Roach size={14} /></div>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Tagline */}
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 1.4 }}
-            className="text-center font-display text-xl sm:text-2xl text-gradient-rose mb-12 px-4"
-          >
-            “{primary.tagline}”
-          </motion.p>
 
           {/* Summary card */}
           <motion.div
@@ -1047,24 +197,7 @@ function Result() {
             <div className="ornate-divider mb-5 text-[10px] tracking-[0.4em] uppercase font-display">
               <span className="shimmer-gold">เกี่ยวกับคุณ</span>
             </div>
-            <p className="font-body text-foreground/90 text-base sm:text-lg leading-relaxed">
-              {primary.summary}
-            </p>
-
-            <p className="mt-8 font-display text-xl sm:text-2xl text-foreground/95 leading-relaxed border-l-2 border-gold/60 pl-5"
-               style={{ background: "linear-gradient(90deg, rgba(242,197,114,0.08), transparent)" }}
-            >
-              “{primary.quote}”
-            </p>
-          </motion.div>
-
-          {/* Desire / Fear */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 1.6 }}
-            className="grid sm:grid-cols-2 gap-5 mb-8"
-          >
+            <p className="
             <div className="rounded-3xl tarot-frame glass p-6">
               <div className="text-[10px] tracking-[0.35em] uppercase shimmer-gold mb-3 font-display flex items-center gap-2">
                 <Roach size={14} /> สิ่งที่คุณอยากได้

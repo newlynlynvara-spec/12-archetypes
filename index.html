@@ -177,259 +177,500 @@ body{
 /* ── ABOUT MODAL ── */
 #modal-about{
   position:fixed;inset:0;z-index:100;
-  background:rgba(0,0,0,0.7);backdrop-fil
+  background:rgba(0,0,0,0.7);backdrop-filter:blur(6px);
+  display:flex;align-items:center;justify-content:center;
+  padding:20px;
+  opacity:0;pointer-events:none;
+  transition:opacity .3s ease;
+}
+#modal-about.open{opacity:1;pointer-events:all;}
+.modal-box{
+  max-width:520px;width:100%;
+  max-height:80vh;overflow-y:auto;
+  padding:36px 32px;
+  border-radius:28px;
+  background:linear-gradient(135deg,rgba(30,0,20,0.95),rgba(18,0,14,0.98));
+  border:1px solid rgba(255,255,255,0.14);
+  box-shadow:0 0 80px rgba(255,45,120,0.2),0 40px 80px rgba(0,0,0,0.6);
+  position:relative;
+  transform:translateY(20px);transition:transform .3s ease;
+  scrollbar-width:thin;scrollbar-color:rgba(255,79,163,0.3) transparent;
+}
+#modal-about.open .modal-box{transform:translateY(0);}
+.modal-close{
+  position:absolute;top:16px;right:20px;
+  background:none;border:none;color:rgba(255,255,255,0.4);
+  font-size:22px;cursor:pointer;
+  transition:color .2s;font-family:'Playfair Display',serif;
+}
+.modal-close:hover{color:rgba(255,255,255,0.8);}
+.modal-body{
+  font-family:'Cormorant Garamond',serif;
+  font-size:18px;line-height:1.85;
+  color:rgba(255,255,255,0.82);
+}
+.modal-body p{margin-bottom:18px;}
+.modal-note{
+  font-family:'Anuphan',sans-serif;
+  font-size:13px;
+  color:#e07a30;
+  line-height:1.7;
+  padding-top:14px;
+  border-top:1px solid rgba(255,255,255,0.1);
+  margin-top:4px;
+}
 
+/* ── QUIZ PAGE ── */
+#page-quiz{
+  flex-direction:column;align-items:center;
+  padding:16px 20px 24px;
+}
+.quiz-inner{
+  max-width:500px;width:100%;
+  display:flex;flex-direction:column;
+  gap:16px;
+}
 
-      
+/* top bar */
+.quiz-topbar{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 2px;
+}
+.q-counter{
+  font-family:'Playfair Display',serif;
+  font-size:22px;
+  color:var(--pink-bright);
+  letter-spacing:0.02em;
+  line-height:1;
+}
+.q-counter span{font-size:14px;color:rgba(255,79,163,0.6);}
+.q-pct{
+  font-family:'Playfair Display',serif;
+  font-size:20px;
+  color:var(--gold);
+  letter-spacing:0.03em;
+}
 
-
-
-
-
-
-          {/* Summary card */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 1.5 }}
-            className="rounded-3xl tarot-frame glass-rose p-7 sm:p-10 mb-8"
-          >
-            <div className="ornate-divider mb-5 text-[10px] tracking-[0.4em] uppercase font-display">
-              <span className="shimmer-gold">เกี่ยวกับคุณ</span>
-            </div>
-            <p className="
-            <div className="rounded-3xl tarot-frame glass p-6">
-              <div className="text-[10px] tracking-[0.35em] uppercase shimmer-gold mb-3 font-display flex items-center gap-2">
-                <Roach size={14} /> สิ่งที่คุณอยากได้
-              </div>
-              <p className="font-body text-foreground/90 leading-relaxed">{primary.desire}</p>
-            </div>
-            <div className="rounded-3xl tarot-frame glass p-6">
-              <div className="text-[10px] tracking-[0.35em] uppercase shimmer-gold mb-3 font-display flex items-center gap-2">
-                <Roach size={14} /> สิ่งที่คุณกลัว
-              </div>
-              <p className="font-body text-foreground/90 leading-relaxed">{primary.fear}</p>
-            </div>
-          </motion.div>
-
-          {/* Strengths / Weaknesses */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 1.7 }}
-            className="grid sm:grid-cols-2 gap-5 mb-8"
-          >
-            <div className="rounded-3xl tarot-frame glass p-6">
-              <div className="text-[10px] tracking-[0.35em] uppercase shimmer-gold mb-4 font-display flex items-center gap-2">
-                <Roach size={14} /> จุดแข็งของคุณ
-              </div>
-              <ul className="space-y-2.5 font-body text-foreground/90">
-                {primary.strengths.map((s) => (
-                  <li key={s} className="flex gap-2.5 leading-relaxed items-start">
-                    <span className="mt-1 shrink-0"><Roach size={11} /></span>
-                    <span>{s}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div className="rounded-3xl tarot-frame glass p-6">
-              <div className="text-[10px] tracking-[0.35em] uppercase shimmer-gold mb-4 font-display flex items-center gap-2">
-                <Roach size={14} /> ด้านที่ต้องระวัง
-              </div>
-              <ul className="space-y-2.5 font-body text-foreground/90">
-                {primary.weaknesses.map((s) => (
-                  <li key={s} className="flex gap-2.5 leading-relaxed items-start">
-                    <span className="mt-1 shrink-0"><Roach size={11} /></span>
-                    <span>{s}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </motion.div>
-
-          {/* Soul palette */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 1.8 }}
-            className="rounded-3xl tarot-frame glass p-7 mb-8"
-          >
-            <div className="ornate-divider text-[10px] tracking-[0.4em] uppercase mb-6 font-display">
-              <span className="shimmer-gold">สีของวิญญาณคุณ</span>
-            </div>
-            <div className="flex justify-center gap-5">
-              {primary.colors.map((c, i) => (
-                <motion.div
-                  key={c}
-                  initial={{ scale: 0, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  transition={{ delay: 1.9 + i * 0.1, type: "spring" }}
-                  className="flex flex-col items-center gap-2"
-                >
-                  <div
-                    className="h-14 w-14 rounded-full gold-ring"
-                    style={{ background: c, boxShadow: `0 0 30px ${c}66, 0 0 0 1px oklch(0.82 0.14 78 / 0.5)` }}
-                  />
-                  <span className="text-[10px] text-foreground/60 font-mono tracking-wider">{c}</span>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-
-          {/* Secondary archetype */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 1.9 }}
-            className="rounded-3xl tarot-frame glass-rose p-7 mb-8"
-          >
-            <div className="text-[10px] tracking-[0.4em] uppercase shimmer-gold mb-4 font-display text-center flex items-center justify-center gap-2">
-              <Roach size={14} /> อาร์คีไทป์รอง
-            </div>
-            <div className="flex items-center gap-5 justify-center">
-              <div
-                className="h-20 w-14 rounded-xl tarot-frame flex items-center justify-center text-white shrink-0"
-                style={{ background: secondary.gradient }}
-              >
-                <Roach size={28} />
-              </div>
-              <div className="text-center sm:text-left">
-                <h3 className="font-display text-3xl text-gradient-rose leading-tight">
-                  {secondary.nameTh}
-                </h3>
-                <p className="font-body text-foreground/65 mt-1 text-sm">{secondary.tagline}</p>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Soul mixture */}
-          {scores && (
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.9, delay: 2.0 }}
-              className="rounded-3xl tarot-frame glass p-7 sm:p-8 mb-8"
-            >
-              <div className="ornate-divider text-[10px] tracking-[0.4em] uppercase mb-6 font-display">
-                <span className="shimmer-gold">ส่วนผสมในตัวคุณ</span>
-              </div>
-              <div className="space-y-3.5">
-                {ranked.map((k, i) => {
-                  const a = archetypes[k];
-                  const pct = percent(k);
-                  if (pct === 0) return null;
-                  return (
-                    <div key={k}>
-                      <div className="flex justify-between font-body text-sm mb-1.5">
-                        <span className="text-foreground/85 flex items-center gap-2">
-                          <Roach size={12} />
-                          {a.nameTh}
-                        </span>
-                        <span className="shimmer-gold font-display tracking-wider">{pct}%</span>
-                      </div>
-                      <div className="h-1.5 rounded-full bg-mauve/40 overflow-hidden border border-gold/15">
-                        <motion.div
-                          initial={{ width: 0 }}
-                          animate={{ width: `${pct}%` }}
-                          transition={{ duration: 1, delay: 2.1 + i * 0.04, ease: "easeOut" }}
-                          className="h-full"
-                          style={{
-                            background: "linear-gradient(90deg, #F2C572, #FF4FA3)",
-                            boxShadow: "0 0 12px rgba(255, 79, 163, 0.5)",
-                          }}
-                        />
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </motion.div>
-          )}
-
-          {/* Premium */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 2.2 }}
-            className="relative rounded-[2rem] tarot-frame overflow-hidden mb-10"
-          >
-            <div
-              className="absolute inset-0"
-              style={{
-                background:
-                  "radial-gradient(ellipse at 50% 0%, oklch(0.45 0.18 350) 0%, transparent 60%), linear-gradient(135deg, oklch(0.22 0.08 340), oklch(0.18 0.06 320))",
-              }}
-            />
-            <div className="absolute inset-0 opacity-30 bg-gradient-gold mix-blend-overlay" />
-            <div className="relative p-8 sm:p-10 text-center text-white">
-              <motion.div
-                animate={{ y: [0, -8, 0], rotate: [-6, 6, -6] }}
-                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                className="mb-3 inline-block"
-              >
-                <Roach size={42} />
-              </motion.div>
-              <div className="text-[10px] tracking-[0.4em] uppercase text-gold/80 mb-3 font-display">
-                เวอร์ชัน Premium · ยังล็อกอยู่
-              </div>
-              <h3 className="font-display text-3xl sm:text-4xl mb-3 text-gradient-rose">
-                อยากรู้จักตัวเองให้ลึกกว่านี้?
-              </h3>
-              <p className="font-body text-white/75 text-sm sm:text-base leading-relaxed max-w-md mx-auto mb-7">
-                เจาะลึกตัวตนคุณอีกชั้น —
-                ทั้งด้านมืดที่ซ่อนอยู่ รูปแบบความรัก และแรงขับที่คุณไม่รู้ตัว
-              </p>
-
-              <ul className="grid sm:grid-cols-2 gap-2.5 text-left text-sm text-white/85 max-w-lg mx-auto mb-8 font-body">
-                {[
-                  "48 คำถามเจาะลึก",
-                  "Shadow Archetype — ด้านมืดที่ซ่อน",
-                  "รูปแบบทางอารมณ์",
-                  "แนวโน้มแบบ MBTI",
-                  "พลังงานแบบ Enneagram",
-                  "พลวัตในความรัก",
-                  "แรงขับใต้สำนึก",
-                  "ความขัดแย้งภายใน",
-                ].map((t) => (
-                  <li key={t} className="flex items-start gap-2">
-                    <span className="mt-0.5 shrink-0"><Roach size={11} /></span>
-                    <span>{t}</span>
-                  </li>
-                ))}
-              </ul>
-
-              <button
-                disabled
-                className="inline-flex items-center gap-2 rounded-full bg-gradient-gold px-9 py-3.5 text-sm font-medium tracking-[0.15em] uppercase text-black/80 shadow-glow cursor-not-allowed opacity-90"
-              >
-                🔒 ปลดล็อกเวอร์ชันลึก
-              </button>
-              <p className="mt-3 font-body text-xs text-white/55">เร็ว ๆ นี้</p>
-            </div>
-          </motion.div>
-
-          {/* Actions */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.9, delay: 2.4 }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-5"
-          >
-            <Link
-              to="/quiz"
-              className="rounded-full px-9 py-3.5 text-white shadow-glow hover:scale-105 transition tracking-[0.15em] text-sm flex items-center gap-2"
-              style={{ background: "var(--gradient-rose)" }}
-            >
-              <Roach size={16} /> ทำแบบทดสอบอีกครั้ง
-            </Link>
-            <Link to="/" className="font-body text-sm text-foreground/55 hover:text-gold underline-offset-4 hover:underline">
-              ← กลับหน้าแรก
-            </Link>
-          </motion.div>
-        </div>
-      </main>
-    </>
+/* water bar */
+.water-bar-wrap{
+  position:relative;
+  height:14px;
+  border-radius:999px;
+  background:rgba(255,255,255,0.07);
+  border:1px solid rgba(255,255,255,0.12);
+  overflow:hidden;
+  box-shadow:inset 0 1px 4px rgba(0,0,0,0.3);
+}
+.water-fill{
+  position:absolute;top:0;left:0;height:100%;
+  border-radius:999px;
+  background:linear-gradient(90deg,#ff2d78,#ff80b8,#ffb3d6);
+  transition:width .5s cubic-bezier(.65,0,.35,1);
+  overflow:hidden;
+}
+.water-fill::after{
+  content:'';position:absolute;inset:0;
+  background:repeating-linear-gradient(
+    90deg,
+    transparent,transparent 6px,
+    rgba(255,255,255,0.18) 6px,rgba(255,255,255,0.18) 7px
   );
-      }
-                                                                                                            
-                                 
+  animation:sparkle 2s linear infinite;
+}
+@keyframes sparkle{0%{background-position:0 0;}100%{background-position:28px 0;}}
+.water-fill::before{
+  content:'';position:absolute;
+  top:2px;left:4px;right:4px;height:3px;
+  border-radius:2px;
+  background:rgba(255,255,255,0.35);
+}
+
+/* question card */
+.q-card{
+  position:relative;
+  border-radius:24px;
+  background:linear-gradient(145deg,rgba(255,255,255,0.11) 0%,rgba(255,255,255,0.05) 50%,rgba(255,200,180,0.07) 100%);
+  backdrop-filter:blur(20px);
+  border:1px solid rgba(255,255,255,0.14);
+  box-shadow:0 0 50px rgba(255,45,120,0.1),0 15px 40px rgba(0,0,0,0.4);
+  padding:24px 24px 20px;
+  text-align:center;
+  overflow:hidden;
+}
+.q-card::before{
+  content:'';position:absolute;inset:0;border-radius:24px;
+  background:linear-gradient(140deg,rgba(255,255,255,0.14) 0%,transparent 45%);
+  pointer-events:none;
+}
+.roach-icon{
+  font-size:28px;
+  display:block;margin-bottom:8px;
+  animation:roachBob 3s ease-in-out infinite;
+  filter:drop-shadow(0 0 6px rgba(212,168,71,0.5));
+}
+@keyframes roachBob{0%,100%{transform:translateY(0);}50%{transform:translateY(-5px);}}
+.q-num{
+  font-family:'Playfair Display',serif;
+  font-size:13px;letter-spacing:.2em;
+  color:var(--gold);text-transform:uppercase;
+  margin-bottom:10px;
+}
+.q-text{
+  font-family:'Cormorant Garamond',serif;
+  font-size:20px;line-height:1.55;
+  color:rgba(255,200,220,0.9);
+  position:relative;z-index:1;
+}
+
+/* answers */
+.answers-grid{
+  display:flex;flex-direction:column;gap:10px;
+}
+.ans-btn{
+  width:100%;
+  padding:14px 18px;
+  border-radius:16px;
+  background:linear-gradient(135deg,rgba(255,45,120,0.22) 0%,rgba(255,79,163,0.14) 100%);
+  border:1px solid rgba(255,79,163,0.3);
+  color:#fff;
+  font-family:'Anuphan',sans-serif;
+  font-size:15px;line-height:1.45;
+  cursor:pointer;
+  text-align:left;
+  display:flex;align-items:flex-start;gap:12px;
+  transition:all .22s ease;
+  backdrop-filter:blur(8px);
+}
+.ans-btn:hover{
+  background:linear-gradient(135deg,rgba(255,45,120,0.38) 0%,rgba(255,79,163,0.28) 100%);
+  border-color:rgba(255,79,163,0.6);
+  transform:translateX(4px);
+  box-shadow:0 4px 20px rgba(255,45,120,0.2);
+}
+.ans-btn:active{transform:scale(0.98);}
+.ans-letter{
+  flex-shrink:0;
+  width:26px;height:26px;
+  border-radius:8px;
+  background:rgba(255,255,255,0.12);
+  display:flex;align-items:center;justify-content:center;
+  font-size:12px;font-weight:600;
+  color:rgba(255,255,255,0.7);
+  letter-spacing:0;
+  font-family:'Playfair Display',serif;
+}
+.ans-text{flex:1;}
+
+/* ── RESULT PAGE ── */
+#page-result{flex-direction:column;padding:20px;}
+.result-inner{
+  max-width:520px;width:100%;
+  display:flex;flex-direction:column;
+  gap:0;
+  padding-bottom:20px;
+}
+.result-card{
+  position:relative;
+  border-radius:28px;
+  padding:32px 28px;
+  background:linear-gradient(145deg,rgba(255,255,255,0.1) 0%,rgba(255,255,255,0.04) 60%);
+  backdrop-filter:blur(28px);
+  border:1px solid rgba(255,255,255,0.15);
+  box-shadow:0 0 80px rgba(255,45,120,0.18),0 30px 60px rgba(0,0,0,0.5);
+  text-align:center;
+  margin-bottom:16px;
+  overflow:hidden;
+}
+.result-card::before{
+  content:'';position:absolute;inset:0;border-radius:28px;
+  background:linear-gradient(145deg,rgba(255,255,255,0.14) 0%,transparent 45%);
+  pointer-events:none;
+}
+.r-symbol{
+  font-size:56px;margin-bottom:8px;
+  filter:drop-shadow(0 0 16px rgba(212,168,71,0.6));
+  animation:pulse 3.5s ease-in-out infinite;
+}
+@keyframes pulse{0%,100%{transform:scale(1);}50%{transform:scale(1.06);}}
+.r-name-en{
+  font-family:'Playfair Display',serif;
+  font-size:11px;letter-spacing:.35em;
+  color:rgba(255,255,255,0.38);
+  text-transform:uppercase;margin-bottom:4px;
+}
+.r-name-th{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(32px,7vw,46px);
+  background:linear-gradient(to right,#ffd6f0,#ffe9b5,#ffd6f0);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  margin-bottom:4px;line-height:1.1;
+}
+.r-tagline{
+  font-family:'Cormorant Garamond',serif;
+  font-style:italic;font-size:16px;
+  color:rgba(255,255,255,0.5);
+  margin-bottom:20px;
+}
+.r-divider{
+  width:50px;height:1px;
+  background:linear-gradient(to right,transparent,rgba(212,168,71,0.4),transparent);
+  margin:0 auto 18px;
+}
+.r-summary{
+  font-family:'Cormorant Garamond',serif;
+  font-size:17px;line-height:1.8;
+  color:rgba(255,255,255,0.8);
+  margin-bottom:20px;
+  text-align:left;
+}
+.r-details{
+  display:grid;grid-template-columns:1fr 1fr;gap:10px;
+  margin-bottom:18px;
+}
+.r-detail{
+  padding:12px;border-radius:14px;
+  background:rgba(255,255,255,0.06);
+  border:1px solid rgba(255,255,255,0.08);
+  text-align:left;
+}
+.r-detail-label{
+  font-size:10px;letter-spacing:.2em;
+  color:rgba(212,168,71,0.7);text-transform:uppercase;
+  margin-bottom:5px;
+}
+.r-detail-val{
+  font-size:13px;color:rgba(255,255,255,0.8);line-height:1.5;
+}
+.r-quote{
+  font-family:'Cormorant Garamond',serif;
+  font-size:18px;font-style:italic;
+  color:rgba(255,220,180,0.75);
+  padding:16px 18px;
+  border-radius:14px;
+  background:rgba(255,255,255,0.04);
+  border-left:2px solid rgba(212,168,71,0.35);
+  line-height:1.65;
+  text-align:left;
+  margin-bottom:24px;
+}
+.r-mbti-row{
+  display:flex;flex-wrap:wrap;gap:7px;
+  margin-bottom:6px;
+}
+.r-mbti-badge{
+  padding:4px 10px;border-radius:8px;
+  background:rgba(255,79,163,0.18);
+  border:1px solid rgba(255,79,163,0.3);
+  font-size:12px;font-weight:600;
+  color:rgba(255,180,210,0.9);
+  letter-spacing:.05em;
+  font-family:'Playfair Display',serif;
+}
+.r-enn-badge{
+  padding:4px 10px;border-radius:8px;
+  background:rgba(212,168,71,0.15);
+  border:1px solid rgba(212,168,71,0.3);
+  font-size:12px;font-weight:600;
+  color:rgba(240,200,96,0.9);
+  letter-spacing:.05em;
+}
+.r-sub-badge{
+  padding:4px 12px;border-radius:8px;
+  background:rgba(255,255,255,0.07);
+  border:1px solid rgba(255,255,255,0.12);
+  font-size:12px;
+  color:rgba(255,255,255,0.6);
+}
+
+/* ranking bars */
+.rank-section{
+  margin-bottom:16px;
+}
+.rank-title{
+  font-size:11px;letter-spacing:.2em;text-transform:uppercase;
+  color:rgba(212,168,71,0.6);margin-bottom:12px;
+  font-family:'Playfair Display',serif;
+}
+.rank-row{
+  display:flex;align-items:center;gap:10px;
+  margin-bottom:7px;
+}
+.rank-label{
+  font-size:12px;color:rgba(255,255,255,0.65);
+  width:110px;flex-shrink:0;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.rank-bar-wrap{
+  flex:1;height:6px;border-radius:999px;
+  background:rgba(255,255,255,0.07);
+  overflow:hidden;
+}
+.rank-bar-fill{
+  height:100%;border-radius:999px;
+  background:linear-gradient(to right,rgba(255,45,120,0.5),rgba(255,79,163,0.8));
+  transition:width .6s ease;
+}
+.rank-bar-fill.top{
+  background:linear-gradient(to right,#ff2d78,#ff80b8);
+  box-shadow:0 0 8px rgba(255,45,120,0.5);
+}
+.rank-pct{
+  font-size:12px;color:rgba(255,255,255,0.5);
+  width:34px;text-align:right;flex-shrink:0;
+}
+.rank-pct.top{color:var(--gold);font-weight:600;}
+
+/* premium lock */
+.premium-section{
+  border-radius:24px;
+  background:linear-gradient(145deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02));
+  border:1px solid rgba(255,255,255,0.1);
+  padding:28px 24px;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+  margin-bottom:16px;
+}
+.premium-section::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(255,45,120,0.08),transparent 60%);
+  pointer-events:none;
+}
+.premium-label{
+  font-size:10px;letter-spacing:.35em;text-transform:uppercase;
+  color:rgba(212,168,71,0.7);margin-bottom:10px;
+  font-family:'Playfair Display',serif;
+}
+.premium-title{
+  font-family:'Playfair Display',serif;
+  font-size:26px;
+  background:linear-gradient(to right,#ffd6f0,#ffe9b5);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  margin-bottom:8px;line-height:1.2;
+}
+.premium-desc{
+  font-size:14px;color:rgba(255,255,255,0.6);
+  line-height:1.7;margin-bottom:20px;
+  font-family:'Cormorant Garamond',serif;font-size:16px;
+}
+.premium-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:6px;margin-bottom:20px;text-align:left;
+}
+.premium-item{
+  display:flex;align-items:flex-start;gap:8px;
+  font-size:13px;color:rgba(255,255,255,0.7);
+  line-height:1.4;
+}
+.premium-dot{color:var(--pink-bright);flex-shrink:0;margin-top:2px;}
+.btn-premium{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:13px 32px;border-radius:999px;
+  background:linear-gradient(120deg,#c9933a,#e8b84b);
+  border:none;
+  font-family:'Anuphan',sans-serif;
+  font-size:14px;font-weight:600;letter-spacing:.1em;
+  color:rgba(0,0,0,0.75);
+  cursor:not-allowed;opacity:0.85;
+}
+.premium-soon{
+  display:block;margin-top:10px;
+  font-size:11px;color:rgba(255,255,255,0.3);letter-spacing:.1em;
+}
+
+.btn-restart{
+  display:block;width:100%;
+  padding:15px;border-radius:999px;
+  background:linear-gradient(120deg,#ff2d78,#ff6ba8);
+  border:none;color:#fff;
+  font-family:'Anuphan',sans-serif;
+  font-size:16px;font-weight:600;letter-spacing:.06em;
+  cursor:pointer;
+  box-shadow:0 0 40px rgba(255,45,120,0.4);
+  transition:all .25s ease;
+}
+.btn-restart:hover{
+  transform:translateY(-2px);
+  box-shadow:0 0 60px rgba(255,45,120,0.6);
+}
+
+/* transitions */
+.fade-in{animation:fadeIn .4s ease both;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
+
+/* scrollbar */
+*::-webkit-scrollbar{width:4px;}
+*::-webkit-scrollbar-track{background:transparent;}
+*::-webkit-scrollbar-thumb{background:rgba(255,79,163,0.3);border-radius:2px;}
+</style>
+</head>
+<body>
+
+<div class="orb orb1"></div>
+<div class="orb orb2"></div>
+<div class="orb orb3"></div>
+
+<!-- ── LANDING ── -->
+<div class="page active" id="page-home">
+  <div class="home-inner">
+    <div class="title-glass">
+      <div class="title-main">
+        <span class="title-find">Find Your</span>
+        <span class="title-inner">Inner Archetypes</span>
+      </div>
+    </div>
+    <p class="tagline">บางสิ่งที่คุณตามหา อาจเป็นตัวตนที่ซ่อนอยู่ในตัวเอง</p>
+    <button class="btn-start" onclick="startQuiz()">เริ่มเลย!</button>
+    <button class="link-about" onclick="openAbout()">อาร์คีไทป์คืออะไร? →</button>
+  </div>
+</div>
+
+<!-- ── ABOUT MODAL ── -->
+<div id="modal-about">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeAbout()">✕</button>
+    <div class="modal-body">
+      <p>คาร์ล ยุง นักจิตวิทยาคนสำคัญของโลก เชื่อว่าลึกลงไปในจิตใจของมนุษย์ทุกคน มี "ต้นแบบ" บางอย่างซ่อนอยู่ เขาเรียกสิ่งนี้ว่า "อาร์คีไทป์"</p>
+      <p>เป็นรูปแบบตัวละคร ความรู้สึก หรือแรงขับบางอย่าง ที่มนุษย์ทั่วโลกพบร่วมกันมาตลอด ไม่ว่าจะในนิทาน ตำนาน หนัง ความฝัน หรือแม้แต่ในชีวิตจริงของเราเอง</p>
+      <p>12 อาร์คีไทป์ไม่ใช่กล่องที่เอาไว้ตัดสินว่าคุณ "เป็นคนแบบไหน" แบบตายตัว แต่เป็นเหมือนหลายเสียงที่อยู่ภายในตัวเรา บางเสียงชัดเจน บางเสียงเงียบลงไป และบางเสียงอาจกำลังรอให้เราได้ยินมัน</p>
+      <p>เวลาทำแบบทดสอบนี้ ลองตอบจากความรู้สึกจริง ๆ ไม่ใช่จากภาพของตัวเองที่อยากให้คนอื่นเห็น ผลลัพธ์ไม่ได้บอกว่า "คุณคือใครทั้งหมด" แต่มันอาจสะท้อนว่า ในช่วงเวลานี้ ตัวตนแบบไหนกำลังส่งเสียงดังที่สุดอยู่ข้างในคุณ</p>
+      <p class="modal-note">รากฐานแนวคิดมาจาก Carl Jung<br>แต่ระบบ 12 อาร์คีไทป์ที่นิยมในปัจจุบัน เป็นเวอร์ชันที่ถูกตีความและพัฒนาต่อในยุคหลัง</p>
+    </div>
+  </div>
+</div>
+
+<!-- ── QUIZ ── -->
+<div class="page hidden" id="page-quiz">
+  <div class="quiz-inner">
+    <div class="quiz-topbar">
+      <div class="q-counter" id="q-counter">1 <span>/ 24</span></div>
+      <div class="q-pct" id="q-pct">4%</div>
+    </div>
+    <div class="water-bar-wrap">
+      <div class="water-fill" id="water-fill" style="width:4%"></div>
+    </div>
+    <div class="q-card" id="q-card">
+      <span class="roach-icon">🪲</span>
+      <div class="q-num" id="q-num">ข้อที่ 1</div>
+      <div class="q-text" id="q-text"></div>
+    </div>
+    <div class="answers-grid" id="answers-grid"></div>
+  </div>
+</div>
+
+<!-- ── RESULT ── -->
+<div class="page hidden" id="page-result">
+  <div class="result-inner">
+    <div class="result-card">
+      <div class="r-symbol" id="r-symbol"></div>
+      <div class="r-name-en" id="r-name-en"></div>
+      <div class="r-name-th" id="r-name-th"></div>
+      <div class="r-tagline" id="r-tagline"></div>
+      <div class="r-divider"></div>
+      <div class="r-summary" id="r-summary"></div>
+      <div class="r-details">
+        <div class="r-detail">
+          <div class="r-detail-label">✦ ความปรารถนา</div>
+          <div class="r-detail-val" id="r-desire"></div>
+        </div>
+        <div clas

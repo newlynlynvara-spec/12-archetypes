@@ -24,8 +24,7 @@
   --white-faint:rgba(255,255,255,0.25);
 }
 
-html,body{height:100%;overflow:hidden;}
-
+html{height:100%;}
 body{
   font-family:'Anuphan',sans-serif;
   background:
@@ -65,16 +64,19 @@ body{
   66%{transform:translate(-20px,35px);}
 }
 
-/* page system */
+/* page system — fixed + overflow-y scroll for tall content */
 .page{
   position:fixed;inset:0;
-  display:flex;align-items:center;justify-content:center;
-  padding:20px;
-  transition:opacity .5s ease, transform .5s ease;
-  overflow-y:auto;
+  display:flex;flex-direction:column;align-items:center;justify-content:flex-start;
+  padding:env(safe-area-inset-top,16px) 16px env(safe-area-inset-bottom,20px);
+  transition:opacity .45s ease, transform .45s ease;
+  overflow-y:auto;overflow-x:hidden;
+  -webkit-overflow-scrolling:touch;
   z-index:1;
 }
-.page.hidden{opacity:0;pointer-events:none;transform:translateY(20px);}
+/* landing stays centered */
+#page-home{justify-content:center;}
+.page.hidden{opacity:0;pointer-events:none;transform:translateY(18px);}
 .page.active{opacity:1;pointer-events:all;transform:translateY(0);}
 
 /* ── LANDING PAGE ── */
@@ -655,10 +657,6 @@ body{
       <div class="q-text" id="q-text"></div>
     </div>
     <div class="answers-grid" id="answers-grid"></div>
-
-<button class="btn-back" id="btn-back" onclick="goBack()">
-  ← ย้อนกลับ
-</button>
   </div>
 </div>
 
@@ -677,4 +675,101 @@ body{
           <div class="r-detail-label">✦ ความปรารถนา</div>
           <div class="r-detail-val" id="r-desire"></div>
         </div>
-        <div clas
+        <div class="r-detail">
+          <div class="r-detail-label">✦ ความกลัว</div>
+          <div class="r-detail-val" id="r-fear"></div>
+        </div>
+        <div class="r-detail">
+          <div class="r-detail-label">✦ จุดเด่น</div>
+          <div class="r-detail-val" id="r-strength"></div>
+        </div>
+        <div class="r-detail">
+          <div class="r-detail-label">✦ จุดอ่อน</div>
+          <div class="r-detail-val" id="r-weakness"></div>
+        </div>
+      </div>
+
+      <!-- MBTI / Enneagram -->
+      <div class="r-detail" style="margin-bottom:18px;text-align:left;">
+        <div class="r-detail-label" style="margin-bottom:10px;">✦ แนวโน้ม MBTI</div>
+        <div class="r-mbti-row" id="r-mbti"></div>
+        <div class="r-detail-label" style="margin:10px 0 8px;">✦ Enneagram</div>
+        <div class="r-mbti-row" id="r-enn"></div>
+        <div class="r-detail-label" style="margin:10px 0 8px;">✦ Subtype</div>
+        <div id="r-sub" style="font-size:13px;color:rgba(255,255,255,0.65);"></div>
+      </div>
+
+<div class="r-quote" id="r-quote"></div>
+    </div>
+ 
+    <!-- RANKING -->
+    <div class="result-card" style="text-align:left;margin-bottom:16px;">
+      <div class="rank-title">✦ คะแนนทั้ง 12 อาร์คีไทป์ของคุณ</div>
+      <div id="rank-list"></div>
+    </div> 
+
+    <!-- PREMIUM -->
+    <div class="premium-section">
+      <div class="premium-label">เวอร์ชัน Premium · ยังล็อกอยู่</div>
+      <div class="premium-title">อยากรู้จักตัวเองให้ลึกกว่านี้?</div>
+      <div class="premium-desc">เจาะลึกตัวตนคุณอีกชั้น — ทั้งด้านมืดที่ซ่อนอยู่ รูปแบบความรัก และแรงขับที่คุณไม่รู้ตัว</div>
+      <div class="premium-grid">
+        <div class="premium-item"><span class="premium-dot">✦</span>48 คำถามเจาะลึก</div>
+
+
+<div class="premium-item"><span class="premium-dot">✦</span>Shadow Archetype — ด้านมืดที่ซ่อน</div>
+        <div class="premium-item"><span class="premium-dot">✦</span>รูปแบบทางอารมณ์</div>
+        <div class="premium-item"><span class="premium-dot">✦</span>แนวโน้ม MBTI - Cognitive Functions</div>
+        <div class="premium-item"><span class="premium-dot">✦</span>พลังงานแบบ Enneagram</div>
+        <div class="premium-item"><span class="premium-dot">✦</span>พลวัตในความรัก</div>
+
+<div class="premium-item"><span class="premium-dot">✦</span>แรงขับใต้สำนึก</div>
+        <div class="premium-item"><span class="premium-dot">✦</span>ความขัดแย้งภายใน</div>
+      </div>
+      <button class="btn-premium" disabled>🔒 ปลดล็อกเวอร์ชันลึก</button>
+      
+    </div>
+
+    <div style="padding:0 4px;">
+      <button class="btn-restart" onclick="restart()">✦ ทำแบบทดสอบอีกครั้ง</button>
+    </div>
+  </div>
+</div> 
+
+  
+      <script>
+const ARCHETYPES = {
+  innocent:  {name:"The Innocent",  nameTh:"ผู้บริสุทธิ์",    tagline:"หัวใจที่ยังเชื่อในแสงสว่าง",      symbol:"✿", summary:"คุณมองโลกด้วยสายตาที่ยังไม่ถูกทำลาย เชื่อในความดี ความงาม และความเรียบง่ายของชีวิต ความบริสุทธิ์ของคุณคือเกราะที่อ่อนโยนที่สุดและทรงพลังที่สุด", desire:"อยู่ในโลกที่ปลอดภัย บริสุทธิ์ และเปี่ยมความสุข", fear:"การถูกลงโทษ ถูกหักหลัง หรือทำสิ่งผิดพลาดร้ายแรง", quote:"\u201cในโลกที่ขมขื่น การยังเชื่อก็คือการกบฏที่งดงามที่สุด\u201d", strength:"มีศรัทธา น่ารัก อ่อนโยน", weakness:"หนีปัญหา ไม่กล้าเผชิญความจริง", mbti:["ISFP","INFP","ENFP"], enn:["9w1","2w1"], sub:"self-pres"},
+  sage:      {name:"The Sage",      nameTh:"นักปราชญ์",        tagline:"ผู้แสวงหาความจริงในความเงียบ",     symbol:"☾", summary:"คุณกระหายความเข้าใจมากกว่าความสบาย จิตของคุณเป็นห้องสมุดที่ไม่มีวันปิด ความจริงคือเข็มทิศ และความกระจ่างคือของขวัญที่คุณมอบให้โลก", desire:"เข้าใจความจริงของโลกและของตัวเอง", fear:"ถูกหลอก หรือใช้ชีวิตอยู่ในความไม่รู้", quote:"\u201cความเงียบของฉันไม่ได้ว่างเปล่า — มันเต็มไปด้วยคำตอบ\u201d", strength:"ฉลาด มีวิจารณญาณ ลึก", weakness:"อยู่กับหัว ไม่ลงมือ หรือจมในทฤษฎี", mbti:["INTJ","INTP","INFJ"], enn:["5w4","1w9"], sub:"self-pres หรือ social"},
+  explorer:  {name:"The Explorer",  nameTh:"นักแสวงหา",        tagline:"วิญญาณที่ไม่เคยหยุดเดิน",         symbol:"✺", summary:"ขอบฟ้าเรียกคุณเสมอ คุณยอมเหงาเพื่อจะได้เป็นตัวเอง ทุกย่างก้าวคือคำประกาศอิสรภาพ", desire:"อิสรภาพในการค้นพบและเป็นตัวของตัวเอง", fear:"ถูกขังอยู่ในกรอบ กิจวัตร หรือชีวิตที่ไร้ความหมาย", quote:"\u201cฉันไม่ได้หลงทาง ฉันแค่ยังไม่ถูกจองจำ\u201d", strength:"กล้าคิด กล้าทำ แสวงหา", weakness:"ไม่มั่นคง วอกแวกง่าย", mbti:["ENFP","INTP","ISTP"], enn:["7w8","4w5"], sub:"sexual (แสวงหาสิ่งเร้าใหม่ ๆ)"},
+  outlaw:    {name:"The Outlaw",    nameTh:"ผู้ทำลายกฎ",       tagline:"ไฟใต้ผิวหนังของผู้ที่ไม่ยอมจำนน", symbol:"✦", summary:"คุณมองทะลุภาพลวง และไม่ยอมเคารพกฎที่ทำร้ายคน การปฏิวัติคือศาสนาส่วนตัวของคุณ", desire:"โค่นล้มสิ่งที่บิดเบี้ยวและทวงคืนเสรีภาพ", fear:"ไร้พลัง ถูกควบคุม หรือกลายเป็นผู้สมรู้ร่วมคิดเงียบ ๆ", quote:"\u201cฉันไม่ได้โกรธโลก ฉันแค่ปฏิเสธจะแกล้งทำเป็นไม่เห็น\u201d", strength:"กล้าท้าทาย เด็ดเดี่ยว", weakness:"หุนหันพลันแล่น ทุบโดยไม่สร้าง", mbti:["INFP","ENTP","INTJ"], enn:["4w5","8w9"], sub:"sexual หรือ social"},
+  magician:  {name:"The Magician",  nameTh:"นักเล่นแร่แปรธาตุ",tagline:"ผู้ถักทอความเป็นจริงด้วยเจตนา",  symbol:"✶", summary:"คุณมองเห็นรูปแบบที่ซ่อนอยู่ใต้ผิวของสิ่งต่าง ๆ และเข้าใจว่าจินตนาการคือพลังที่สร้างโลก คุณไม่ได้รอ คุณเรียกมันออกมา", desire:"เข้าใจกฎของจักรวาลและใช้มันเปลี่ยนความเป็นจริง", fear:"ผลที่ไม่ได้คาดคิด การสูญเสียการควบคุมพลังของตัวเอง", quote:"\u201cโลกนี้คือกระจก ฉันแค่เปลี่ยนสิ่งที่ฉันมองเห็นในนั้น\u201d", strength:"มีวิสัยทัศน์ เชื่อมโยงได้ลึก", weakness:"ควบคุมคนอื่นโดยไม่รู้ตัว", mbti:["INFJ","INTJ","ENFP"], enn:["4w5","5w6"], sub:"sexual"},
+  hero:      {name:"The Hero",      nameTh:"วีรบุรุษ",          tagline:"หัวใจที่ก้าวเข้าหาไฟ",             symbol:"✧", summary:"ความท้าทายเรียกคุณออกมาจากเงา คุณเชื่อในการพิสูจน์คุณค่าด้วยการกระทำ และไม่ยอมให้ความกลัวเป็นคนเขียนเรื่องราวของคุณ", desire:"พิสูจน์คุณค่าผ่านการกระทำที่กล้าหาญ", fear:"ความอ่อนแอ ความขลาด หรือถูกมองว่าไร้ความสามารถ", quote:"\u201cฉันไม่ได้ไร้ความกลัว ฉันแค่เดินไปข้างหน้าทั้ง ๆ ที่กลัว\u201d", strength:"กล้าหาญ เด็ดเดี่ยว", weakness:"ดื้อ หลงตัวเอง", mbti:["ESTJ","ENTJ","ENFJ"], enn:["3w4","8w7"], sub:"social หรือ sexual"},
+  lover:     {name:"The Lover",     nameTh:"ผู้รัก",            tagline:"หัวใจที่หลอมรวมเป็นโลกได้ทั้งใบ",  symbol:"♥", summary:"คุณรู้สึกลึก รักแรง และเห็นความศักดิ์สิทธิ์ในความใกล้ชิด ทุกสายตา ทุกสัมผัส คือบทสวดของคุณต่อชีวิต", desire:"ได้รักและถูกรักอย่างหมดหัวใจ", fear:"ถูกทอดทิ้ง ไม่เป็นที่ต้องการ หรืออยู่คนเดียว", quote:"\u201cฉันไม่ได้รักเพื่อจะถูกรัก — ฉันรักเพราะวิญญาณฉันถูกสร้างมาแบบนั้น\u201d", strength:"โรแมนติก อ่อนโยน เข้าใจคน", weakness:"ยึดติด ต้องการการยอมรับ", mbti:["ESFP","ISFP","ENFJ"], enn:["2w3","4w3"], sub:"sexual (แสวงหาการเชื่อมต่อแบบลึก)"},
+  jester:    {name:"The Jester",    nameTh:"ผู้เริงร่า",        tagline:"ปัญญาที่ซ่อนอยู่ในเสียงหัวเราะ",   symbol:"✸", summary:"คุณเชื่อว่าชีวิตนี้สั้นเกินกว่าจะจริงจังตลอดเวลา ความสนุกของคุณคือคำเตือนเงียบ ๆ ว่าทุกสิ่งจะผ่านไป", desire:"อยู่ในปัจจุบัน เพลิดเพลินกับชีวิตเต็มที่", fear:"ความน่าเบื่อ ความว่างเปล่า การไม่ถูกมองเห็น", quote:"\u201cฉันหัวเราะ เพราะฉันเข้าใจดีเกินกว่าจะร้องไห้\u201d", strength:"มองโลกในแง่ดี มีชีวิตชีวา", weakness:"ไม่จริงจัง หนีความรู้สึกจริง", mbti:["ENFP","ESFP","ENTP"], enn:["7w6","3w2"], sub:"social หรือ sexual"},
+  everyman:  {name:"The Everyman",  nameTh:"สามัญชน",          tagline:"ความจริงในความธรรมดา",              symbol:"❋", summary:"คุณเป็นที่พักใจของคนรอบข้าง ไม่ต้องสวมหน้ากาก ไม่ต้องพิสูจน์อะไร ความอบอุ่นของคุณทำให้โลกใจดีขึ้น", desire:"ได้รู้สึกเป็นส่วนหนึ่ง ไม่ถูกตัดสิน", fear:"ถูกแยก โดดเดี่ยว หรือดู 'แตกต่าง' จนเกินไป", quote:"\u201cฉันไม่ใช่ใครคนพิเศษ — และนั่นคือของขวัญของฉัน\u201d", strength:"นอบน้อม อ่อนโยน เป็นมิตร", weakness:"ไม่มีจุดยืน หวั่นไหวง่าย", mbti:["ISFJ","ESFJ","ISFP"], enn:["6w7","9w8"], sub:"social (อยากกลมกลืน เข้ากลุ่ม)"},
+        caregiver: {name:"The Caregiver", nameTh:"ผู้โอบอุ้ม",       tagline:"หัวใจที่กว้างพอจะแบกทั้งโลก",     symbol:"✿", summary:"คุณรู้สึกถึงความเจ็บของผู้อื่นได้ก่อนที่พวกเขาจะรู้ตัว ความรักของคุณคือยา แต่บางครั้งคุณก็ลืมเก็บไว้ดูแลตัวเอง", desire:"ปกป้องและดูแลผู้อื่นอย่างไม่มีเงื่อนไข", fear:"เห็นแก่ตัว ไม่เป็นที่ต้องการ หรือช่วยใครไม่ได้", quote:"\u201cฉันโอบกอดรอยแผลของคนอื่น เพราะรู้ว่ามันรู้สึกอย่างไร\u201d", strength:"เสียสละ เมตตา", weakness:"ลืมดูแลตัวเอง โดนเอาเปรียบ", mbti:["ISFJ","INFJ","ESFJ"], enn:["2w1","9w1"], sub:"self-pres หรือ social"},
+  ruler:     {name:"The Ruler",     nameTh:"ผู้ปกครอง",        tagline:"ผู้สถาปนาระเบียบอันงดงาม",         symbol:"✷", summary:"คุณถูกเรียกมาเพื่อสร้างความมั่นคง ความรุ่งโรจน์ และมรดกที่ยั่งยืน อำนาจในมือของคุณคือเครื่องมือ ไม่ใช่รางวัล", desire:"สร้างอาณาจักรแห่งความรุ่งเรืองและความเป็นระเบียบ", fear:"ความวุ่นวาย การสูญเสียอำนาจ หรือถูกล้มล้าง", quote:"\u201cฉันไม่ได้ครอง — ฉันรับผิดชอบ\u201d", strength:"มีความเป็นผู้นำ ตัดสินใจได้", weakness:"เผด็จการ ขาดความยืดหยุ่น", mbti:["ENTJ","ESTJ","INTJ"], enn:["8w7","1w2"], sub:"social (ต้องการควบคุม สร้างระบบ)"},
+  creator:   {name:"The Creator",   nameTh:"ผู้สร้างสรรค์",    tagline:"วิญญาณที่ต้องสร้าง มิฉะนั้นจะตาย", symbol:"❈", summary:"คุณไม่สามารถหยุดสร้างสิ่งใหม่ได้ — มันคือลมหายใจ ทุกสิ่งที่คุณสัมผัสกลายเป็นรูปแบบ ความหมาย หรือบทกวีบางประการ", desire:"สร้างบางสิ่งที่งดงาม คงอยู่ และเป็นของคุณคนเดียว", fear:"ความธรรมดา การลอกเลียน หรือไม่สามารถถ่ายทอดสิ่งภายในออกมาได้", quote:"\u201cสิ่งที่ฉันสร้างคือสิ่งเดียวที่ฉันแน่ใจว่ามีอยู่จริง\u201d", strength:"มีวิสัยทัศน์ สร้างสรรค์", weakness:"เพอร์เฟกชันนิสต์ กลัวผลงานไม่ดีพอ", mbti:["INFP","INTP","INTJ"], enn:["4w5","5w4"], sub:"self-pres"},
+};
+        const QUESTIONS = [
+  {q:"ในฝันที่กลับมาหาคุณซ้ำ ๆ คุณมักไปอยู่ที่แบบไหน?",a:[{t:"ทุ่งกว้าง ๆ ที่ลมพัดไม่หยุด",k:["explorer"]},{t:"ห้องสมุดเก่า ๆ ที่หนังสือเหมือนกระซิบอะไรบางอย่าง",k:["sage","magician"]},{t:"บ้านอุ่น ๆ ที่ยังมีคนนั่งรอที่โต๊ะ",k:["caregiver","everyman"]},{t:"ที่สูงสักแห่งที่มองลงมาเห็นทั้งเมือง",k:["ruler"]}]},
+  {q:"ตื่นขึ้นกลางดึกแบบไม่มีเหตุผล ความรู้สึกแรกคืออะไร?",a:[{t:"เงียบเกินไป จนรู้สึกว่ามีอะไรจะบอก",k:["magician","sage"]},{t:"นึกถึงคนคนหนึ่งจนแน่นอก",k:["lover"]},{t:"อยากออกไปไหนก็ได้ที่ไม่เคยไป",k:["explorer","outlaw"]},{t:"นึกถึงงานที่ค้าง อยากลุกไปทำให้จบ",k:["hero","creator"]}]},
+{q:"ช่วงเวลาไหนที่ทำให้คุณรู้สึกว่า 'กำลังมีชีวิตอยู่จริง ๆ'?",a:[{t:"ตอนกำลังสร้างอะไรที่{q:"อะไรคือสิ่งที่คุณกลัวอยู่ลึก ๆ แต่ไม่ค่อยพูดให้ใครฟัง?",a:[{t:"การถูกทิ้งให้เหลือคนเดียวจริง ๆ",k:["lover","everyman"]},{t:"การใช้ชีวิตทั้งชีวิตโดยไม่ได้เป็นตัวเองสักที",k:["explorer","outlaw"]},{t:"การไม่มีแรงพอจะปกป้องคนที่รัก",k:["hero","ruler"]},{t:"การพบว่าสิ่งที่เคยเชื่อมาทั้งหมด ไม่จริงสักเรื่อง",k:["sage","innocent"]}]{q:"ตอนมองตัวเองในกระจกยามเช้า เสียงในใจมักพูดว่าอะไร?",a:[{t:"\u201cวันนี้ต้องเป็นวันที่ดี เนอะ\u201d",k:["innocent"]},{t:"\u201cยังเหลืออีกหลายเรื่องต้องสู้ ไปต่อ\u201d",k:["hero"]},{t:"\u201cวันนี้จะทำให้ใครรู้สึกดีขึ้นได้บ้างนะ\u201d",k:["caregiver"]},{t:"\u201cจริง ๆ เราเป็นใครกันแน่วะ\u201d",k:["sage","creator"]}]},},ยังไม่เคยมี",k:["creator","magician"]},{t:"ตอนได้อยู่ข้างใครสักคนในวันที่เขาแย่ที่สุด",k:["caregiver","hero"]},{t:"ตอนหัวเราะกับคนที่ใช่ จนน้ำตาไหล",k:["jester","everyman"]},{t:"ตอนเข้าใจอะไรบางอย่างที่คนอื่นยังมองไม่เห็น",k:["sage"]}]},
+
+{q:"อะไรคือสิ่งที่คุณกลัวอยู่ลึก ๆ แต่ไม่ค่อยพูดให้ใครฟัง?",a:[{t:"การถูกทิ้งให้เหลือคนเดียวจริ{q:"ตอนมองตัวเองในกระจกยามเช้า เสียงในใจมักพูดว่าอะไร?",a:[{t:"\u201cวันนี้ต้องเป็นวันที่ดี เนอะ\u201d",k:["innocent"]},{t:"\u201cยังเหลืออีกหลายเรื่องต้องสู้ ไปต่อ\u201d",k:["hero"]},{t:"\u201cวันนี้จะทำให้ใครรู้สึกดีขึ้นได้บ้างนะ\u201d",k:["caregiver"]},{t:"\u201cจริง ๆ เราเป็นใครกันแน่วะ\u201d",k:["sage","creator"]}]},ง ๆ",k:["lover","everyman"]},{t:"การใช้ชีวิตทั้งชีวิตโดยไม่ได้เป็นตัวเองสักที",k:["explorer","outlaw"]},{t:"การไม่มีแรงพอจะปกป้องคนที่รัก",k:["hero","ruler"]},{t:"การพบว่าสิ่งที่เคยเชื่อมาทั้งหมด ไม่จริงสักเรื่อง",k:["sage","innocent"]}]},
+
+{q:"ตอนมองตัวเองในกระจกยามเช้า เสียงในใจมักพูดว่าอะไร?",a:[{t:"\u201cวันนี้ต้องเป็นวันที่ดี เนอะ\u201d",k:["innocent"]},{t:"\u201cยังเหลืออีกหลายเรื่องต้องสู้ ไปต่อ\u201d",k:["hero"]},{t:"\u201cวันนี้จะทำให้ใครรู้สึกดีขึ้นได้บ้างนะ\u201d",k:["caregiver"]},{t:"\u201cจริง ๆ เราเป็นใครกันแน่วะ\u201d",k:["sage","creator"]}]},
+  {q:"เพลงที่บอกตัวตนคุณได้มากที่สุด ฟังแล้วให้ความรู้สึกแบบไหน?",a:[{t:"เปียโนเบา ๆ ในห้องว่าง — เศร้า แต่ก็สวย",k:["lover","creator"]},{t:"กลองหนัก ๆ ที่ทำให้อยากลุกขึ้นสู้",k:["hero","outlaw"]},{t:"เสียงคลื่นกับกีตาร์ เหมือนเดินทางคนเดียว",k:["explorer"]},{t:"เสียงประสานในวิหาร เหมือนแตะอะไรที่ใหญ่กว่าตัวเรา",k:["magician","sage"]}]},
+
+{q:"'ความสวย' ในแบบของคุณ หน้าตาเป็นยังไง?",a  {q:"ในวงสังสรรค์กับเพื่อน คุณมักเป็นคนแบบไหน?",a:[{t:"คนที่ทำให้ทุกคนรู้สึกว่ามีตัวตน",k:["caregiver","everyman"]},{t:"คนที่ทำให้ทั้งวงหัวเราะจนปวดท้อง",k:["jester"]},{t:"คนที่นั่งเงียบ ๆ มุมหนึ่ง คอยดูคนอื่น",k:["sage","magician"]},{t:"คนที่พอเปิดปาก ทุกคนก็หันมาฟัง",k:["ruler","hero"]}]},:[{t:"เรียบง่าย ไม่ต้องพยายามเป็นอะไร",k:["innocent","everyman"]},{t:"ประณีต มีรสนิยมซ่อนอยู่ในรายละเอียด",k:["ruler","lover"]},{t:"กล้าต่าง กล้าเป็นตัวเอง",k:["outlaw","creator"]},{t:"ลึกลับ ทำให้คนอยากรู้จักให้มากขึ้น",k:["magician"]}]},
+  {q:"ถ้าวันนี้ลองเปิดสมุดบันทึกของตัวเอง ประโยคไหนที่คุณเขียนซ้ำบ่อยที่สุด?",a:[{t:"\u201cทำไมเรารู้สึ  {q:"อะไรคือสิ่งที่คุณยอมเสียทุกอย่างเพื่อรักษาเอาไว้?",a:[{t:"อิสระที่จะเลือกชีวิตของตัวเอง",k:["explorer","outlaw"]},{t:"คนที่รักจนสุดใจ",k:["lover","caregiver"]},{t:"ความฝัน และสิ่งที่ตั้งใจสร้างมัน",k:["creator","magician"]},{t:"ศักดิ์ศรี และคำพูดของตัวเอง",k:["hero","ruler"]}]},กอะไรเยอะแบบนี้นะ\u201d",k:["lover","creator"]},{t:"\u201cเราต้องเก่งกว่านี้อีก\u201d",k:["hero","ruler"]},{t:"\u201cเดี๋ยวมันก็ผ่านไป… ใช่ไหม\u201d",k:["innocent","caregiver"]},{t:"\u201cโลกนี้บ้าไปแล้วจริง ๆ\u201d",k:["outlaw","sage"]}]},
+
+  {q:"เวลารู้สึกว่าตัวเอง 'ยังไม่ดีพอ' คุณมักรับมือยังไง?",a:[{t:"พยายามมากขึ้น ทำมากขึ้น เพื่อพิสูจน์ตัวเอง",k:["hero"]},{t:"หันไปดูแลคนอื่น เพื่อให้รู้สึกว่าตัวเองมีค่า",k:["caregiver"]},{t:"หลบเข้าไปในโลกของตัวเอง ในงาน ในจินตนาการ",k:["creator","magician"]},{t:"หาอะไรสนุก ๆ ทำ จะได้ไม่ต้องคิด",k:["jester","everyman"]}]},
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+
+
+  
+        
+        

@@ -721,7 +721,7 @@ body{
         <div class="premium-item"><span class="premium-dot">✦</span>รูปแบบทางอารมณ์</div>
         <div class="premium-item"><span class="premium-dot">✦</span>แนวโน้ม MBTI - Cognitive Functions</div>
         <div class="premium-item"><span class="premium-dot">✦</span>พลังงานแบบ Enneagram</div>
-        <div class="premium-item"><span class="premium-dot">✦</span>พลวัตในความรัก</div>
+        <div class="preanswers-gridspan class="premium-dot">✦</span>พลวัตในความรัก</div>
 
 <div class="premium-item"><span class="premium-dot">✦</span>แรงขับใต้สำนึก</div>
         <div class="premium-item"><span class="premium-dot">✦</span>ความขัดแย้งภายใน</div>
@@ -767,9 +767,139 @@ const ARCHETYPES = {
 
   {q:"เวลารู้สึกว่าตัวเอง 'ยังไม่ดีพอ' คุณมักรับมือยังไง?",a:[{t:"พยายามมากขึ้น ทำมากขึ้น เพื่อพิสูจน์ตัวเอง",k:["hero"]},{t:"หันไปดูแลคนอื่น เพื่อให้รู้สึกว่าตัวเองมีค่า",k:["caregiver"]},{t:"หลบเข้าไปในโลกของตัวเอง ในงาน ในจินตนาการ",k:["creator","magician"]},{t:"หาอะไรสนุก ๆ ทำ จะได้ไม่ต้องคิด",k:["jester","everyman"]}]},
 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+                    {q:"ความรักของคุณ มีรสชาติแบบไหนมากที่สุด?",a:[{t:"เข้มข้น ลึกซึ้ง เหมือนเรื่องที่ทั้งสวยและเจ็บ",k:["lover"]},{t:"อุ่น ๆ ปลอดภัย เหมือนผ้าห่มในวันที่หนาว",k:["caregiver","everyman"]},{t:"เงียบ ๆ พูดน้อย แต่จริงใจตลอด",k:["magician","sage"]},{t:"อิสระ ไม่อึดอัด อยู่ด้วยกันก็ดี อยู่คนเดียวก็ได้",k:["explorer"]}]},
+  {q:"ตอนยังเด็ก คุณมักหลงรักเรื่องราวแบบไหน?",a:[{t:"เทพนิยาย เจ้าหญิง ปราสาท ความรักที่ไม่มีวันจบ",k:["innocent","lover"]},{t:"ผจญภัย โจรสลัด ดินแดนที่ไม่มีใครรู้จัก",k:["explorer","hero"]},{t:"เวทมนตร์ คาถา โลกอีกใบที่ซ่อนอยู่",k:["magician","creator"]},{t:"วีรบุรุษที่ลุกขึ้นสู้กับสิ่งไม่ยุติธรรม",k:["outlaw","ruler"]}]},                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
 
 
-  
+  {q:"เวลามีใครทำร้ายใจคุณ ลึก ๆ แล้วคุณตอบสนองยังไง?",a:[{t:"เก็บเงียบ แล้วค่อย ๆ ถอยห่างไปเอง",k:["sage","magician"]},{t:"ลุกสู้กลับด้วยทุกอย่างที่มี",k:["hero","outlaw"]},{t:"พยายามเข้าใจว่าทำไมเขาถึงทำแบบนั้น",k:["caregiver","innocent"]},{t:"เปลี่ยนความเจ็บเป็นงานสักชิ้น",k:["creator","lover"]}]},
+  {q:"ถ้าจักรวาลให้ของขวัญคุณได้หนึ่งอย่าง คุณจะเลือกอะไร?",a:[{t:"อ่านใจคนได้หมด เข้าใจทุกคน",k:["sage","caregiver"]},{t:"เปลี่ยนความคิดให้เป็นเรื่องจริงได้",k:["magician","creator"]},{t:"เวลาไม่จำกัด เพื่ออยู่กับคนที่รัก",k:["lover"]},{t:"โลกใบเล็ก ๆ ของตัวเอง ไม่มีใครมาสั่ง",k:["ruler","outlaw"]}]},
+  {q:"สถานที่ที่คุณรู้สึก 'เป็นตัวเอง' ที่สุด หน้าตาเป็นแบบไหน?",a:[{t:"มุมเงียบ ๆ ในร้านกาแฟ มีหนังสือกับกาแฟอุ่น",k:["sage","everyman"]},{t:"บนรถไฟตอนกลางคืน มองวิวเลื่อนผ่านหน้าต่าง",k:["explorer","creator"]},{t:"ในอ้อมกอดของคนที่ไว้ใจที่สุด",k:["lover","caregiver"]},{t:"บนเวที หรือในห้องที่ทุกสายตาหันมามอง",k:["jester","ruler"]}]},
         
-        
+        {q:"อะไรคือสิ่งที่คุณรู้สึกว่า 'โลกใบนี้กำลังขาดมันไป'?",a:[{t:"ความจริงใจ และคนที่กล้าเป็นตัวเอง",k:["outlaw","innocent"]},{t:"ความเข้าใจกันอย่างลึก ๆ ระหว่างคน",k:["sage","lover"]},{t:"ความกล้าที่จะยืนหยัดเพื่อสิ่งที่ถูกต้อง",k:["hero"]},{t:"ความสวย และศิลปะที่จับใจคน",k:["creator","ruler"]}]},
+  {q:"ตอนเดินคนเดียวในเมืองยามดึก ๆ คุณรู้สึกยังไง?",a:[{t:"เหมือนนักเขียนที่กำลังเก็บฉากของชีวิตทีละนิด",k:["creator","sage"]},{t:"เหมือนหายไปจากโลก แล้วก็โอเคนะ",k:["explorer","magician"]},{t:"อยากมีใครสักคนเดินอยู่ข้าง ๆ",k:["lover","everyman"]},{t:"รู้สึกว่าทุกถนนตรงนี้ เป็นของเรา",k:["ruler","outlaw"]}]},
+  {q:"ฉากในชีวิตที่คุณอยากเก็บไว้ตลอดไป มักเป็นเรื่องเกี่ยวกับอะไร?",a:[{t:"ตอนหัวเราะกับคนรัก จนลืมเวลา",k:["jester","lover"]},{t:"ตอนทำสิ่งที่ตัวเองภูมิใจที่สุด",k:["hero","ruler"]},{t:"ตอนได้ช่วยใครสักคนได้จริง ๆ",k:["caregiver"]},{t:"ตอนจู่ ๆ ก็เข้าใจชีวิตขึ้นมาเอง",k:["sage","magician"]}]},
+
+
+{q:"ถ้าใจของคุณเป็นห้องสักห้อง ห้องนั้นจะเป็นแบบไหน?",a:[{t:"ห้องที่มีกระจกหลายบาน สะท้อนตัวเองหลายมุม",k:["sage","magician"]},{t:"ห้องโล่ง ๆ มีหน้าต่างเปิดออกสู่ทะเล",k:["explorer","innocent"]},{t:"ห้องอุ่น ๆ มีโซฟาตัวใหญ่ และคนที่รออยู่",k:["caregiver","everyman"]},{t:"ห้องประณีต เต็มไปด้วยศิลปะและของหายาก",k:["creator","ruler"]}]},
+  {q:"อะไรคือสิ่งที่คุณ 'ยอมไม่ได้' จะเป็น?",a:[{t:"คนที่ใช้ชีวิตหลอกตัวเองไปวัน ๆ",k:["outlaw","sage"]},{t:"คนที่ทำร้ายคนอื่นโดยไม่รู้สึกอะไรเลย",k:["caregiver","hero"]},{t:"คนที่ยอมอยู่ในกรอบ ทั้งที่มันไม่ใช่ตัวเอง",k:["explorer","creator"]},{t:"คนที่ไม่กล้ารัก หรือไม่ยอมให้ใครรัก",k:["lover","innocent"]}]},
+  {q:"วันหนึ่งเมื่อคุณไม่อยู่แล้ว อยากให้คนอื่นจดจำคุณยังไง?",a:[{t:"\u201cเธอทำให้ฉันรู้ว่าการถูกรัก เป็นยังไง\u201d",k:["lover","caregiver"]},{t:"\u201cเธอเปลี่ยนวิธีที่ฉันมองโลก\u201d",k:["sage","magician"]},{t:"\u201cเธอกล้าทำในสิ่งที่ฉันไม่กล้า\u201d",k:["hero","outlaw"]},{t:"\u201cเธอทิ้งบางอย่างที่งดงามไว้บนโลกนี้\u201d",k:["creator","ruler"]}]},
+];
+ 
+const LETTERS = ['A','B','C','D'];
+let cur = 0;
+const scores = {};
+Object.keys(ARCHETYPES).forEach(k => scores[k]=0);
+ 
+function goPage(id){
+  document.querySelectorAll('.page').forEach(p=>{
+    p.classList.remove('active');p.classList.add('hidden');
+  });
+  const el=document.getElementById(id);
+  el.classList.remove('hidden');el.classList.add('active');
+  el.scrollTop=0;
+        } 
+
+function openAbout(){document.getElementById('modal-about').classList.add('open');}
+function closeAbout(){document.getElementById('modal-about').classList.remove('open');}
+document.getElementById('modal-about').addEventListener('click',function(e){
+  if(e.target===this)closeAbout();
+});
+ 
+function startQuiz(){
+  cur=0;Object.keys(scores).forEach(k=>scores[k]=0);
+  goPage('page-quiz');renderQ();
+}
+ 
+
+        function renderQ(){
+  const total=QUESTIONS.length;
+  const q=QUESTIONS[cur];
+  const pct=Math.round(((cur+1)/total)*100);
+ 
+  document.getElementById('q-counter').innerHTML=`${cur+1} <span>/ ${total}</span>`;
+  document.getElementById('q-pct').textContent=pct+'%';
+  document.getElementById('water-fill').style.width=pct+'%';
+  document.getElementById('q-num').textContent='ข้อที่ '+(cur+1);
+  document.getElementById('q-text').textContent=q.q;
+
+
+const shuffled=[...q.a].sort(()=>Math.random()-.5);
+  const grid=document.getElementById('answers-grid');
+  grid.innerHTML='';
+  shuffled.forEach((ans,i)=>{
+    const btn=document.createElement('button');
+    btn.className='ans-btn fade-in';
+    btn.style.animationDelay=(i*.06)+'s';
+    btn.innerHTML=`<span class="ans-letter">${LETTERS[i]}</span><span class="ans-text">${ans.t}</span>`;
+    btn.onclick=()=>pick(ans.k);
+    grid.appendChild(btn);
+  }); 
+
+const card=document.getElementById('q-card');
+  card.classList.remove('fade-in');void card.offsetWidth;card.classList.add('fade-in');
+}
+ 
+function pick(keys){
+  keys.forEach(k=>{if(scores[k]!==undefined)scores[k]++;});
+  cur++;
+  if(cur<QUESTIONS.length){renderQ();}
+  else{showResult();}
+}
+ 
+function showResult(){
+  const sorted=Object.entries(scores).sort((a,b)=>b[1]-a[1]);
+  const winner=sorted[0][0];
+  const arc=ARCHETYPES[winner];
+  const totalPoints=sorted.reduce((s,e)=>s+e[1],0)||1;
+
+// Main card
+  document.getElementById('r-symbol').textContent=arc.symbol;
+  document.getElementById('r-name-en').textContent=arc.name;
+  document.getElementById('r-name-th').textContent=arc.nameTh;
+  document.getElementById('r-tagline').textContent=arc.tagline;
+  document.getElementById('r-summary').textContent=arc.summary;
+  document.getElementById('r-desire').textContent=arc.desire;
+  document.getElementById('r-fear').textContent=arc.fear;
+document.getElementById('r-strength').textContent=arc.strength;
+  document.getElementById('r-weakness').textContent=arc.weakness;
+  document.getElementById('r-quote').textContent=arc.quote;
+  document.getElementById('r-sub').textContent=arc.sub;
+ 
+  // MBTI badges
+  const mbtiEl=document.getElementById('r-mbti');
+  mbtiEl.innerHTML=arc.mbti.map(m=>`<span class="r-mbti-badge">${m}</span>`).join('');
+  // Enneagram badges
+  const ennEl=document.getElementById('r-enn');
+  ennEl.innerHTML=arc.enn.map(e=>`<span class="r-enn-badge">${e}</span>`).join('');
+
+  // Ranking bars
+  const rankEl=document.getElementById('rank-list');
+  rankEl.innerHTML='';
+  sorted.forEach(([key,score],i)=>{
+    const a=ARCHETYPES[key];
+    const pct=Math.round((score/totalPoints)*100);
+    const isTop=i===0;
+    const row=document.createElement('div');
+    row.className='rank-row';
+    row.innerHTML=`
+      <div class="rank-label">${a.symbol} ${a.nameTh}</div>
+      <div class="rank-bar-wrap">
+        <div class="rank-bar-fill${isTop?' top':''}" style="width:0%" data-w="${pct}"></div>
+      </div>
+<div class="rank-pct${isTop?' top':''}">${pct}%</div>`;
+    rankEl.appendChild(row);
+  });
+  // Animate bars after render
+  setTimeout(()=>{
+    rankEl.querySelectorAll('.rank-bar-fill').forEach(el=>{
+      el.style.width=el.dataset.w+'%';
+    });
+  },80);
+ 
+  goPage('page-result');
+}
+ 
+function restart(){startQuiz();}
+</script>
+</body>
+</html>     

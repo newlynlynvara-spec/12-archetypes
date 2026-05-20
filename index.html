@@ -385,7 +385,7 @@ body{
 }
 .result-card::before{
   content:'';position:absolute;inset:0;border-radius:28px;
-  background:linear-gradient(145deg,rgba(255,255,255,0.14) 0%,transparent 45%);
+  background:linear-gradient(145deg,rgba(255,255,255,0.14) 0%,transpaนrent 45%);
   pointer-events:none;
 }
 .r-symbol{
@@ -712,7 +712,7 @@ body{
     </div> 
 
     <!-- ── GATE PAGE ── -->
-<div class="page active" id="page-gate">
+<div class="page hidden" id="page-gate">
   <div class="gate-inner">
     <div class="gate-badge">✦ Premium Deep Analysis ✦</div>
     <div class="gate-title">เจาะลึกตัวตน<br>ที่ซ่อนอยู่</div>
@@ -787,12 +787,11 @@ body{
 
 
     
-    
     <div style="padding:0 4px;">
       <button class="btn-restart" onclick="restart()">✦ ทำแบบทดสอบอีกครั้ง</button>
     </div>
   </div>
-</div> 
+</div> <div class="page hidden" id="page-gate">
 
   
       <script>

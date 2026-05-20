@@ -363,6 +363,24 @@ body{
 }
 .ans-text{flex:1;}
 
+.btn-back{
+  width:100%;
+  padding:12px;
+  border-radius:12px;
+  background:rgba(255,255,255,0.08);
+  border:1px solid rgba(255,255,255,0.15);
+  color:rgba(255,255,255,0.7);
+  font-family:'Anuphan',sans-serif;
+  font-size:14px;
+  cursor:pointer;
+  transition:all .2s ease;
+  margin-top:8px;
+}
+.btn-back:hover{
+  background:rgba(255,255,255,0.12);
+  color:rgba(255,255,255,0.9);
+}
+
 /* ── RESULT PAGE ── */
 #page-result{flex-direction:column;padding:20px;}
 .result-inner{
@@ -385,7 +403,7 @@ body{
 }
 .result-card::before{
   content:'';position:absolute;inset:0;border-radius:28px;
-  background:linear-gradient(145deg,rgba(255,255,255,0.14) 0%,transpaนrent 45%);
+  background:linear-gradient(145deg,rgba(255,255,255,0.14) 0%,transparent 45%);
   pointer-events:none;
 }
 .r-symbol{
@@ -522,62 +540,165 @@ body{
 }
 .rank-pct.top{color:var(--gold);font-weight:600;}
 
-/* premium lock */
-.premium-section{
-  border-radius:24px;
-  background:linear-gradient(145deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02));
-  border:1px solid rgba(255,255,255,0.1);
-  padding:28px 24px;
-  text-align:center;
-  position:relative;
-  overflow:hidden;
-  margin-bottom:16px;
+/* gate page */
+#page-gate{flex-direction:column;align-items:center;padding:20px;}
+.gate-inner{
+  max-width:520px;width:100%;
+  display:flex;flex-direction:column;
+  gap:20px;
+  padding-bottom:20px;
 }
-.premium-section::before{
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(135deg,rgba(255,45,120,0.08),transparent 60%);
-  pointer-events:none;
+.gate-badge{
+  font-size:11px;letter-spacing:.25em;text-transform:uppercase;
+  color:rgba(212,168,71,0.8);font-family:'Playfair Display',serif;
+  margin-bottom:0;
 }
-.premium-label{
-  font-size:10px;letter-spacing:.35em;text-transform:uppercase;
-  color:rgba(212,168,71,0.7);margin-bottom:10px;
+.gate-title{
   font-family:'Playfair Display',serif;
-}
-.premium-title{
-  font-family:'Playfair Display',serif;
-  font-size:26px;
+  font-size:clamp(28px,6vw,42px);
   background:linear-gradient(to right,#ffd6f0,#ffe9b5);
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-  margin-bottom:8px;line-height:1.2;
+  line-height:1.15;margin-bottom:8px;
 }
-.premium-desc{
-  font-size:14px;color:rgba(255,255,255,0.6);
-  line-height:1.7;margin-bottom:20px;
-  font-family:'Cormorant Garamond',serif;font-size:16px;
+.gate-sub{
+  font-family:'Cormorant Garamond',serif;
+  font-size:16px;color:rgba(255,255,255,0.5);
+  margin-bottom:20px;
 }
-.premium-grid{
-  display:grid;grid-template-columns:1fr 1fr;
-  gap:6px;margin-bottom:20px;text-align:left;
+.gate-card{
+  border-radius:24px;
+  background:linear-gradient(145deg,rgba(255,255,255,0.08),rgba(255,255,255,0.02));
+  border:1px solid rgba(255,255,255,0.12);
+  padding:24px;
+  text-align:left;
 }
-.premium-item{
-  display:flex;align-items:flex-start;gap:8px;
-  font-size:13px;color:rgba(255,255,255,0.7);
-  line-height:1.4;
+.gate-section-title{
+  font-size:11px;letter-spacing:.2em;text-transform:uppercase;
+  color:rgba(212,168,71,0.7);margin-bottom:16px;
+  font-family:'Playfair Display',serif;
 }
-.premium-dot{color:var(--pink-bright);flex-shrink:0;margin-top:2px;}
-.btn-premium{
-  display:inline-flex;align-items:center;gap:8px;
-  padding:13px 32px;border-radius:999px;
-  background:linear-gradient(120deg,#c9933a,#e8b84b);
-  border:none;
+.gate-features{
+  display:flex;flex-direction:column;gap:8px;margin-bottom:24px;
+}
+.gate-feat{
+  font-size:13px;color:rgba(255,255,255,0.75);
+  line-height:1.5;display:flex;align-items:flex-start;gap:10px;
+}
+.feat-dot{color:var(--pink-bright);flex-shrink:0;}
+.gate-phases{
+  display:flex;flex-direction:column;gap:12px;
+}
+.phase-row{
+  display:flex;gap:12px;align-items:flex-start;
+}
+.phase-num{
+  flex-shrink:0;width:28px;height:28px;
+  border-radius:50%;background:rgba(212,168,71,0.15);
+  border:1px solid rgba(212,168,71,0.3);
+  display:flex;align-items:center;justify-content:center;
+  font-size:12px;font-weight:600;color:rgba(212,168,71,0.9);
+  font-family:'Playfair Display',serif;
+}
+.phase-text{
+  font-size:13px;color:rgba(255,255,255,0.7);line-height:1.45;
+}
+.btn-unlock{
+  display:block;width:100%;
+  padding:15px;border-radius:999px;
+  background:linear-gradient(120deg,#ffd600,#ffb300);
+  border:none;color:rgba(0,0,0,0.8);
   font-family:'Anuphan',sans-serif;
-  font-size:14px;font-weight:600;letter-spacing:.1em;
-  color:rgba(0,0,0,0.75);
-  cursor:not-allowed;opacity:0.85;
+  font-size:16px;font-weight:600;letter-spacing:.06em;
+  cursor:pointer;
+  box-shadow:0 0 40px rgba(255,214,0,0.3);
+  transition:all .25s ease;
 }
-.premium-soon{
-  display:block;margin-top:10px;
-  font-size:11px;color:rgba(255,255,255,0.3);letter-spacing:.1em;
+.btn-unlock:hover{
+  transform:translateY(-2px);
+  box-shadow:0 0 60px rgba(255,214,0,0.5);
+}
+.gate-note{
+  font-size:12px;color:rgba(255,255,255,0.4);
+  text-align:center;letter-spacing:.05em;
+}
+
+/* pay page */
+#page-pay{flex-direction:column;align-items:center;padding:20px;}
+.pay-inner{
+  max-width:520px;width:100%;
+  display:flex;flex-direction:column;
+  gap:16px;
+}
+.pay-card{
+  border-radius:28px;
+  padding:32px 28px;
+  background:linear-gradient(145deg,rgba(255,255,255,0.1) 0%,rgba(255,255,255,0.04) 60%);
+  backdrop-filter:blur(28px);
+  border:1px solid rgba(255,255,255,0.15);
+  box-shadow:0 0 80px rgba(255,45,120,0.18),0 30px 60px rgba(0,0,0,0.5);
+  text-align:center;
+}
+.pay-icon{font-size:48px;margin-bottom:16px;}
+.pay-title{
+  font-family:'Playfair Display',serif;
+  font-size:24px;
+  color:rgba(255,255,255,0.95);
+  margin-bottom:12px;
+}
+.pay-desc{
+  font-family:'Cormorant Garamond',serif;
+  font-size:15px;color:rgba(255,255,255,0.7);
+  line-height:1.6;margin-bottom:20px;
+}
+.price-box{
+  background:rgba(212,168,71,0.1);
+  border:1px solid rgba(212,168,71,0.2);
+  border-radius:16px;
+  padding:16px;
+  margin-bottom:20px;
+}
+.price-amount{
+  font-family:'Playfair Display',serif;
+  font-size:36px;font-weight:600;
+  color:var(--gold-light);
+}
+.price-unit{
+  font-size:13px;color:rgba(212,168,71,0.8);
+}
+.pay-methods{
+  display:flex;flex-direction:column;gap:10px;margin-bottom:16px;
+}
+.pay-btn{
+  width:100%;padding:12px;border-radius:12px;
+  border:1px solid rgba(255,255,255,0.2);
+  background:rgba(255,255,255,0.05);
+  color:rgba(255,255,255,0.8);
+  font-family:'Anuphan',sans-serif;
+  font-size:13px;font-weight:500;
+  cursor:pointer;
+  transition:all .2s ease;
+}
+.pay-btn:hover{
+  background:rgba(255,255,255,0.1);
+  border-color:rgba(255,255,255,0.3);
+}
+.pay-secure{
+  font-size:12px;color:rgba(255,255,255,0.4);
+  letter-spacing:.05em;
+}
+.btn-back-gate{
+  width:100%;padding:12px;border-radius:12px;
+  background:rgba(255,255,255,0.08);
+  border:1px solid rgba(255,255,255,0.15);
+  color:rgba(255,255,255,0.7);
+  font-family:'Anuphan',sans-serif;
+  font-size:14px;
+  cursor:pointer;
+  transition:all .2s ease;
+}
+.btn-back-gate:hover{
+  background:rgba(255,255,255,0.12);
+  color:rgba(255,255,255,0.9);
 }
 
 .btn-restart{
@@ -632,11 +753,11 @@ body{
   <div class="modal-box">
     <button class="modal-close" onclick="closeAbout()">✕</button>
     <div class="modal-body">
-      <p>คาร์ล ยุง นักจิตวิทยาคนสำคัญของโลก เชื่อว่าลึกลงไปในจิตใจของมนุษย์ทุกคน มี "ต้นแบบ" บางอย่างซ่อนอยู่ เขาเรียกสิ่งนี้ว่า "อาร์คีไทป์"</p>
-      <p>เป็นรูปแบบตัวละคร ความรู้สึก หรือแรงขับบางอย่าง ที่มนุษย์ทั่วโลกพบร่วมกันมาตลอด ไม่ว่าจะในนิทาน ตำนาน หนัง ความฝัน หรือแม้แต่ในชีวิตจริงของเราเอง</p>
-      <p>12 อาร์คีไทป์ไม่ใช่กล่องที่เอาไว้ตัดสินว่าคุณ "เป็นคนแบบไหน" แบบตายตัว แต่เป็นเหมือนหลายเสียงที่อยู่ภายในตัวเรา บางเสียงชัดเจน บางเสียงเงียบลงไป และบางเสียงอาจกำลังรอให้เราได้ยินมัน</p>
-      <p>เวลาทำแบบทดสอบนี้ ลองตอบจากความรู้สึกจริง ๆ ไม่ใช่จากภาพของตัวเองที่อยากให้คนอื่นเห็น ผลลัพธ์ไม่ได้บอกว่า "คุณคือใครทั้งหมด" แต่มันอาจสะท้อนว่า ในช่วงเวลานี้ ตัวตนแบบไหนกำลังส่งเสียงดังที่สุดอยู่ข้างในคุณ</p>
-      <p class="modal-note">รากฐานแนวคิดมาจาก Carl Jung<br>แต่ระบบ 12 อาร์คีไทป์ที่นิยมในปัจจุบัน เป็นเวอร์ชันที่ถูกตีความและพัฒนาต่อในยุคหลัง</p>
+      <p>คาร์ล ยุง นักจิตวิทยาคนสำคัญของโลก เชื่อว่าลึกลงไปในจิตใจของมนุษย์มีรูปแบบเดียวกัน ที่เรียกว่า "อาร์คีไทป์" (Archetype)</p>
+      <p>เป็นรูปแบบตัวละคร ความรู้สึก หรือแรงขับบางอย่าง ที่มนุษย์ทั่วโลกมีร่วมกัน ในลึกใจ ไม่ว่าจะเป็นเพศไหน วัฒนธรรมไหน</p>
+      <p>12 อาร์คีไทป์ไม่ใช่กล่องที่เอาไว้ตัดสินว่าคุณ "เป็นคนแบบไหน" แบบตายตัว มันเป็น "กระจก" เพื่อให้คุณเข้าใจตัวเองลึกลงไป</p>
+      <p>เวลาทำแบบทดสอบนี้ ลองตอบจากความรู้สึกจริง ๆ ไม่ใช่จากภาพของตัวเองที่อยากจะเป็น ยิ่งตรงใจมากเท่าไหร่ ผลลัพธ์ยิ่งมีความหมายมากเท่านั้น</p>
+      <p class="modal-note">รากฐานแนวคิดมาจาก Carl Jung<br>ระบบ 12 อาร์คีไทป์ที่ได้รับความนิยม มาจาก Caroline Myss และ Christopher Pearson</p>
     </div>
   </div>
 </div>
@@ -657,9 +778,9 @@ body{
       <div class="q-text" id="q-text"></div>
     </div>
     <div class="answers-grid" id="answers-grid"></div>
-<button class="btn-back" id="btn-back" onclick="goBack()">
-  ← ย้อนกลับ
-</button>
+    <button class="btn-back" id="btn-back" onclick="goBack()">
+      ← ย้อนกลับ
+    </button>
   </div>
 </div>
 
@@ -702,23 +823,29 @@ body{
         <div id="r-sub" style="font-size:13px;color:rgba(255,255,255,0.65);"></div>
       </div>
 
-<div class="r-quote" id="r-quote"></div>
+      <div class="r-quote" id="r-quote"></div>
     </div>
  
     <!-- RANKING -->
     <div class="result-card" style="text-align:left;margin-bottom:16px;">
       <div class="rank-title">✦ คะแนนทั้ง 12 อาร์คีไทป์ของคุณ</div>
       <div id="rank-list"></div>
-    </div> 
+    </div>
 
-    <!-- ── GATE PAGE ── -->
+    <div style="padding:0 4px;">
+      <button class="btn-restart" onclick="restart()">✦ ทำแบบทดสอบอีกครั้ง</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── GATE PAGE ── -->
 <div class="page hidden" id="page-gate">
   <div class="gate-inner">
     <div class="gate-badge">✦ Premium Deep Analysis ✦</div>
     <div class="gate-title">เจาะลึกตัวตน<br>ที่ซ่อนอยู่</div>
     <div class="gate-sub">เกินกว่าที่คุณเคยรู้จักตัวเอง</div>
 
-<div class="gate-card">
+    <div class="gate-card">
       <div class="gate-section-title">✦ สิ่งที่คุณจะได้รับ</div>
       <div class="gate-features">
         <div class="gate-feat"><span class="feat-dot">◆</span>Shadow Archetype ด้านมืดที่ซ่อน</div>
@@ -726,12 +853,12 @@ body{
         <div class="gate-feat"><span class="feat-dot">◆</span>Defense Mechanism กลไกป้องกันตัว</div>
         <div class="gate-feat"><span class="feat-dot">◆</span>Anima/Animus พลังตรงข้ามในใจ</div>
         <div class="gate-feat"><span class="feat-dot">◆</span>รูปแบบความรักเชิงลึก</div>
-<div class="gate-feat"><span class="feat-dot">◆</span>แรงขับใต้สำนึก</div>
+        <div class="gate-feat"><span class="feat-dot">◆</span>แรงขับใต้สำนึก</div>
         <div class="gate-feat"><span class="feat-dot">◆</span>ความขัดแย้งภายใน</div>
         <div class="gate-feat"><span class="feat-dot">◆</span>แนวทาง Individuation</div>
       </div>
 
-<div class="gate-phases">
+      <div class="gate-phases">
         <div class="gate-section-title" style="margin-top:0;">✦ 4 Phase การวิเคราะห์ — 40 ข้อ 6 ตัวเลือก</div>
         <div class="phase-row">
           <div class="phase-num">1</div>
@@ -739,7 +866,7 @@ body{
         </div>
         <div class="phase-row">
           <div class="phase-num">2</div>
-<div class="phase-text"><strong>Shadow & Defense</strong> — ด้านมืดและกลไกป้องกัน</div>
+          <div class="phase-text"><strong>Shadow & Defense</strong> — ด้านมืดและกลไกป้องกัน</div>
         </div>
         <div class="phase-row">
           <div class="phase-num">3</div>
@@ -750,220 +877,119 @@ body{
           <div class="phase-text"><strong>Individuation</strong> — การค้นหาตัวตนที่แท้จริง</div>
         </div>
       </div>
-            </div>
+    </div>
 
-
-   
     <button class="btn-unlock" onclick="goPage('page-pay')">🔓 ปลดล็อก Premium — 79 บาท</button>
     <div class="gate-note">ชำระครั้งเดียว · เข้าถึงได้ตลอด · ไม่มีการสมัครสมาชิก</div>
   </div>
 </div>
 
-
- 
 <!-- ── PAY PAGE ── -->
 <div class="page hidden" id="page-pay">
   <div class="pay-inner">
     <div class="pay-card">
       <div class="pay-icon">🔮</div>
       <div class="pay-title">Premium Deep Analysis</div>
-      <div class="pay-desc">เจาะลึกจิตใต้สำนึก Shadow และ Core Wound ของคุณผ่าน 40 คำถามที่ออกแบบมาจาก Jungian Psychology</div>
+      <div class="pay-desc">เจาะลึกจิตใต้สำนึก Shadow และ Core Wound ของคุณผ่าน 40 คำถามที่ออกแบบมาเพื่อการวิเคราะห์ที่ลึกยิ่งขึ้น</div>
       <div class="price-box">
         <div class="price-amount">79</div>
-<div class="price-unit">บาท / ครั้ง</div>
+        <div class="price-unit">บาท / ครั้ง</div>
       </div>
       <div class="pay-methods">
-        <button class="pay-btn pay-btn-primary" onclick="simulatePay()">💳 ชำระผ่านบัตรเครดิต / เดบิต</button>
-        <button class="pay-btn pay-btn-secondary" onclick="simulatePay()">📱 PromptPay / QR Code</button>
-        <button class="pay-btn pay-btn-secondary" onclick="simulatePay()">🏦 โอนผ่านธนาคาร</button>
+        <button class="pay-btn" onclick="simulatePay()">💳 ชำระผ่านบัตรเครดิต / เดบิต</button>
+        <button class="pay-btn" onclick="simulatePay()">📱 PromptPay / QR Code</button>
+        <button class="pay-btn" onclick="simulatePay()">🏦 โอนผ่านธนาคาร</button>
       </div>
-
-<div class="pay-secure">🔒 ปลอดภัย · เข้ารหัส SSL</div>
+      <div class="pay-secure">🔒 ปลอดภัย · เข้ารหัส SSL</div>
     </div>
     <button class="btn-back-gate" onclick="goPage('page-gate')">← กลับ</button>
   </div>
 </div>
 
+<script>
+// ── PAGE NAVIGATION ──
+function goPage(pageId){
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.page').forEach(p => p.classList.add('hidden'));
+  const page = document.getElementById(pageId);
+  if(page){
+    page.classList.remove('hidden');
+    page.classList.add('active');
+  }
+}
 
+function startQuiz(){
+  currentQ = 0;
+  scores = {};
+  Object.keys(ARCHETYPES).forEach(k => scores[k] = 0);
+  goPage('page-quiz');
+  loadQuestion();
+}
 
-    
-    <div style="padding:0 4px;">
-      <button class="btn-restart" onclick="restart()">✦ ทำแบบทดสอบอีกครั้ง</button>
-    </div>
-  </div>
-</div> <div class="page hidden" id="page-gate">
+function openAbout(){
+  document.getElementById('modal-about').classList.add('open');
+}
 
-  
-      <script>
+function closeAbout(){
+  document.getElementById('modal-about').classList.remove('open');
+}
+
+function goBack(){
+  if(currentQ > 0){
+    currentQ--;
+    loadQuestion();
+  }
+}
+
+function restart(){
+  goPage('page-home');
+}
+
+function simulatePay(){
+  alert('Payment integration coming soon!');
+}
+
+// ── ARCHETYPES DATA ──
 const ARCHETYPES = {
-  innocent:  {name:"The Innocent",  nameTh:"ผู้บริสุทธิ์",    tagline:"หัวใจที่ยังเชื่อในแสงสว่าง",      symbol:"✿", summary:"คุณมองโลกด้วยสายตาที่ยังไม่ถูกทำลาย เชื่อในความดี ความงาม และความเรียบง่ายของชีวิต ความบริสุทธิ์ของคุณคือเกราะที่อ่อนโยนที่สุดและทรงพลังที่สุด", desire:"อยู่ในโลกที่ปลอดภัย บริสุทธิ์ และเปี่ยมความสุข", fear:"การถูกลงโทษ ถูกหักหลัง หรือทำสิ่งผิดพลาดร้ายแรง", quote:"\u201cในโลกที่ขมขื่น การยังเชื่อก็คือการกบฏที่งดงามที่สุด\u201d", strength:"มีศรัทธา น่ารัก อ่อนโยน", weakness:"หนีปัญหา ไม่กล้าเผชิญความจริง", mbti:["ISFP","INFP","ENFP"], enn:["9w1","2w1"], sub:"social"},
-  sage:      {name:"The Sage",      nameTh:"นักปราชญ์",        tagline:"ผู้แสวงหาความจริงในความเงียบ",     symbol:"☾", summary:"คุณกระหายความเข้าใจมากกว่าความสบาย จิตของคุณเป็นห้องสมุดที่ไม่มีวันปิด ความจริงคือเข็มทิศ และความกระจ่างคือของขวัญที่คุณมอบให้โลก", desire:"เข้าใจความจริงของโลกและของตัวเอง", fear:"ถูกหลอก หรือใช้ชีวิตอยู่ในความไม่รู้", quote:"\u201cความเงียบของฉันไม่ได้ว่างเปล่า — มันเต็มไปด้วยคำตอบ\u201d", strength:"ฉลาด มีวิจารณญาณ ลึก", weakness:"อยู่กับหัว ไม่ลงมือ หรือจมในทฤษฎี", mbti:["INTJ","INTP","INFJ"], enn:["5w4","1w9","6w5"], sub:"self-pres"},
-  explorer:  {name:"The Explorer",  nameTh:"นักแสวงหา",        tagline:"วิญญาณที่ไม่เคยหยุดเดิน",         symbol:"✺", summary:"ขอบฟ้าเรียกคุณเสมอ คุณยอมเหงาเพื่อจะได้เป็นตัวเอง ทุกย่างก้าวคือคำประกาศอิสรภาพ", desire:"อิสรภาพในการค้นพบและเป็นตัวของตัวเอง", fear:"ถูกขังอยู่ในกรอบ กิจวัตร หรือชีวิตที่ไร้ความหมาย", quote:"\u201cฉันไม่ได้หลงทาง ฉันแค่ยังไม่ถูกจองจำ\u201d", strength:"กล้าคิด กล้าทำ แสวงหา", weakness:"ไม่มั่นคง วอกแวกง่าย", mbti:["ENFP","INTP","ISTP","ESTP"], enn:["7w8","4w5"], sub:"sexual (แสวงหาสิ่งเร้าใหม่ ๆ)"},
-  outlaw:    {name:"The Outlaw",    nameTh:"ผู้ทำลายกฎ",       tagline:"ไฟใต้ผิวหนังของผู้ที่ไม่ยอมจำนน", symbol:"✦", summary:"คุณมองทะลุภาพลวง และไม่ยอมเคารพกฎที่ทำร้ายคน การปฏิวัติคือศาสนาส่วนตัวของคุณ", desire:"โค่นล้มสิ่งที่บิดเบี้ยวและทวงคืนเสรีภาพ", fear:"ไร้พลัง ถูกควบคุม หรือกลายเป็นผู้สมรู้ร่วมคิดเงียบ ๆ", quote:"\u201cฉันไม่ได้โกรธโลก ฉันแค่ปฏิเสธจะแกล้งทำเป็นไม่เห็น\u201d", strength:"กล้าท้าทาย เด็ดเดี่ยว", weakness:"หุนหันพลันแล่น ทุบโดยไม่สร้าง", mbti:["INFP","ENTP","INTJ"], enn:["4w5","8w9"], sub:"sexual หรือ social"},
-  magician:  {name:"The Magician",  nameTh:"นักเล่นแร่แปรธาตุ",tagline:"ผู้ถักทอความเป็นจริงด้วยเจตนา",  symbol:"✶", summary:"คุณมองเห็นรูปแบบที่ซ่อนอยู่ใต้ผิวของสิ่งต่าง ๆ และเข้าใจว่าจินตนาการคือพลังที่สร้างโลก คุณไม่ได้รอ คุณเรียกมันออกมา", desire:"เข้าใจกฎของจักรวาลและใช้มันเปลี่ยนความเป็นจริง", fear:"ผลที่ไม่ได้คาดคิด การสูญเสียการควบคุมพลังของตัวเอง", quote:"\u201cโลกนี้คือกระจก ฉันแค่เปลี่ยนสิ่งที่ฉันมองเห็นในนั้น\u201d", strength:"มีวิสัยทัศน์ เชื่อมโยงได้ลึก", weakness:"ควบคุมคนอื่นโดยไม่รู้ตัว", mbti:["INFJ","INTJ","ENFP"], enn:["4w5","5w6"], sub:"sexual"},
-  hero:      {name:"The Hero",      nameTh:"วีรบุรุษ",          tagline:"หัวใจที่ก้าวเข้าหาไฟ",             symbol:"✧", summary:"ความท้าทายเรียกคุณออกมาจากเงา คุณเชื่อในการพิสูจน์คุณค่าด้วยการกระทำ และไม่ยอมให้ความกลัวเป็นคนเขียนเรื่องราวของคุณ", desire:"พิสูจน์คุณค่าผ่านการกระทำที่กล้าหาญ", fear:"ความอ่อนแอ ความขลาด หรือถูกมองว่าไร้ความสามารถ", quote:"\u201cฉันไม่ได้ไร้ความกลัว ฉันแค่เดินไปข้างหน้าทั้ง ๆ ที่กลัว\u201d", strength:"กล้าหาญ เด็ดเดี่ยว", weakness:"ดื้อ หลงตัวเอง", mbti:["ESTJ","ENTJ","ENFJ","ESTP"], enn:["3w4","8w7"], sub:"social หรือ sexual"},
-  lover:     {name:"The Lover",     nameTh:"ผู้รัก",            tagline:"หัวใจที่หลอมรวมเป็นโลกได้ทั้งใบ",  symbol:"♥", summary:"คุณรู้สึกลึก รักแรง และเห็นความศักดิ์สิทธิ์ในความใกล้ชิด ทุกสายตา ทุกสัมผัส คือบทสวดของคุณต่อชีวิต", desire:"ได้รักและถูกรักอย่างหมดหัวใจ", fear:"ถูกทอดทิ้ง ไม่เป็นที่ต้องการ หรืออยู่คนเดียว", quote:"\u201cฉันไม่ได้รักเพื่อจะถูกรัก — ฉันรักเพราะวิญญาณฉันถูกสร้างมาแบบนั้น\u201d", strength:"โรแมนติก อ่อนโยน เข้าใจคน", weakness:"ยึดติด ต้องการการยอมรับ", mbti:["ESFP","ISFP","ENFJ"], enn:["2w3","4w3"], sub:"sexual (แสวงหาการเชื่อมต่อแบบลึก)"},
-  jester:    {name:"The Jester",    nameTh:"ผู้เริงร่า",        tagline:"ปัญญาที่ซ่อนอยู่ในเสียงหัวเราะ",   symbol:"✸", summary:"คุณเชื่อว่าชีวิตนี้สั้นเกินกว่าจะจริงจังตลอดเวลา ความสนุกของคุณคือคำเตือนเงียบ ๆ ว่าทุกสิ่งจะผ่านไป", desire:"อยู่ในปัจจุบัน เพลิดเพลินกับชีวิตเต็มที่", fear:"ความน่าเบื่อ ความว่างเปล่า การไม่ถูกมองเห็น", quote:"\u201cฉันหัวเราะ เพราะฉันเข้าใจดีเกินกว่าจะร้องไห้\u201d", strength:"มองโลกในแง่ดี มีชีวิตชีวา", weakness:"ไม่จริงจัง หนีความรู้สึกจริง", mbti:["ENFP","ESFP","ENTP"], enn:["7w6","3w2"], sub:"social หรือ sexual"},
-  everyman:  {name:"The Everyman",  nameTh:"สามัญชน",          tagline:"ความจริงในความธรรมดา",              symbol:"❋", summary:"คุณเป็นที่พักใจของคนรอบข้าง ไม่ต้องสวมหน้ากาก ไม่ต้องพิสูจน์อะไร ความอบอุ่นของคุณทำให้โลกใจดีขึ้น", desire:"ได้รู้สึกเป็นส่วนหนึ่ง ไม่ถูกตัดสิน", fear:"ถูกแยก โดดเดี่ยว หรือดู 'แตกต่าง' จนเกินไป", quote:"\u201cฉันไม่ใช่ใครคนพิเศษ — และนั่นคือของขวัญของฉัน\u201d", strength:"นอบน้อม อ่อนโยน เป็นมิตร", weakness:"ไม่มีจุดยืน หวั่นไหวง่าย", mbti:["ISFJ","ESFJ","ISFP","ISTJ"], enn:["6w7","9w8"], sub:"social (อยากกลมกลืน เข้ากลุ่ม)"},
-        caregiver: {name:"The Caregiver", nameTh:"ผู้โอบอุ้ม",       tagline:"หัวใจที่กว้างพอจะแบกทั้งโลก",     symbol:"✿", summary:"คุณรู้สึกถึงความเจ็บของผู้อื่นได้ก่อนที่พวกเขาจะรู้ตัว ความรักของคุณคือยา แต่บางครั้งคุณก็ลืมเก็บไว้ดูแลตัวเอง", desire:"ปกป้องและดูแลผู้อื่นอย่างไม่มีเงื่อนไข", fear:"เห็นแก่ตัว ไม่เป็นที่ต้องการ หรือช่วยใครไม่ได้", quote:"\u201cฉันโอบกอดรอยแผลของคนอื่น เพราะรู้ว่ามันรู้สึกอย่างไร\u201d", strength:"เสียสละ เมตตา", weakness:"ลืมดูแลตัวเอง โดนเอาเปรียบ", mbti:["ISFJ","INFJ","ESFJ"], enn:["2w1","9w1"], sub:"self-pres หรือ social"},
-       ruler:     {name:"The Ruler",     nameTh:"ผู้ปกครอง",        tagline:"ผู้สถาปนาระเบียบอันงดงาม",         symbol:"✷", summary:"คุณถูกเรียกมาเพื่อสร้างความมั่นคง ความรุ่งโรจน์ และมรดกที่ยั่งยืน อำนาจในมือของคุณคือเครื่องมือ ไม่ใช่รางวัล", desire:"สร้างอาณาจักรแห่งความรุ่งเรืองและความเป็นระเบียบ", fear:"ความวุ่นวาย การสูญเสียอำนาจ หรือถูกล้มล้าง", quote:"\u201cฉันไม่ได้ครอง — ฉันรับผิดชอบ\u201d", strength:"มีความเป็นผู้นำ ตัดสินใจได้", weakness:"เผด็จการ ขาดความยืดหยุ่น", mbti:["ENTJ","ESTJ","INTJ","ISTJ"], enn:["8w7","1w2"], sub:"social หรือ self-pres "},           
-creator:   {name:"The Creator",   nameTh:"ผู้สร้างสรรค์",    tagline:"วิญญาณที่ต้องสร้าง มิฉะนั้นจะตาย", symbol:"❈", summary:"คุณไม่สามารถหยุดสร้างสิ่งใหม่ได้ — มันคือลมหายใจ ทุกสิ่งที่คุณสัมผัสกลายเป็นรูปแบบ ความหมาย หรือบทกวีบางประการ", desire:"สร้างบางสิ่งที่งดงาม คงอยู่ และเป็นของคุณคนเดียว", fear:"ความธรรมดา การลอกเลียน หรือไม่สามารถถ่ายทอดสิ่งภายในออกมาได้", quote:"\u201cสิ่งที่ฉันสร้างคือสิ่งเดียวที่ฉันแน่ใจว่ามีอยู่จริง\u201d", strength:"มีวิสัยทัศน์ สร้างสรรค์", weakness:"เพอร์เฟกชันนิสต์ กลัวผลงานไม่ดีพอ", mbti:["INFP","ISFP","ENFP","ESFP"], enn:["4w5","5w4"], sub:"self-pres หรือ social"},};
-  
-        const QUESTIONS = [
-     {q:"ในฝันที่กลับมาหาคุณซ้ำ ๆ คุณมักไปอยู่ที่แบบไหน?",a:[{t:"ทุ่งกว้าง ๆ ที่ลมพัดไม่หยุด",k:["explorer"]},{t:"ห้องสมุดเก่า ๆ ที่หนังสือเหมือนกระซิบอะไรบางอย่าง",k:["sage","magician"]},{t:"บ้านอุ่น ๆ ที่ยังมีคนนั่งรอที่โต๊ะ",k:["caregiver","everyman"]},{t:"ที่สูงสักแห่งที่มองลงมาเห็นทั้งเมือง",k:["ruler"]}]},
-  {q:"ตื่นขึ้นกลางดึกแบบไม่มีเหตุผล ความรู้สึกแรกคืออะไร?",a:[{t:"เงียบเกินไป จนรู้สึกว่ามีอะไรจะบอก",k:["magician","sage"]},{t:"นึกถึงคนคนหนึ่งจนแน่นอก",k:["lover"]},{t:"อยากออกไปไหนก็ได้ที่ไม่เคยไป",k:["explorer","outlaw"]},{t:"นึกถึงงานที่ค้าง อยากลุกไปทำให้จบ",k:["hero","creator"]}]},
-  {q:"ถ้าชีวิตของคุณเป็นหนังสักเรื่อง บรรยากาศของมันจะเป็นแบบไหน?",a:[{t:"แสงเทียนนุ่ม ๆ กับบทสนทนาของคนที่รักกัน",k:["lover","caregiver"]},{t:"ฟ้ากว้าง ทะเลทราย กับการเดินทางที่ยังไม่จบ",k:["explorer"]},{t:"เมืองตอนฝนตก ไฟนีออน กับความลับที่ค่อย ๆ คลี่",k:["outlaw","magician"]},{t:"วังเก่า เครื่องประดับทอง อำนาจแบบไม่ต้องส่งเสียง",k:["ruler","creator"]}]},
+  innocent:  {name:"The Innocent",  nameTh:"ผู้บริสุทธิ์",    tagline:"หัวใจที่ยังเชื่อในแสงสว่าง",      symbol:"✿"},
+  sage:      {name:"The Sage",      nameTh:"นักปราชญ์",        tagline:"ผู้แสวงหาความจริงในความเงียบ",     symbol:"☾"},
+  explorer:  {name:"The Explorer",  nameTh:"นักแสวงหา",        tagline:"วิญญาณที่ไม่เคยหยุดเดิน",         symbol:"✺"},
+  outlaw:    {name:"The Outlaw",    nameTh:"ผู้ทำลายกฎ",       tagline:"ไฟใต้ผิวหนังของผู้ที่ไม่ยอมจำนน", symbol:"✦"},
+  magician:  {name:"The Magician",  nameTh:"นักเล่นแร่แปรธาตุ",tagline:"ผู้ถักทอความเป็นจริงด้วยเจตนา",  symbol:"◈"},
+  hero:      {name:"The Hero",      nameTh:"วีรบุรุษ",          tagline:"หัวใจที่ก้าวเข้าหาไฟ",             symbol:"✧"},
+  lover:     {name:"The Lover",     nameTh:"ผู้รัก",            tagline:"หัวใจที่หลอมรวมเป็นโลกได้ทั้งใบ",  symbol:"♥"},
+  jester:    {name:"The Jester",    nameTh:"ผู้เริงร่า",        tagline:"ปัญญาที่ซ่อนอยู่ในเสียงหัวเราะ",   symbol:"✸"},
+  everyman:  {name:"The Everyman",  nameTh:"สามัญชน",          tagline:"ความจริงในความธรรมดา",              symbol:"❋"},
+  caregiver: {name:"The Caregiver", nameTh:"ผู้โอบอุ้ม",       tagline:"หัวใจที่กว้างพอจะแบกทั้งโลก",     symbol:"❖"},
+  ruler:     {name:"The Ruler",     nameTh:"ผู้ปกครอง",        tagline:"ผู้สถาปนาระเบียบอันงดงาม",         symbol:"✷"},
+  creator:   {name:"The Creator",   nameTh:"ผู้สร้างสรรค์",    tagline:"วิญญาณที่ต้องสร้าง มิฉะนั้นจะตาย", symbol:"✻"}
+};
 
-  {q:"ช่วงเวลาไหนที่ทำให้คุณรู้สึกว่า 'กำลังมีชีวิตอยู่จริง ๆ'?",a:[{t:"ตอนกำลังสร้างอะไรที่ยังไม่เคยมี",k:["creator","magician"]},{t:"ตอนได้อยู่ข้างใครสักคนในวันที่เขาแย่ที่สุด",k:["caregiver","hero"]},{t:"ตอนหัวเราะกับคนที่ใช่ จนน้ำตาไหล",k:["jester","everyman"]},{t:"ตอนเข้าใจอะไรบางอย่างที่คนอื่นยังมองไม่เห็น",k:["sage"]}]},
-{q:"อะไรคือสิ่งที่คุณกลัวอยู่ลึก ๆ แต่ไม่ค่อยพูดให้ใครฟัง?",a:[{t:"การถูกทิ้งให้เหลือคนเดียวจริง ๆ",k:["lover","everyman"]},{t:"การใช้ชีวิตทั้งชีวิตโดยไม่ได้เป็นตัวเองสักที",k:["explorer","outlaw"]},{t:"การไม่มีแรงพอจะปกป้องคนที่รัก",k:["hero","ruler"]},{t:"การพบว่าสิ่งที่เคยเชื่อมาทั้งหมด ไม่จริงสักเรื่อง",k:["sage","innocent"]}]},
-{q:"ตอนมองตัวเองในกระจกยามเช้า เสียงในใจมักพูดว่าอะไร?",a:[{t:"\u201cวันนี้ต้องเป็นวันที่ดี เนอะ\u201d",k:["innocent"]},{t:"\u201cยังเหลืออีกหลายเรื่องต้องสู้ ไปต่อ\u201d",k:["hero"]},{t:"\u201cวันนี้จะทำให้ใครรู้สึกดีขึ้นได้บ้างนะ\u201d",k:["caregiver"]},{t:"\u201cจริง ๆ เราเป็นใครกันแน่วะ\u201d",k:["sage","creator"]}]},
-  {q:"เพลงที่บอกตัวตนคุณได้มากที่สุด ฟังแล้วให้ความรู้สึกแบบไหน?",a:[{t:"เปียโนเบา ๆ ในห้องว่าง — เศร้า แต่ก็สวย",k:["lover","creator"]},{t:"กลองหนัก ๆ ที่ทำให้อยากลุกขึ้นสู้",k:["hero","outlaw"]},{t:"เสียงคลื่นกับกีตาร์ เหมือนเดินทางคนเดียว",k:["explorer"]},{t:"เสียงประสานในวิหาร เหมือนแตะอะไรที่ใหญ่กว่าตัวเรา",k:["magician","sage"]}]},
-{q:"'ความสวย' ในแบบของคุณ หน้าตาเป็นยังไง?",a:[{t:"เรียบง่าย ไม่ต้องพยายามเป็นอะไร",k:["innocent","everyman"]},{t:"ประณีต มีรสนิยมซ่อนอยู่ในรายละเอียด",k:["ruler","lover"]},{t:"กล้าต่าง กล้าเป็นตัวเอง",k:["outlaw","creator"]},{t:"ลึกลับ ทำให้คนอยากรู้จักให้มากขึ้น",k:["magician"]}]},
-  {q:"ในวงสังสรรค์กับเพื่อน คุณมักเป็นคนแบบไหน?",a:[{t:"คนที่ทำให้ทุกคนรู้สึกว่ามีตัวตน",k:["caregiver","everyman"]},{t:"คนที่ทำให้ทั้งวงหัวเราะจนปวดท้อง",k:["jester"]},{t:"คนที่นั่งเงียบ ๆ มุมหนึ่ง คอยดูคนอื่น",k:["sage","magician"]},{t:"คนที่พอเปิดปาก ทุกคนก็หันมาฟัง",k:["ruler","hero"]}]},
-  {q:"ถ้าวันนี้ลองเปิดสมุดบันทึกของตัวเอง ประโยคไหนที่คุณเขียนซ้ำบ่อยที่สุด?",a:[{t:"\u201cทำไมเรารู้สึกอะไรเยอะแบบนี้นะ\u201d",k:["lover","creator"]},{t:"\u201cเราต้องเก่งกว่านี้อีก\u201d",k:["hero","ruler"]},{t:"\u201cเดี๋ยวมันก็ผ่านไป… ใช่ไหม\u201d",k:["innocent","caregiver"]},{t:"\u201cโลกนี้บ้าไปแล้วจริง ๆ\u201d",k:["outlaw","sage"]}]},
-  {q:"อะไรคือสิ่งที่คุณยอมเสียทุกอย่างเพื่อรักษาเอาไว้?",a:[{t:"อิสระที่จะเลือกชีวิตของตัวเอง",k:["explorer","outlaw"]},{t:"คนที่รักจนสุดใจ",k:["lover","caregiver"]},{t:"ความฝัน และสิ่งที่ตั้งใจสร้างมัน",k:["creator","magician"]},{t:"ศักดิ์ศรี และคำพูดของตัวเอง",k:["hero","ruler"]}]},
-        
-  {q:"เวลารู้สึกว่าตัวเอง 'ยังไม่ดีพอ' คุณมักรับมือยังไง?",a:[{t:"พยายามมากขึ้น ทำมากขึ้น เพื่อพิสูจน์ตัวเอง",k:["hero"]},{t:"หันไปดูแลคนอื่น เพื่อให้รู้สึกว่าตัวเองมีค่า",k:["caregiver"]},{t:"หลบเข้าไปในโลกของตัวเอง ในงาน ในจินตนาการ",k:["creator","magician"]},{t:"หาอะไรสนุก ๆ ทำ จะได้ไม่ต้องคิด",k:["jester","everyman"]}]},
-
-                   {q:"ความรักของคุณ มีรสชาติแบบไหนมากที่สุด?",a:[{t:"เข้มข้น ลึกซึ้ง เหมือนเรื่องที่ทั้งสวยและเจ็บ",k:["lover"]},{t:"อุ่น ๆ ปลอดภัย เหมือนผ้าห่มในวันที่หนาว",k:["caregiver","everyman"]},{t:"เงียบ ๆ พูดน้อย แต่จริงใจตลอด",k:["magician","sage"]},{t:"อิสระ ไม่อึดอัด อยู่ด้วยกันก็ดี อยู่คนเดียวก็ได้",k:["explorer"]}]},
-  {q:"ตอนยังเด็ก คุณมักหลงรักเรื่องราวแบบไหน?",a:[{t:"เทพนิยาย เจ้าหญิง ปราสาท ความรักที่ไม่มีวันจบ",k:["innocent","lover"]},{t:"ผจญภัย โจรสลัด ดินแดนที่ไม่มีใครรู้จัก",k:["explorer","hero"]},{t:"เวทมนตร์ คาถา โลกอีกใบที่ซ่อนอยู่",k:["magician","creator"]},{t:"วีรบุรุษที่ลุกขึ้นสู้กับสิ่งไม่ยุติธรรม",k:["outlaw","ruler"]}]},                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
-
-
-  {q:"เวลามีใครทำร้ายใจคุณ ลึก ๆ แล้วคุณตอบสนองยังไง?",a:[{t:"เก็บเงียบ แล้วค่อย ๆ ถอยห่างไปเอง",k:["sage","magician"]},{t:"ลุกสู้กลับด้วยทุกอย่างที่มี",k:["hero","outlaw"]},{t:"พยายามเข้าใจว่าทำไมเขาถึงทำแบบนั้น",k:["caregiver","innocent"]},{t:"เปลี่ยนความเจ็บเป็นงานสักชิ้น",k:["creator","lover"]}]},
-  {q:"ถ้าจักรวาลให้ของขวัญคุณได้หนึ่งอย่าง คุณจะเลือกอะไร?",a:[{t:"อ่านใจคนได้หมด เข้าใจทุกคน",k:["sage","caregiver"]},{t:"เปลี่ยนความคิดให้เป็นเรื่องจริงได้",k:["magician","creator"]},{t:"เวลาไม่จำกัด เพื่ออยู่กับคนที่รัก",k:["lover"]},{t:"โลกใบเล็ก ๆ ของตัวเอง ไม่มีใครมาสั่ง",k:["ruler","outlaw"]}]},
-  {q:"สถานที่ที่คุณรู้สึก 'เป็นตัวเอง' ที่สุด หน้าตาเป็นแบบไหน?",a:[{t:"มุมเงียบ ๆ ในร้านกาแฟ มีหนังสือกับกาแฟอุ่น",k:["sage","everyman"]},{t:"บนรถไฟตอนกลางคืน มองวิวเลื่อนผ่านหน้าต่าง",k:["explorer","creator"]},{t:"ในอ้อมกอดของคนที่ไว้ใจที่สุด",k:["lover","caregiver"]},{t:"บนเวที หรือในห้องที่ทุกสายตาหันมามอง",k:["jester","ruler"]}]},
-        
-        {q:"อะไรคือสิ่งที่คุณรู้สึกว่า 'โลกใบนี้กำลังขาดมันไป'?",a:[{t:"ความจริงใจ และคนที่กล้าเป็นตัวเอง",k:["outlaw","innocent"]},{t:"ความเข้าใจกันอย่างลึก ๆ ระหว่างคน",k:["sage","lover"]},{t:"ความกล้าที่จะยืนหยัดเพื่อสิ่งที่ถูกต้อง",k:["hero"]},{t:"ความสวย และศิลปะที่จับใจคน",k:["creator","ruler"]}]},
-  {q:"ตอนเดินคนเดียวในเมืองยามดึก ๆ คุณรู้สึกยังไง?",a:[{t:"เหมือนนักเขียนที่กำลังเก็บฉากของชีวิตทีละนิด",k:["creator","sage"]},{t:"เหมือนหายไปจากโลก แล้วก็โอเคนะ",k:["explorer","magician"]},{t:"อยากมีใครสักคนเดินอยู่ข้าง ๆ",k:["lover","everyman"]},{t:"รู้สึกว่าทุกถนนตรงนี้ เป็นของเรา",k:["ruler","outlaw"]}]},
-  {q:"ฉากในชีวิตที่คุณอยากเก็บไว้ตลอดไป มักเป็นเรื่องเกี่ยวกับอะไร?",a:[{t:"ตอนหัวเราะกับคนรัก จนลืมเวลา",k:["jester","lover"]},{t:"ตอนทำสิ่งที่ตัวเองภูมิใจที่สุด",k:["hero","ruler"]},{t:"ตอนได้ช่วยใครสักคนได้จริง ๆ",k:["caregiver"]},{t:"ตอนจู่ ๆ ก็เข้าใจชีวิตขึ้นมาเอง",k:["sage","magician"]}]},
-
-
-{q:"ถ้าใจของคุณเป็นห้องสักห้อง ห้องนั้นจะเป็นแบบไหน?",a:[{t:"ห้องที่มีกระจกหลายบาน สะท้อนตัวเองหลายมุม",k:["sage","magician"]},{t:"ห้องโล่ง ๆ มีหน้าต่างเปิดออกสู่ทะเล",k:["explorer","innocent"]},{t:"ห้องอุ่น ๆ มีโซฟาตัวใหญ่ และคนที่รออยู่",k:["caregiver","everyman"]},{t:"ห้องประณีต เต็มไปด้วยศิลปะและของหายาก",k:["creator","ruler"]}]},
-  {q:"อะไรคือสิ่งที่คุณ 'ยอมไม่ได้' จะเป็น?",a:[{t:"คนที่ใช้ชีวิตหลอกตัวเองไปวัน ๆ",k:["outlaw","sage"]},{t:"คนที่ทำร้ายคนอื่นโดยไม่รู้สึกอะไรเลย",k:["caregiver","hero"]},{t:"คนที่ยอมอยู่ในกรอบ ทั้งที่มันไม่ใช่ตัวเอง",k:["explorer","creator"]},{t:"คนที่ไม่กล้ารัก หรือไม่ยอมให้ใครรัก",k:["lover","innocent"]}]},
-{q:"วันหนึ่งเมื่อคุณไม่อยู่แล้ว อยากให้คนอื่นจดจำคุณยังไง?",a:[
-  {t:"“เธอทำให้ฉันรู้ว่าการถูกรัก เป็นยังไง”",k:["lover","caregiver"]},
-  {t:"“เธอเปลี่ยนวิธีที่ฉันมองโลก”",k:["sage","magician"]},
-  {t:"“เธอกล้าทำในสิ่งที่ฉันไม่กล้า”",k:["hero","outlaw"]},
-  {t:"“เธอทิ้งบางอย่างที่งดงามไว้บนโลกนี้”",k:["creator","ruler"]}
-]},
-
-{q:"ถ้าวิญญาณของคุณมีกลิ่น มันจะเป็นกลิ่นแบบไหน?",a:[
-  {t:"กระดาษเก่า ไม้จันทน์ และฝนตอนค่ำ",k:["sage","magician"]},
-  {t:"กุหลาบ น้ำผึ้ง และผิวของคนที่รัก",k:["lover","innocent"]},
-  {t:"ทะเล หนัง และอากาศของถนนยามเช้า",k:["explorer","outlaw"]},
-  {t:"เทียนหอม ทองคำ และห้องโอ่อ่ายามค่ำคืน",k:["ruler","creator"]}
-]}
-];
-
-// ── QUESTIONS (40 ข้อ 6 ตัวเลือก) ──────────────────────────
-// scoring keys: each answer maps to archetype dimensions
-// A=openness B=sensitivity C=structure D=autonomy E=connection F=depth
-const PHASES = [
-  {range:[0,9],  label:"Phase 1 — Surface Pattern & Orientation"},
-  {range:[10,19],label:"Phase 2 — Shadow & Defense"},
-  {range:[20,29],label:"Phase 3 — Projection / Core Wound"},
-  {range:[30,39],label:"Phase 4 — Individuation & Deep Structure"},
-];
-
+// ── SAMPLE QUESTIONS ──
 const QUESTIONS = [
-  // Phase 1
   {q:"เวลาคุณเริ่มสนิทกับใคร สิ่งที่เปลี่ยนก่อนคืออะไร?",a:[
     {t:"เริ่มเปิดโลกภายใน",k:["magician","sage","creator"]},
     {t:"เริ่มปกป้องพื้นที่ตัวเอง",k:["outlaw","explorer","ruler"]},
     {t:"เริ่มคาดหวังความมั่นคง",k:["everyman","caregiver","innocent"]},
     {t:"เริ่มกลัวเสียอิสระ",k:["explorer","outlaw"]},
     {t:"เริ่มอ่านอารมณ์อีกฝ่ายมากขึ้น",k:["caregiver","lover","sage"]},
-    {t:"เริ่มตั้งคำถามกับความสัมพันธ์",k:["sage","outlaw","creator"]},
+    {t:"เริ่มตั้งคำถามกับความสัมพันธ์",k:["sage","outlaw","creator"]}
   ]},
-  {q:"เวลาถูกเข้าใจผิด สิ่งที่เจ็บที่สุดคืออะไร?",a:[
-{t:"ความตั้งใจถูกมองผิด",k:["caregiver","lover","hero"]},
-    {t:"ความสามารถถูกดูต่ำ",k:["hero","ruler","creator"]},
-    {t:"ความรู้สึกถูกละเลย",k:["lover","jester","everyman"]},
-    {t:"ตัวตนถูกลดทอน",k:["outlaw","magician","creator"]},
-    {t:"ความจริงถูกบิดเบือน",k:["sage","outlaw"]},
-    {t:"ความพยายามไม่มีความหมาย",k:["caregiver","hero","innocent"]},
-  ]},
-{q:"คุณมักซ่อนอะไรจากคนอื่นมากที่สุด?",a:[
+  {q:"คุณมักซ่อนอะไรจากคนอื่นมากที่สุด?",a:[
     {t:"ความอ่อนแอ",k:["hero","ruler","outlaw"]},
     {t:"ความโกรธ",k:["caregiver","innocent","everyman"]},
     {t:"ความต้องการการยอมรับ",k:["jester","lover","creator"]},
     {t:"ความกลัวการถูกทิ้ง",k:["lover","innocent","caregiver"]},
     {t:"ความทะเยอทะยาน",k:["ruler","hero","creator"]},
-    {t:"ความว่างเปล่าในใจ",k:["jester","sage","explorer"]},
+    {t:"ความว่างเปล่าในใจ",k:["jester","sage","explorer"]}
   ]},
-{q:"เวลามีปัญหา สิ่งแรกที่คุณทำคือ:",a:[
-    {t:"ถอยกลับไปคิดคนเดียว",k:["sage","creator","magician"]},
-    {t:"หาความหมายของมัน",k:["sage","magician","outlaw"]},
-    {t:"รีบแก้ให้จบ",k:["hero","ruler"]},
-    {t:"ดูผลกระทบต่อคนอื่น",k:["caregiver","everyman","lover"]},
-    {t:"เบี่ยงความสนใจตัวเอง",k:["jester","explorer","innocent"]},
-    {t:"เก็บไว้เงียบ ๆ",k:["everyman","innocent","ruler"]},
-  ]},
-{q:"อะไรทำให้คุณรู้สึก 'มีตัวตน' มากที่สุด?",a:[
+  {q:"อะไรทำให้คุณรู้สึก 'มีตัวตน' มากที่สุด?",a:[
     {t:"มีคนเข้าใจลึก ๆ",k:["lover","magician","sage"]},
     {t:"ได้สร้างบางอย่างจากตัวเอง",k:["creator","hero","magician"]},
     {t:"ได้ช่วยใครจริง ๆ",k:["caregiver","hero","everyman"]},
     {t:"ได้เป็นอิสระ",k:["explorer","outlaw"]},
     {t:"ได้รับการยอมรับ",k:["jester","everyman","lover"]},
-    {t:"ได้ค้นพบบางอย่างใหม่",k:["sage","explorer","magician"]},
-  ]},
-{q:"เวลาคนอื่นควบคุมคุณมากเกินไป คุณมัก:",a:[
-    {t:"เงียบและถอยออก",k:["sage","innocent","everyman"]},
-    {t:"ต่อต้านทันที",k:["outlaw","hero"]},
-    {t:"ทำตามแต่ภายในอึดอัด",k:["caregiver","everyman","innocent"]},
-    {t:"พยายามรักษาสมดุล",k:["ruler","lover","sage"]},
-    {t:"รู้สึกผิดที่ไม่ทำตาม",k:["caregiver","innocent"]},
-    {t:"ตัดขาดทางอารมณ์",k:["explorer","magician","outlaw"]},
-  ]},
-  {q:"คุณมักเหนื่อยจากอะไรที่สุด?",a:[
-    {t:"การต้องเป็นบางอย่างตลอดเวลา",k:["jester","caregiver","hero"]},
-    {t:"การไม่มีเวลาคิด",k:["sage","creator","magician"]},
-    {t:"การถูกคาดหวัง",k:["hero","ruler","caregiver"]},
-    {t:"คนที่ใช้อารมณ์ใส่",k:["sage","creator","ruler"]},
-    {t:"ความวุ่นวายที่ควบคุมไม่ได้",k:["ruler","innocent","everyman"]},
-    {t:"ความสัมพันธ์ที่ไม่ชัดเจน",k:["lover","magician","outlaw"]},
-  ]},
-{q:"เวลาคุณล้มเหลว เสียงในหัวมักพูดว่า:",a:[
-    {t:'"ยังดีไม่พอ"',k:["hero","ruler","creator"]},
-    {t:'"ไม่มีใครเข้าใจ"',k:["magician","sage","creator"]},
-    {t:'"ควรทำได้ดีกว่านี้"',k:["hero","ruler"]},
-    {t:'"อย่าพึ่งคนอื่นอีก"',k:["explorer","outlaw","sage"]},
-    {t:'"ฉันไม่มีคุณค่า"',k:["innocent","lover","everyman"]},
-    {t:'"ทุกอย่างไร้ความหมาย"',k:["sage","outlaw","explorer"]},
-  ]},
-{q:"สิ่งที่คุณให้อภัยตัวเองยากที่สุดคือ:",a:[
-    {t:"ทำร้ายคนอื่น",k:["caregiver","lover","innocent"]},
-    {t:"ไม่เป็นตัวเอง",k:["outlaw","creator","explorer"]},
-    {t:"อ่อนแอเกินไป",k:["hero","ruler","outlaw"]},
-    {t:"ล้มเหลว",k:["hero","ruler","creator"]},
-    {t:"เสียการควบคุม",k:["ruler","sage","magician"]},
-    {t:"ทอดทิ้งตัวเอง",k:["caregiver","lover"]},
-  ]},
-{q:"เวลามีคนชอบคุณ คุณมักรู้สึก:",a:[
-    {t:"กลัวเขาจะเห็นด้านจริง",k:["magician","creator","outlaw"]},
-    {t:"ดีใจแต่ไม่เชื่อเต็มที่",k:["innocent","everyman","caregiver"]},
-    {t:"อึดอัดเมื่อใกล้เกินไป",k:["explorer","sage","outlaw"]},
-    {t:"อยากรู้ว่าเขาชอบเพราะอะไร",k:["sage","magician"]},
-    {t:"รู้สึกต้องรักษาความคาดหวัง",k:["hero","ruler","jester"]},
-    {t:"เฝ้าระวังว่าจะเสียเขาไป",k:["lover","innocent","caregiver"]},
-  ]},
-
-  // Phase 2
-  {q:"คนแบบไหนที่ทำให้คุณหงุดหงิดที่สุด?",a:[
-    {t:"คนควบคุมทุกอย่าง",k:["explorer","outlaw","creator"]},
-    {t:"คนอ่อนไหวเกินไป",k:["ruler","hero","sage"]},
-    {t:"คนไม่รับผิดชอบ",k:["ruler","hero","caregiver"]},
-    {t:"คนต้องการความสนใจตลอด",k:["sage","creator","explorer"]},
-    {t:"คนไร้จุดยืน",k:["outlaw","hero","ruler"]},
-    {t:"คนเย็นชาทางอารมณ์",k:["lover","caregiver","innocent"]},
-  ]},
-{q:"คุณเกลียดการถูกมองว่า:",a:[
-    {t:"ไม่มีความสามารถ",k:["hero","ruler","creator"]},
-    {t:"ธรรมดา",k:["creator","magician","outlaw"]},
-    {t:"อ่อนแอ",k:["hero","outlaw","ruler"]},
-    {t:"เห็นแก่ตัว",k:["caregiver","lover","innocent"]},
-    {t:"ไร้เหตุผล",k:["sage","ruler"]},
-    {t:"ไม่มีคุณค่า",k:["lover","everyman","innocent"]},
+    {t:"ได้ค้นพบบางอย่างใหม่",k:["sage","explorer","magician"]}
   ]},
   {q:"เมื่อคุณเครียดมาก คุณมัก:",a:[
     {t:"ตัดขาดจากคนอื่น",k:["sage","creator","explorer"]},
@@ -971,23 +997,15 @@ const QUESTIONS = [
     {t:"จมในอารมณ์",k:["lover","caregiver","innocent"]},
     {t:"หาความสมบูรณ์แบบ",k:["creator","ruler","hero"]},
     {t:"หนีเข้าสิ่งบันเทิง",k:["jester","explorer","innocent"]},
-    {t:"คิดวนซ้ำไม่จบ",k:["sage","magician","lover"]},
+    {t:"คิดวนซ้ำไม่จบ",k:["sage","magician","lover"]}
   ]},
-{q:"ถ้าคนอื่นเห็น 'ตัวจริง' ของคุณทั้งหมด คุณกลัวว่าเขาจะ:",a:[
+  {q:"ถ้าคนอื่นเห็น 'ตัวจริง' ของคุณทั้งหมด คุณกลัวว่าเขาจะ:",a:[
     {t:"ผิดหวัง",k:["hero","caregiver","innocent"]},
     {t:"ไม่เลือกคุณ",k:["lover","everyman","caregiver"]},
     {t:"มองว่าคุณแปลก",k:["magician","creator","sage"]},
     {t:"ใช้มันทำร้ายคุณ",k:["outlaw","explorer","ruler"]},
     {t:"มองว่าคุณอ่อนแอ",k:["hero","ruler","outlaw"]},
-    {t:"คิดว่าคุณไม่มีอะไรพิเศษ",k:["creator","magician","jester"]},
-  ]},
-  {q:"เวลาความสัมพันธ์เริ่มห่าง คุณมัก:",a:[
-    {t:"โทษตัวเอง",k:["caregiver","innocent","lover"]},
-    {t:"ถอยก่อน",k:["explorer","outlaw","sage"]},
-    {t:"พยายามแก้ทุกอย่าง",k:["hero","caregiver","ruler"]},
-    {t:"แกล้งไม่รู้สึก",k:["ruler","outlaw","jester"]},
-    {t:"เริ่มคิดมาก",k:["sage","lover","magician"]},
-    {t:"ทำเหมือนไม่สำคัญ",k:["jester","outlaw","everyman"]},
+    {t:"คิดว่าคุณไม่มีอะไรพิเศษ",k:["creator","magician","jester"]}
   ]},
   {q:"อะไรคือสิ่งที่คุณไม่อยากยอมรับเกี่ยวกับตัวเอง?",a:[
     {t:"อยากถูกเลือก",k:["lover","innocent","everyman"]},
@@ -995,592 +1013,112 @@ const QUESTIONS = [
     {t:"อยากหนีทุกอย่าง",k:["explorer","outlaw","jester"]},
     {t:"อยากเป็นคนสำคัญ",k:["hero","creator","jester"]},
     {t:"กลัวการไม่มีตัวตน",k:["creator","magician","outlaw"]},
-    {t:"ต้องการคนอื่นมากกว่าที่คิด",k:["sage","ruler","explorer"]},
+    {t:"ต้องการคนอื่นมากกว่าที่คิด",k:["sage","ruler","explorer"]}
   ]},
-{q:"คุณมักปกป้องตัวเองด้วย:",a:[
-    {t:"เหตุผล",k:["sage","ruler","hero"]},
-    {t:"ระยะห่าง",k:["explorer","magician","outlaw"]},
-    {t:"การทำให้คนพอใจ",k:["caregiver","everyman","innocent"]},
-    {t:"ความเงียบ",k:["sage","creator","ruler"]},
-    {t:"การควบคุม",k:["ruler","hero","magician"]},
-    {t:"การสร้างโลกในหัว",k:["creator","magician","jester"]},
+  {q:"คนแบบไหนที่ทำให้คุณหงุดหงิดที่สุด?",a:[
+    {t:"คนควบคุมทุกอย่าง",k:["explorer","outlaw","creator"]},
+    {t:"คนอ่อนไหวเกินไป",k:["ruler","hero","sage"]},
+    {t:"คนไม่รับผิดชอบ",k:["ruler","hero","caregiver"]},
+    {t:"คนต้องการความสนใจตลอด",k:["sage","creator","explorer"]},
+    {t:"คนไร้จุดยืน",k:["outlaw","hero","ruler"]},
+    {t:"คนเย็นชาทางอารมณ์",k:["lover","caregiver","innocent"]}
   ]},
-  {q:"เวลาถูกปฏิเสธ คุณรู้สึกลึกที่สุดว่า:",a:[
-    {t:"ฉันไม่ดีพอ",k:["hero","creator","innocent"]},
-    {t:"ไม่มีใครเข้าใจฉันจริง",k:["magician","sage","creator"]},
-    {t:"ฉันไว้ใจคนผิด",k:["outlaw","ruler","sage"]},
-    {t:"ฉันไม่ควรเปิดใจ",k:["explorer","outlaw","magician"]},
-    {t:"ฉันไม่มีคุณค่า",k:["innocent","lover","everyman"]},
-    {t:"ฉันจะถูกทิ้งเสมอ",k:["lover","caregiver","innocent"]},
+  {q:"เวลาความสัมพันธ์เริ่มห่าง คุณมัก:",a:[
+    {t:"โทษตัวเอง",k:["caregiver","innocent","lover"]},
+    {t:"ถอยก่อน",k:["explorer","outlaw","sage"]},
+    {t:"พยายามแก้ทุกอย่าง",k:["hero","caregiver","ruler"]},
+    {t:"แกล้งไม่รู้สึก",k:["ruler","outlaw","jester"]},
+    {t:"เริ่มคิดมาก",k:["sage","lover","magician"]},
+    {t:"ทำเหมือนไม่สำคัญ",k:["jester","outlaw","everyman"]}
   ]},
-  {q:"คุณอิจฉาคนแบบไหนลึก ๆ ?",a:[
-    {t:"คนที่มั่นใจโดยไม่ต้องพิสูจน์ตัวเอง",k:["hero","creator","lover"]},
-    {t:"คนที่ใช้ชีวิตง่าย ๆ",k:["sage","creator","magician"]},
-    {t:"คนที่กล้าเป็นตัวเอง",k:["caregiver","innocent","everyman"]},
-    {t:"คนที่ไม่ต้องคิดมาก",k:["sage","magician","ruler"]},
-    {t:"คนที่ดูเป็นที่รัก",k:["outlaw","explorer","sage"]},
-    {t:"คนที่ควบคุมชีวิตตัวเองได้",k:["lover","innocent","caregiver"]},
+  {q:"วันหนึ่งเมื่อคุณไม่อยู่แล้ว อยากให้คนอื่นจดจำคุณยังไง?",a:[
+    {t:""เธอทำให้ฉันรู้ว่าการถูกรัก เป็นยังไง"",k:["lover","caregiver"]},
+    {t:""เธอเปลี่ยนวิธีที่ฉันมองโลก"",k:["sage","magician"]},
+    {t:""เธอกล้าทำในสิ่งที่ฉันไม่กล้า"",k:["hero","outlaw"]},
+    {t:""เธอทิ้งบางอย่างที่งดงามไว้บนโลกนี้"",k:["creator","ruler"]}
   ]},
-  {q:"คุณอิจฉาคนแบบไหนลึก ๆ ?",a:[
-    {t:"คนที่มั่นใจโดยไม่ต้องพิสูจน์ตัวเอง",k:["hero","creator","lover"]},
-    {t:"คนที่ใช้ชีวิตง่าย ๆ",k:["sage","creator","magician"]},
-    {t:"คนที่กล้าเป็นตัวเอง",k:["caregiver","innocent","everyman"]},
-    {t:"คนที่ไม่ต้องคิดมาก",k:["sage","magician","ruler"]},
-    {t:"คนที่ดูเป็นที่รัก",k:["outlaw","explorer","sage"]},
-    {t:"คนที่ควบคุมชีวิตตัวเองได้",k:["lover","innocent","caregiver"]},
-  ]},
-{q:"เวลาชีวิตเริ่มวุ่นวาย คุณมักต้องการ:",a:[
-    {t:"พื้นที่เงียบ ๆ",k:["sage","creator","magician"]},
-    {t:"คำตอบที่ชัดเจน",k:["ruler","hero","sage"]},
-    {t:"ใครสักคนที่เข้าใจ",k:["lover","caregiver","innocent"]},
-    {t:"การเริ่มใหม่",k:["explorer","outlaw","creator"]},
-    {t:"การควบคุมคืนมา",k:["ruler","hero"]},
-    {t:"หนีไปจากทุกอย่าง",k:["jester","explorer","innocent"]},
-  ]},
-
-  // Phase 3
-  {q:"คนที่คุณมักหลงใหล มักมีอะไรบางอย่างที่:",a:[
-    {t:"คุณไม่กล้าเป็น",k:["caregiver","innocent","everyman"]},
-    {t:"คุณขาดอยู่",k:["sage","hero","creator"]},
-    {t:"ทำให้คุณรู้สึกปลอดภัย",k:["lover","innocent","caregiver"]},
-    {t:"ทำให้คุณรู้สึกมีชีวิต",k:["explorer","outlaw","jester"]},
-    {t:"ทำให้คุณรู้สึกถูกมองเห็น",k:["magician","creator","sage"]},
-    {t:"ทำให้คุณอยากเปลี่ยนตัวเอง",k:["hero","ruler","creator"]},
-  ]},
-{q:"ความรักสำหรับคุณลึกที่สุดคือ:",a:[
-    {t:"การถูกเข้าใจ",k:["magician","sage","creator"]},
-    {t:"การเติบโตไปด้วยกัน",k:["hero","sage","explorer"]},
-    {t:"การไม่ถูกทอดทิ้ง",k:["lover","innocent","caregiver"]},
-    {t:"การยอมรับกันจริง ๆ",k:["outlaw","creator","magician"]},
-    {t:"การมีพื้นที่ปลอดภัย",k:["everyman","caregiver","innocent"]},
-    {t:"การไม่ต้องสวมหน้ากาก",k:["outlaw","creator","explorer"]},
-  ]},
-{q:"คุณกลัวอะไรมากกว่ากัน?",a:[
-    {t:"ไม่มีใครรัก",k:["lover","innocent","caregiver"]},
-    {t:"ไม่มีตัวตน",k:["creator","outlaw","magician"]},
-    {t:"ไม่มีอิสระ",k:["explorer","outlaw"]},
-    {t:"ไม่มีความหมาย",k:["sage","creator","hero"]},
-    {t:"ไม่มีคุณค่า",k:["hero","innocent","lover"]},
-    {t:"ไม่มีใครเข้าใจ",k:["magician","sage","creator"]},
-  ]},
-  {q:"เวลาอยู่คนเดียว คุณมัก:",a:[
-    {t:"คิดถึงอนาคต",k:["ruler","hero","sage"]},
-    {t:"ดำดิ่งกับความรู้สึก",k:["lover","caregiver","creator"]},
-    {t:"สร้างโลกในหัว",k:["creator","magician","jester"]},
-    {t:"วิเคราะห์ตัวเอง",k:["sage","magician","outlaw"]},
-    {t:"พักจากโลกภายนอก",k:["sage","creator","explorer"]},
-    {t:"คิดถึงความสัมพันธ์ที่ผ่านมา",k:["lover","innocent","caregiver"]},
-  ]},
-  {q:"อะไรคือสิ่งที่คุณโหยหา แต่ไม่ค่อยพูดถึง?",a:[
-    {t:"การถูกเลือก",k:["lover","innocent","caregiver"]},
-    {t:"ความสงบจริง ๆ",k:["sage","ruler","caregiver"]},
-    {t:"การเริ่มต้นใหม่",k:["explorer","outlaw","jester"]},
-    {t:"การเป็นอิสระเต็มที่",k:["explorer","outlaw","creator"]},
-    {t:"คนที่เข้าใจลึกจริง",k:["magician","sage","creator"]},
-    {t:"การมีคุณค่าโดยไม่ต้องพิสูจน์",k:["hero","caregiver","innocent"]},
-  ]},
-{q:"ถ้าคุณเปลี่ยนชีวิตตัวเองได้ทันทีหนึ่งอย่าง คุณจะ:",a:[
-    {t:"กล้าเป็นตัวเองมากขึ้น",k:["outlaw","creator","explorer"]},
-    {t:"หยุดคิดมาก",k:["sage","magician","ruler"]},
-    {t:"เลิกกลัวการสูญเสีย",k:["lover","innocent","caregiver"]},
-    {t:"มีเป้าหมายชัดเจน",k:["hero","ruler","creator"]},
-    {t:"รักตัวเองได้จริง",k:["caregiver","hero","innocent"]},
-    {t:"ไม่กลัวการถูกปฏิเสธ",k:["lover","jester","everyman"]},
-  ]},
-{q:"สิ่งที่คุณต้องการจากโลกมากที่สุดคือ:",a:[
-    {t:"การยอมรับ",k:["innocent","everyman","caregiver"]},
-    {t:"อิสรภาพ",k:["explorer","outlaw","creator"]},
-    {t:"ความเข้าใจ",k:["magician","sage","lover"]},
-    {t:"ความมั่นคง",k:["ruler","caregiver","innocent"]},
-    {t:"ความหมาย",k:["sage","creator","hero"]},
-    {t:"ความสงบ",k:["everyman","caregiver","innocent"]},
-  ]},
-  {q:"คุณรู้สึกใกล้ตัวเองที่สุดตอน:",a:[
-    {t:"อยู่คนเดียว",k:["sage","creator","magician"]},
-    {t:"สร้างบางอย่าง",k:["creator","hero","magician"]},
-    {t:"ได้ช่วยคนอื่น",k:["caregiver","hero","everyman"]},
-    {t:"ได้พูดความจริง",k:["outlaw","sage","creator"]},
-    {t:"ได้รักใครสักคน",k:["lover","caregiver","innocent"]},
-    {t:"ได้หลุดจากความคาดหวัง",k:["explorer","jester","outlaw"]},
-  ]},
-{q:"คุณคิดว่าด้านไหนของตัวเองที่ 'คนไม่ค่อยเห็น'?",a:[
-    {t:"ความเปราะบาง",k:["hero","ruler","outlaw"]},
-    {t:"ความมืดในใจ",k:["jester","innocent","everyman"]},
-    {t:"ความทะเยอทะยาน",k:["caregiver","everyman","sage"]},
-    {t:"ความเหนื่อยล้า",k:["caregiver","hero","ruler"]},
-    {t:"ความต้องการความรัก",k:["outlaw","explorer","sage"]},
-    {t:"ความกลัวลึก ๆ",k:["ruler","hero","creator"]},
-  ]},
-{q:"อะไรทำให้คุณรู้สึกโดดเดี่ยวที่สุด?",a:[
-    {t:"ไม่มีใครเข้าใจ",k:["magician","sage","creator"]},
-    {t:"ต้องเข้มแข็งตลอด",k:["hero","ruler","caregiver"]},
-    {t:"รู้สึกต่างจากคนอื่น",k:["outlaw","magician","creator"]},
-    {t:"พูดความจริงไม่ได้",k:["outlaw","creator","sage"]},
-    {t:"ไม่มีที่ของตัวเอง",k:["explorer","outlaw","innocent"]},
-    {t:"รู้สึกไม่สำคัญ",k:["lover","innocent","everyman"]},
-  ]},
-  
-// Phase 4
-  {q:"คุณมักหลีกเลี่ยงอะไรในตัวเอง?",a:[
-    {t:"ความโกรธ",k:["caregiver","innocent","everyman"]},
-    {t:"ความต้องการ",k:["hero","ruler","sage"]},
-    {t:"ความอ่อนแอ",k:["hero","outlaw","ruler"]},
-    {t:"ความธรรมดา",k:["creator","magician","outlaw"]},
-    {t:"ความกลัว",k:["hero","ruler","jester"]},
-    {t:"ความว่างเปล่า",k:["jester","creator","explorer"]},
-  ]},
-{q:"เวลาคุณรู้สึกหลงทาง คุณมัก:",a:[
-    {t:"หาความหมายใหม่",k:["sage","magician","creator"]},
-    {t:"หายไปจากผู้คน",k:["creator","sage","explorer"]},
-    {t:"เริ่มควบคุมชีวิตตัวเองหนักขึ้น",k:["ruler","hero"]},
-    {t:"ย้อนกลับไปหาอดีต",k:["innocent","lover","caregiver"]},
-    {t:"มองหาคนที่เข้าใจ",k:["lover","caregiver","magician"]},
-    {t:"เปลี่ยนตัวเองครั้งใหญ่",k:["explorer","outlaw","creator"]},
-  ]},
-{q:"คุณรู้สึกว่าชีวิตจะสมบูรณ์ขึ้น ถ้า:",a:[
-    {t:"ได้เป็นตัวเองจริง ๆ",k:["outlaw","creator","explorer"]},
-    {t:"มีใครสักคนเข้าใจ",k:["magician","sage","lover"]},
-    {t:"ไม่ต้องกลัวอนาคต",k:["innocent","caregiver","everyman"]},
-    {t:"รู้ว่าตัวเองมีคุณค่า",k:["hero","innocent","caregiver"]},
-    {t:"หยุดหนีตัวเอง",k:["explorer","jester","outlaw"]},
-    {t:"พบสิ่งที่มีความหมายจริง",k:["sage","creator","magician"]},
-  ]},
-{q:"เวลาเจอคนที่ 'ดูสมบูรณ์แบบ' คุณมัก:",a:[
-    {t:"เปรียบเทียบตัวเอง",k:["hero","innocent","creator"]},
-    {t:"วิเคราะห์ว่าเขาปิดบังอะไร",k:["sage","magician","outlaw"]},
-    {t:"รู้สึกห่างเหิน",k:["sage","creator","explorer"]},
-    {t:"ชื่นชมเงียบ ๆ",k:["caregiver","everyman","innocent"]},
-    {t:"อยากเข้าใกล้",k:["lover","caregiver","jester"]},
-    {t:"ต่อต้านโดยไม่รู้ตัว",k:["outlaw","ruler","creator"]},
-  ]},
-  {q:"สิ่งที่คุณต้องการให้คนเข้าใจเกี่ยวกับคุณที่สุดคือ:",a:[
-    {t:"ฉันรู้สึกลึกกว่าที่เห็น",k:["magician","sage","creator"]},
-    {t:"ฉันไม่ได้เย็นชา",k:["ruler","sage","explorer"]},
-    {t:"ฉันพยายามมาตลอด",k:["hero","caregiver","innocent"]},
-    {t:"ฉันเหนื่อยเหมือนกัน",k:["caregiver","hero","ruler"]},
-    {t:"ฉันแค่ต้องการพื้นที่",k:["creator","sage","magician"]},
-    {t:"ฉันไม่ได้อยากโดดเดี่ยว",k:["outlaw","explorer","creator"]},
-  ]},
-  {q:"อะไรคือสิ่งที่คุณใช้เวลาทั้งชีวิตพยายามพิสูจน์?",a:[
-    {t:"ฉันมีคุณค่า",k:["innocent","everyman","caregiver"]},
-    {t:"ฉันคู่ควรกับความรัก",k:["lover","innocent","caregiver"]},
-    {t:"ฉันไม่อ่อนแอ",k:["hero","outlaw","ruler"]},
-    {t:"ฉันแตกต่าง",k:["creator","magician","outlaw"]},
-    {t:"ฉันควบคุมชีวิตตัวเองได้",k:["ruler","explorer","hero"]},
-    {t:"ฉันมีความหมาย",k:["sage","creator","magician"]},
-  ]},
-{q:"คุณมักรู้สึกผิดกับอะไร?",a:[
-    {t:"ทำให้คนผิดหวัง",k:["caregiver","innocent","hero"]},
-    {t:"ไม่เป็นอย่างที่หวัง",k:["creator","hero","innocent"]},
-    {t:"ดูแลตัวเองมากเกินไป",k:["caregiver","everyman","innocent"]},
-    {t:"ต้องการมากเกินไป",k:["lover","caregiver","innocent"]},
-    {t:"หนีปัญหา",k:["explorer","jester","outlaw"]},
-    {t:"ไม่กล้าพอ",k:["hero","outlaw","creator"]},
-  ]},
-  {q:"ลึก ๆ แล้ว คุณอยากให้ใครสักคนพูดอะไรกับคุณ?",a:[
-    {t:'"เธอไม่ต้องพิสูจน์ตัวเองแล้ว"',k:["hero","creator","innocent"]},
-    {t:'"ฉันเห็นตัวตนจริงของเธอ"',k:["magician","outlaw","creator"]},
-    {t:'"เธอปลอดภัยแล้ว"',k:["innocent","caregiver","lover"]},
-    {t:'"เธอไม่ได้แปลก"',k:["magician","sage","creator"]},
-    {t:'"เธอมีค่าพออยู่แล้ว"',k:["hero","innocent","caregiver"]},
-    {t:'"เธอไม่จำเป็นต้องแบกทุกอย่าง"',k:["caregiver","ruler","hero"]},
-  ]},
-{q:"สิ่งที่คุณกลัวว่าจะไม่มีวันได้คือ:",a:[
-    {t:"การเข้าใจตัวเองจริง ๆ",k:["sage","magician","creator"]},
-    {t:"ความรักที่มั่นคง",k:["lover","innocent","caregiver"]},
-    {t:"อิสรภาพทางใจ",k:["explorer","outlaw","creator"]},
-    {t:"ความสงบ",k:["sage","ruler","caregiver"]},
-    {t:"การยอมรับตัวเอง",k:["hero","creator","innocent"]},
-    {t:"การมีที่ยืนในโลกนี้",k:["everyman","innocent","outlaw"]},
-  ]},
-  {q:"ถ้าต้องนิยามการเดินทางของชีวิตตัวเองตอนนี้ คุณจะเลือก:",a:[
-    {t:"การค้นหาตัวตน",k:["explorer","outlaw","creator"]},
-    {t:"การเยียวยา",k:["innocent","caregiver","lover"]},
-    {t:"การหลบหนี",k:["jester","explorer","outlaw"]},
-    {t:"การเปลี่ยนผ่าน",k:["magician","creator","sage"]},
-    {t:"การดิ้นรนเพื่อความหมาย",k:["hero","ruler","creator"]},
-    {t:"การเรียนรู้ที่จะยอมรับตัวเอง",k:["caregiver","innocent","sage"]},
-  ]},
+  {q:"ถ้าวิญญาณของคุณมีกลิ่น มันจะเป็นกลิ่นแบบไหน?",a:[
+    {t:"กระดาษเก่า ไม้จันทน์ และฝนตอนค่ำ",k:["sage","magician"]},
+    {t:"กุหลาบ น้ำผึ้ง และผิวของคนที่รัก",k:["lover","innocent"]},
+    {t:"ทะเล หนัง และอากาศของถนนยามเช้า",k:["explorer","outlaw"]},
+    {t:"เทียนหอม ทองคำ และห้องโอ่อ่ายามค่ำคืน",k:["ruler","creator"]}
+  ]}
 ];
- 
-// ── ARCHETYPE DATA (with deep fields) ────────────────────────
-const ARCHETYPES = {
-  innocent: {
-    name:"The Innocent", nameTh:"ผู้บริสุทธิ์", symbol:"✿",
-    tagline:"หัวใจที่ยังเชื่อในแสงสว่าง",
-    summary:"คุณมองโลกด้วยสายตาที่ยังไม่ถูกทำลาย เชื่อในความดี ความงาม และความเรียบง่ายของชีวิต ความบริสุทธิ์ของคุณคือเกราะที่อ่อนโยนที่สุดและทรงพลังที่สุด",
-    wound:"บาดแผลของคุณคือการถูกทำให้รู้สึกผิดในสิ่งที่คุณเป็น ในวัยเด็กหรือในความสัมพันธ์บางอย่าง คุณเรียนรู้ว่าโลกไม่ปลอดภัยอย่างที่คิด และนั่นทำให้คุณต้องเลือกระหว่างการยังเชื่อ หรือการปกป้องตัวเอง",
-    woundQuote:""บางทีการยังไร้เดียงสาไม่ใช่ความอ่อนแอ — มันคือการกล้าที่จะไม่ยอมให้โลกทำลายสิ่งที่งดงามในตัวเรา"",
-shadow:"เงาของคุณคือการหนีจากความจริง คุณอาจใช้ความร่าเริงและความบริสุทธิ์เพื่อหลีกเลี่ยงความเจ็บปวดที่แท้จริง ทำให้คนรอบข้างต้องแบกรับสิ่งที่คุณไม่ยอมมอง",
-    shadowTags:["denial","magical thinking","avoidance"],
-    defense:"คุณใช้ความไร้เดียงสาและการมองโลกในแง่ดีเป็นเกราะ ซึ่งบางครั้งกลายเป็นการ rationalization — การหาเหตุผลสวยงามให้กับสิ่งที่ควรได้รับการเผชิญหน้า",
-    love:"คุณรักแบบไม่มีเงื่อนไข แต่มักเลือกคู่ที่ทำให้คุณรู้สึก 'ได้รับการปกป้อง' มากกว่าคนที่เท่าเทียมกัน รูปแบบนี้อาจนำไปสู่การพึ่งพิงหรือการถูกมองข้าม",
-    loveTags:["anxious attachment","idealization","caretaker dynamic"],
-growth:"เส้นทางของคุณคือการเรียนรู้ว่าความบริสุทธิ์ที่แท้จริงไม่ใช่การไม่รู้จักความมืด แต่คือการเลือกแสงสว่างทั้งที่รู้จักมันดีแล้ว",
-    quote:""ในโลกที่ขมขื่น การยังเชื่อก็คือการกบฏที่งดงามที่สุด"",
-    spectrum:{openness:80,sensitivity:75,autonomy:40,structure:55,intensity:45,depth:60}
-  },
-  sage: {
-    name:"The Sage", nameTh:"นักปราชญ์", symbol:"☾",
-    tagline:"ผู้แสวงหาความจริงในความเงียบ",
-    summary:"คุณกระหายความเข้าใจมากกว่าความสบาย จิตของคุณเป็นห้องสมุดที่ไม่มีวันปิด ความจริงคือเข็มทิศ",
-  wound:"บาดแผลของคุณมักเกิดจากการถูกมองว่า 'คิดมากเกินไป' หรือ 'แปลกแยก' คุณเรียนรู้ว่าการรู้มากทำให้โดดเดี่ยว และนั่นทำให้คุณถอยเข้าไปในโลกความคิดมากขึ้นเรื่อย ๆ",
-    woundQuote:""ความเจ็บปวดของการเข้าใจมากกว่าคนอื่น คือการอยู่คนเดียวในฝูงชน"",
-    shadow:"เงาของคุณคือความเย่อหยิ่งทางปัญญา คุณอาจใช้ความรู้เป็นเกราะที่ห่างเหิน และบางครั้งตัดสินคนอื่นในใจโดยไม่รู้ตัว",
-    shadowTags:["intellectualization","superiority complex","emotional detachment"],
-    defense:"คุณใช้การวิเคราะห์เป็นทางหนีจากการรู้สึก — เมื่ออารมณ์ซับซ้อนเกินไป คุณจะเปลี่ยนมันเป็นคำถาม ทฤษฎี หรือการสังเกต",
-love:"คุณรักแบบลึกซึ้งแต่ไม่ค่อยแสดงออก คุณต้องการคนที่กระตุ้นความคิดได้ แต่มักกลัวว่าการเปิดใจจะทำให้เสียการควบคุม",
-    loveTags:["avoidant tendency","intellectual bonding","slow to trust"],
-    growth:"เส้นทางของคุณคือการเรียนรู้ว่าปัญญาที่สมบูรณ์ต้องรวมหัวใจด้วย การรู้จักตัวเองไม่ใช่แค่การวิเคราะห์ แต่คือการกล้าสัมผัส",
-    quote:""ความเงียบของฉันไม่ได้ว่างเปล่า — มันเต็มไปด้วยคำตอบ"",
-    spectrum:{openness:70,sensitivity:55,autonomy:80,structure:65,intensity:50,depth:95}
-  },
-explorer: {
-    name:"The Explorer", nameTh:"นักแสวงหา", symbol:"✺",
-    tagline:"วิญญาณที่ไม่เคยหยุดเดิน",
-    summary:"ขอบฟ้าเรียกคุณเสมอ คุณยอมเหงาเพื่อจะได้เป็นตัวเอง ทุกย่างก้าวคือคำประกาศอิสรภาพ",
-    wound:"บาดแผลของคุณมักมาจากการถูกกักขัง ไม่ว่าจะเป็นครอบครัว ความสัมพันธ์ หรือความคาดหวังของสังคม คุณเรียนรู้ว่าความปลอดภัยและอิสรภาพอยู่ด้วยกันไม่ได้",
-    woundQuote:""การวิ่งหนีไม่ใช่ความอ่อนแอ — บางครั้งมันคือวิธีเดียวที่จะรอด"",
-    shadow:"เงาของคุณคือการหนีจากตัวเอง คุณอาจแสวงหาสิ่งใหม่ตลอดเวลาไม่ใช่เพราะความกระหาย แต่เพราะการอยู่กับตัวเองนานเกินไปทำให้รู้สึกไม่สบายใจ",
-shadowTags:["commitment phobia","escapism","restlessness"],
-    defense:"คุณใช้การเคลื่อนไหวเป็นการป้องกัน — เมื่อชีวิตเริ่มหนักเกินไป คุณจะออกเดินทาง เปลี่ยนงาน เปลี่ยนสถานที่ หรือเริ่มสิ่งใหม่",
-    love:"คุณรักแบบเข้มข้นในช่วงแรก แต่มักถอยออกเมื่อความสัมพันธ์เริ่มลึก เพราะความลึกทำให้รู้สึกว่ากำลังสูญเสียตัวเอง",
-    loveTags:["hot and cold pattern","fear of enmeshment","independence over intimacy"],
-    growth:"เส้นทางของคุณคือการค้นพบว่าอิสรภาพที่แท้จริงไม่ใช่การไม่มีพันธะ แต่คือการเลือกพันธะที่ไม่ทำให้คุณต้องหยุดเป็นตัวเอง",
-    quote:""ฉันไม่ได้หลงทาง ฉันแค่ยังไม่ถูกจองจำ"",
-    spectrum:{openness:95,sensitivity:60,autonomy:95,structure:25,intensity:65,depth:55}
-  },
-outlaw: {
-    name:"The Outlaw", nameTh:"ผู้ทำลายกฎ", symbol:"✦",
-    tagline:"ไฟใต้ผิวหนังของผู้ที่ไม่ยอมจำนน",
-    summary:"คุณมองทะลุภาพลวง และไม่ยอมเคารพกฎที่ทำร้ายคน การปฏิวัติคือศาสนาส่วนตัวของคุณ",
-    wound:"บาดแผลของคุณมักมาจากการถูกทำให้รู้สึกไร้อำนาจ — ในบ้าน ในระบบ หรือในความสัมพันธ์ คุณเรียนรู้ว่ากฎและอำนาจมักถูกใช้เพื่อทำร้าย ไม่ใช่ปกป้อง",
-    woundQuote:""ฉันไม่ได้เกิดมาเป็นกบฏ — ฉันแค่ปฏิเสธที่จะยอมรับระบบที่ทำร้ายคนที่ฉันรัก"",
-    shadow:"เงาของคุณคือการทำลายโดยไม่สร้าง คุณอาจเผาสะพานโดยไม่จำเป็น หรือสร้างวิกฤตเพื่อให้รู้สึกมีชีวิตชีวา",
-      shadowTags:["self-sabotage","counter-dependence","rage as control"],
-    defense:"คุณใช้การต่อต้านและการสร้างระยะห่างเป็นเกราะ — ก่อนที่ใครจะทิ้งคุณ คุณจะทิ้งก่อน หรือก่อนที่ระบบจะบังคับคุณ คุณจะทำลายมันก่อน",
-    love:"คุณรักอย่างเข้มข้นและเสียสละได้มาก แต่มักทดสอบคนที่รักอยู่ตลอดเวลา ว่าเขาจะยอมรับตัวตนจริง ๆ ของคุณหรือเปล่า",
-    loveTags:["push-pull dynamic","loyalty testing","intensity seeking"],
-    growth:"เส้นทางของคุณคือการเรียนรู้ว่าพลังที่แท้จริงไม่ได้มาจากการปฏิเสธทุกอย่าง แต่จากการเลือกว่าอะไรคุ้มค่าที่จะสู้",
-    quote:""ฉันไม่ได้โกรธโลก ฉันแค่ปฏิเสธจะแกล้งทำเป็นไม่เห็น"",
-    spectrum:{openness:75,sensitivity:80,autonomy:90,structure:15,intensity:95,depth:70}
-  },
-magician: {
-    name:"The Magician", nameTh:"นักเล่นแร่แปรธาตุ", symbol:"✶",
-    tagline:"ผู้ถักทอความเป็นจริงด้วยเจตนา",
-    summary:"คุณมองเห็นรูปแบบที่ซ่อนอยู่ใต้ผิวของสิ่งต่าง ๆ คุณไม่ได้รอให้สิ่งใดเกิดขึ้น คุณเรียกมันออกมา",
-    wound:"บาดแผลของคุณมักมาจากการที่พลังงานของคุณถูกมองว่า 'แปลก' หรือ 'น่ากลัว' คุณเรียนรู้ที่จะซ่อนความลึกของตัวเองเพื่อให้คนรับได้",
-    woundQuote:""การเข้าใจโลกลึกกว่าคนอื่น บางครั้งหมายถึงการอยู่คนเดียวกับความจริงที่คนอื่นยังไม่พร้อมรับ"",
-    shadow:"เงาของคุณคือการใช้พลังงานเพื่อควบคุมแทนที่จะรับใช้ คุณอาจเป็นคนที่ดึงดูดคนอื่นได้อย่างน่าทึ่ง แต่ใช้มันเพื่อประโยชน์ตัวเองโดยไม่รู้ตัว",
-    shadowTags:["manipulation","god complex","power over others"],
-defense:"คุณใช้ความลึกลับและการควบคุมข้อมูลเป็นเกราะ — คุณมักเลือกว่าจะให้คนเห็นอะไรและซ่อนอะไร ทำให้คนรู้สึกว่าไม่เคยรู้จักคุณจริง ๆ",
-    love:"คุณรักแบบที่ทำให้คนรู้สึกว่าถูกมองเห็นอย่างลึกซึ้ง แต่ตัวคุณเองมักไม่ยอมให้คนเข้าถึงในระดับเดียวกัน",
-    loveTags:["intense but guarded","transformative connection","fear of being known"],
-    growth:"เส้นทางของคุณคือการเรียนรู้ว่าความลึกไม่ต้องการการปกป้อง และการให้คนรู้จักคุณจริง ๆ ไม่ใช่การสูญเสียพลัง",
-    quote:""โลกนี้คือกระจก ฉันแค่เปลี่ยนสิ่งที่ฉันมองเห็นในนั้น"",
-    spectrum:{openness:65,sensitivity:85,autonomy:75,structure:60,intensity:90,depth:95}
-  },
-hero: {
-    name:"The Hero", nameTh:"วีรบุรุษ", symbol:"✧",
-    tagline:"หัวใจที่ก้าวเข้าหาไฟ",
-    summary:"ความท้าทายเรียกคุณออกมาจากเงา คุณไม่ยอมให้ความกลัวเป็นคนเขียนเรื่องราวของคุณ",
-    wound:"บาดแผลของคุณมักมาจากการต้องเข้มแข็งเร็วเกินไป คุณเรียนรู้ว่าความอ่อนแอไม่ได้รับการยอมรับ และความรักมักมาพร้อมเงื่อนไข",
-    woundQuote:""ฉันไม่ได้เกิดมากล้าหาญ — ฉันแค่เรียนรู้ตั้งแต่เด็กว่าถ้าไม่สู้ จะไม่มีใครสู้แทน"",
-    shadow:"เงาของคุณคือการหลงตัวเอง คุณอาจกำหนดคุณค่าของตัวเองด้วยสิ่งที่ทำสำเร็จ และเมื่อล้มเหลว รู้สึกว่าตัวเองไม่มีคุณค่าเลย",
-    shadowTags:["workaholism","conditional self-worth","savior complex"],
-    defense:"คุณใช้การกระทำและความสำเร็จเป็นเกราะ — ตราบใดที่คุณยังทำสิ่งต่าง ๆ ได้ดี คุณไม่ต้องเผชิญกับคำถามว่า 'ถ้าไม่มีสิ่งนี้ ฉันคือใคร'",
-love:"คุณรักแบบเต็มที่และซื่อสัตย์ แต่มักทำให้ตัวเองเป็นผู้ช่วยเหลือในความสัมพันธ์ ซึ่งบางครั้งก็ดึงดูดคนที่ต้องการให้ดูแลมากกว่าที่ควร",
-    loveTags:["protector role","high standards","fear of vulnerability"],
-    growth:"เส้นทางของคุณคือการเรียนรู้ว่าความกล้าหาญที่ยิ่งใหญ่ที่สุดคือการยอมรับว่าตัวเองต้องการความช่วยเหลือบ้าง",
-    quote:""ฉันไม่ได้ไร้ความกลัว ฉันแค่เดินไปข้างหน้าทั้ง ๆ ที่กลัว"",
-    spectrum:{openness:60,sensitivity:55,autonomy:70,structure:80,intensity:85,depth:65}
-  },
-  lover: {
-    name:"The Lover", nameTh:"ผู้รัก", symbol:"♥",
-tagline:"หัวใจที่หลอมรวมเป็นโลกได้ทั้งใบ",
-    summary:"คุณรู้สึกลึก รักแรง และเห็นความศักดิ์สิทธิ์ในความใกล้ชิด ทุกสายตาและทุกสัมผัสคือบทสวดของคุณต่อชีวิต",
-    wound:"บาดแผลของคุณมักมาจากการถูกทอดทิ้ง หรือการที่ความรักของคุณไม่ถูกรับในแบบที่มอบให้ คุณเรียนรู้ว่าการรักมากเกินไปอาจเจ็บปวดมาก",
-    woundQuote:""ฉันไม่ได้กลัวการรัก ฉันกลัวการรักและถูกทิ้งให้อยู่กับความเจ็บปวดนั้นคนเดียว"",
-    shadow:"เงาของคุณคือการยึดติดและการหมกมุ่น คุณอาจสูญเสียตัวตนไปในความสัมพันธ์ หรือพยายามควบคุมคนที่รักเพราะกลัวสูญเสีย",
-    shadowTags:["codependency","obsessive attachment","loss of self"],
-    defense:"คุณใช้การดูแลและการอุทิศตัวเป็นเกราะ — ถ้าคุณรักพอ ดูแลพอ เขาก็จะไม่ทิ้งคุณ แต่กลยุทธ์นี้มักดึงดูดคนที่จะใช้ประโยชน์จากความรักของคุณ",
-love:"คุณรักแบบไม่มีเงื่อนไขและลึกมาก แต่มักต้องการการยืนยันว่าถูกรักกลับอยู่ตลอดเวลา ซึ่งทำให้คู่ของคุณรู้สึกกดดัน",
-    loveTags:["anxious attachment","all-in love style","needs reassurance"],
-    growth:"เส้นทางของคุณคือการเรียนรู้ว่าความรักที่สมบูรณ์ต้องเริ่มจากการรักตัวเองก่อน และการยืนหยัดในตัวตนของคุณคือของขวัญที่แท้จริงให้กับความสัมพันธ์",
-    quote:""ฉันไม่ได้รักเพื่อจะถูกรัก — ฉันรักเพราะวิญญาณฉันถูกสร้างมาแบบนั้น"",
-    spectrum:{openness:90,sensitivity:95,autonomy:35,structure:45,intensity:95,depth:85}
-  },
-jester: {
-    name:"The Jester", nameTh:"ผู้เริงร่า", symbol:"✸",
-    tagline:"ปัญญาที่ซ่อนอยู่ในเสียงหัวเราะ",
-    summary:"คุณเชื่อว่าชีวิตนี้สั้นเกินกว่าจะจริงจังตลอดเวลา ความสนุกของคุณคือคำเตือนเงียบ ๆ ว่าทุกสิ่งจะผ่านไป",
-    wound:"บาดแผลของคุณมักมาจากการอยู่ในสภาพแวดล้อมที่หนักและตึงเครียด คุณเรียนรู้ว่าการทำให้คนหัวเราะคือวิธีที่ปลอดภัยที่สุดในการอยู่รอด",
-    woundQuote:""ฉันเริ่มทำให้คนหัวเราะตั้งแต่เด็ก ไม่ใช่เพราะมีความสุข แต่เพราะมันทำให้บรรยากาศดีขึ้นและทุกคนก็ไม่ทะเลาะกัน"",
-    shadow:"เงาของคุณคือความว่างเปล่าที่ซ่อนอยู่หลังเสียงหัวเราะ คุณอาจใช้อารมณ์ขันเพื่อหลีกเลี่ยงการสัมผัสกับความเจ็บปวดที่แท้จริง",
-    shadowTags:["emotional avoidance","clown mask","cynicism"],
-    defense:"คุณใช้อารมณ์ขันและการทำให้สถานการณ์เบาลงเป็นเกราะ — เมื่อบทสนทนาเริ่มลึกหรือเครียดเกินไป คุณจะหาทางหันเหด้วยมุก",
-love:"คุณรักแบบสนุกสนานและเต็มไปด้วยความประหลาดใจ แต่มักหลีกเลี่ยงการสนทนาที่ลึกและจริงจัง ทำให้คู่ของคุณรู้สึกว่าไม่เคยเข้าถึงตัวตนจริง ๆ ของคุณ",
-    loveTags:["playful bonding","fear of depth","commitment ambivalence"],
-    growth:"เส้นทางของคุณคือการเรียนรู้ว่าความสุขที่ลึกที่สุดไม่ได้มาจากการทำให้ทุกอย่างเบา แต่จากการกล้าสัมผัสกับความหนักของชีวิตและยังคงหัวเราะได้",
-    quote:""ฉันหัวเราะ เพราะฉันเข้าใจดีเกินกว่าจะร้องไห้"",
-    spectrum:{openness:85,sensitivity:70,autonomy:65,structure:30,intensity:60,depth:55}
-  },
-everyman: {
-    name:"The Everyman", nameTh:"สามัญชน", symbol:"❋",
-    tagline:"ความจริงในความธรรมดา",
-    summary:"คุณเป็นที่พักใจของคนรอบข้าง ไม่ต้องสวมหน้ากาก ความอบอุ่นและความสัตย์ซื่อของคุณทำให้โลกใจดีขึ้น",
-    wound:"บาดแผลของคุณมักมาจากการถูกมองข้ามหรือรู้สึกว่าตัวเองไม่โดดเด่นพอ คุณเรียนรู้ว่าการเป็นส่วนหนึ่งของกลุ่มสำคัญกว่าการเป็นตัวเอง",
-    woundQuote:""ฉันแค่อยากอยู่ในห้องโดยที่คนไม่รู้สึกว่าฉันเป็นภาระ"",
-    shadow:"เงาของคุณคือการยอมจนเกินไป คุณอาจสูญเสียตัวตนไปเพราะพยายามกลมกลืนกับทุกคน และสะสมความโกรธที่ไม่ได้แสดงออก",
-    shadowTags:["people pleasing","passive aggression","identity diffusion"],
-defense:"คุณใช้ความเป็นกลางและการหลีกเลี่ยงความขัดแย้งเป็นเกราะ — คุณมักพูดว่า 'อะไรก็ได้' หรือ 'แล้วแต่คุณ' เพื่อรักษาความสงบ",
-    love:"คุณรักแบบซื่อสัตย์และมั่นคง แต่มักลืมบอกว่าตัวเองต้องการอะไร ทำให้คู่ของคุณไม่รู้ว่าจะดูแลคุณอย่างไร",
-    loveTags:["secure but self-erasing","needs encouragement to speak up","loyal partner"],
-    growth:"เส้นทางของคุณคือการค้นพบว่าการมีตัวตนที่ชัดเจนไม่ได้ทำให้คุณน่ารักน้อยลง — มันทำให้ความสัมพันธ์ของคุณจริงขึ้น",
-    quote:""ฉันไม่ใช่ใครคนพิเศษ — และนั่นคือของขวัญของฉัน"",
-    spectrum:{openness:65,sensitivity:70,autonomy:40,structure:70,intensity:45,depth:60}
-  },
-caregiver: {
-    name:"The Caregiver", nameTh:"ผู้โอบอุ้ม", symbol:"✿",
-    tagline:"หัวใจที่กว้างพอจะแบกทั้งโลก",
-    summary:"คุณรู้สึกถึงความเจ็บของผู้อื่นได้ก่อนที่พวกเขาจะรู้ตัว ความรักของคุณคือยา",
-    wound:"บาดแผลของคุณมักมาจากการต้องดูแลคนอื่นตั้งแต่เด็ก หรือการเรียนรู้ว่าการได้รับความรักต้องแลกด้วยการให้ก่อน",
-    woundQuote:""ฉันไม่รู้ว่าตัวเองต้องการอะไร เพราะโตมากับการถามแต่ว่าคนอื่นต้องการอะไร"",
-    shadow:"เงาของคุณคือการดูแลเพื่อควบคุม คุณอาจสร้างความต้องการพึ่งพิงในคนอื่น เพื่อให้รู้สึกว่าตัวเองมีความหมาย",
-    shadowTags:["martyrdom","enabling behavior","resentment buildup"],
-    defense:"คุณใช้การดูแลคนอื่นเป็นเกราะจากการต้องเผชิญกับความต้องการของตัวเอง — ตราบใดที่คุณยุ่งกับการช่วยคนอื่น คุณไม่ต้องถามว่า 'แล้วฉันล่ะ?'",
-      love:"คุณรักแบบเสียสละและอุทิศ แต่มักสร้างความสัมพันธ์ที่ไม่สมดุล และสะสมความเหนื่อยล้าและความขุ่นเคืองโดยไม่พูดออกมา",
-    loveTags:["self-sacrifice","needs reciprocity","giver's burnout"],
-    growth:"เส้นทางของคุณคือการเรียนรู้ว่าการดูแลตัวเองไม่ใช่ความเห็นแก่ตัว และคุณไม่สามารถเทน้ำจากแก้วที่ว่างเปล่าได้",
-    quote:""ฉันโอบกอดรอยแผลของคนอื่น เพราะรู้ว่ามันรู้สึกอย่างไร"",
-    spectrum:{openness:80,sensitivity:95,autonomy:35,structure:65,intensity:75,depth:80}
-  },
-ruler: {
-    name:"The Ruler", nameTh:"ผู้ปกครอง", symbol:"✷",
-    tagline:"ผู้สถาปนาระเบียบอันงดงาม",
-    summary:"คุณถูกเรียกมาเพื่อสร้างความมั่นคง ความรุ่งโรจน์ และมรดกที่ยั่งยืน อำนาจในมือของคุณคือเครื่องมือ ไม่ใช่รางวัล",
-    wound:"บาดแผลของคุณมักมาจากการเผชิญความวุ่นวายที่ควบคุมไม่ได้ในวัยเด็ก คุณเรียนรู้ว่าการควบคุมคือวิธีเดียวที่จะรู้สึกปลอดภัย",
-    woundQuote:""ฉันสร้างระเบียบไม่ใช่เพราะอยากควบคุมคนอื่น — แต่เพราะครั้งหนึ่งฉันเคยไม่มีอะไรที่มั่นคงเลย"",
-    shadow:"เงาของคุณคือความเผด็จการที่ซ่อนอยู่ในความปรารถนาดี คุณอาจตัดสินใจแทนคนอื่นเพราะคิดว่าตัวเองรู้ดีกว่า",
-shadowTags:["control issues","perfectionism","difficulty delegating"],
-    defense:"คุณใช้การวางแผนและการควบคุมสถานการณ์เป็นเกราะ — เมื่อชีวิตไม่เป็นไปตามที่วางไว้ คุณจะรู้สึกไม่ปลอดภัยอย่างลึก ๆ",
-    love:"คุณรักแบบมั่นคงและซื่อสัตย์ แต่มักนำในความสัมพันธ์มากเกินไป ทำให้คู่ของคุณรู้สึกว่าไม่มีพื้นที่เป็นตัวเอง",
-    loveTags:["provider and protector","struggles with equality","needs to learn surrender"],
-    growth:"เส้นทางของคุณคือการเรียนรู้ว่าความแข็งแกร่งที่แท้จริงคือการยอมให้คนอื่นมีพื้นที่ และการควบคุมทุกอย่างไม่ได้ทำให้ปลอดภัยขึ้นจริง ๆ",
-    quote:""ฉันไม่ได้ครอง — ฉันรับผิดชอบ"",
-    spectrum:{openness:50,sensitivity:55,autonomy:80,structure:95,intensity:70,depth:65}
-  },
-creator: {
-    name:"The Creator", nameTh:"ผู้สร้างสรรค์", symbol:"❈",
-    tagline:"วิญญาณที่ต้องสร้าง มิฉะนั้นจะตาย",
-    summary:"คุณไม่สามารถหยุดสร้างสิ่งใหม่ได้ มันคือลมหายใจ ทุกสิ่งที่คุณสัมผัสกลายเป็นรูปแบบ ความหมาย หรือบทกวีบางประการ",
-    wound:"บาดแผลของคุณมักมาจากการที่ความคิดสร้างสรรค์ของคุณถูกปฏิเสธ หรือการเรียนรู้ว่าคุณค่าของคุณผูกกับสิ่งที่คุณสร้าง ไม่ใช่สิ่งที่คุณเป็น",
-    woundQuote:""ฉันสร้างเพราะเมื่อไม่ได้สร้าง ฉันไม่แน่ใจว่าตัวเองมีตัวตนอยู่"",
-    shadow:"เงาของคุณคือความเพอร์เฟกชันนิสต์ที่ทำให้อัมพาต คุณอาจเก็บงานไว้โดยไม่แสดงออก เพราะกลัวว่ามันจะไม่ดีพอ",
-    shadowTags:["perfectionism paralysis","creation as identity","fear of judgment"],
-defense:"คุณใช้การสร้างและการจมในงานเป็นเกราะ — เมื่อรู้สึกไม่ดี คุณจะสร้าง เมื่อเจ็บปวด คุณจะเขียน วาด หรือสร้างบางอย่าง",
-    love:"คุณรักแบบลึกและมีความหมาย แต่มักต้องการคนที่เข้าใจโลกสร้างสรรค์ของคุณ และบางครั้งงานก็แข่งกับความสัมพันธ์",
-    loveTags:["creative partner needed","world-builder","needs to be truly seen"],
-    growth:"เส้นทางของคุณคือการเรียนรู้ว่าคุณค่าของคุณไม่ได้ขึ้นอยู่กับสิ่งที่คุณสร้าง และบางครั้งการหยุดสร้างเพื่อรู้สึกก็คือศิลปะอีกแบบ",
-    quote:""สิ่งที่ฉันสร้างคือสิ่งเดียวที่ฉันแน่ใจว่ามีอยู่จริง"",
-    spectrum:{openness:90,sensitivity:85,autonomy:75,structure:40,intensity:80,depth:90}
+
+// ── STATE ──
+let currentQ = 0;
+let scores = {};
+
+function loadQuestion(){
+  if(currentQ >= QUESTIONS.length){
+    showResult();
+    return;
   }
-};
-
-
-
-        
-      
-        const LETTERS = ['A','B','C','D','E','F'];
- let cur = 0;
-const scores = {};
-Object.keys(ARCHETYPES).forEach(k => scores[k] = 0);
-  let history = [];
-  let isPremium = false;
-  let activeQuestions = QUESTIONS;
- 
-function goPage(id){
-  document.querySelectorAll('.page').forEach(p=>{
-    p.classList.remove('active');p.classList.add('hidden');
-  });
-  const el=document.getElementById(id);
-  el.classList.remove('hidden');el.classList.add('active');
-  el.scrollTop=0;
-        } 
-
-function openAbout(){document.getElementById('modal-about').classList.add('open');}
-function closeAbout(){document.getElementById('modal-about').classList.remove('open');}
-document.getElementById('modal-about').addEventListener('click',function(e){
-  if(e.target===this)closeAbout();
-});
- 
-function startQuiz(){
-  cur=0;Object.keys(scores).forEach(k=>scores[k]=0);
-  goPage('page-quiz');renderQ();
-}
- 
-function renderQ(){
-
-  const total = activeQuestions.length;
-
-  const q = activeQuestions[cur];
-
-  const pct = Math.round(((cur+1)/total)*100);
-
-  document.getElementById('q-counter').innerHTML =
-    `${cur+1} <span>/ ${total}</span>`;
-
-  document.getElementById('q-pct').textContent = pct+'%';
-
-  document.getElementById('water-fill').style.width = pct+'%';
-
-  document.getElementById('q-num').textContent =
-    'ข้อที่ '+(cur+1);
-
+  const q = QUESTIONS[currentQ];
+  document.getElementById('q-num').textContent = 'ข้อที่ ' + (currentQ + 1);
   document.getElementById('q-text').textContent = q.q;
- 
-  document.getElementById('q-counter').innerHTML=`${cur+1} <span>/ ${total}</span>`;
-  document.getElementById('q-pct').textContent=pct+'%';
-  document.getElementById('water-fill').style.width=pct+'%';
-  document.getElementById('q-num').textContent='ข้อที่ '+(cur+1);
-  document.getElementById('q-text').textContent=q.q;
-
-
-const shuffled=[...q.a].sort(()=>Math.random()-.5);
-  const grid=document.getElementById('answers-grid');
-  grid.innerHTML='';
-  shuffled.forEach((ans,i)=>{
-    const btn=document.createElement('button');
-    btn.className='ans-btn fade-in';
-    btn.style.animationDelay=(i*.06)+'s';
-    btn.innerHTML=`<span class="ans-letter">${LETTERS[i]}</span><span class="ans-text">${ans.t}</span>`;
-    btn.onclick=()=>pick(ans.k);
+  document.getElementById('q-counter').innerHTML = (currentQ + 1) + ' <span>/ ' + QUESTIONS.length + '</span>';
+  const pct = Math.round((currentQ / QUESTIONS.length) * 100);
+  document.getElementById('q-pct').textContent = pct + '%';
+  document.getElementById('water-fill').style.width = pct + '%';
+  
+  const grid = document.getElementById('answers-grid');
+  grid.innerHTML = '';
+  q.a.forEach((ans, idx) => {
+    const letter = String.fromCharCode(65 + idx);
+    const btn = document.createElement('button');
+    btn.className = 'ans-btn';
+    btn.innerHTML = `<div class="ans-letter">${letter}</div><div class="ans-text">${ans.t}</div>`;
+    btn.onclick = () => {
+      ans.k.forEach(k => scores[k] = (scores[k] || 0) + 1);
+      currentQ++;
+      loadQuestion();
+    };
     grid.appendChild(btn);
-  }); 
-
-const card=document.getElementById('q-card');
-  card.classList.remove('fade-in');void card.offsetWidth;card.classList.add('fade-in');
+  });
 }
- 
-function pick(keys){
 
-  keys.forEach(k=>{
-    if(scores[k]!==undefined) scores[k]++;
-  });
-
-  cur++;
-
-  if(cur < activeQuestions.length){
-
-    renderQ();
-
-  }else{
-
-    if(!isPremium){
-
-      goPage('page-gate');
-
-    }else{
-
-      showResult();
-
-    }
-
-  }
-        }
- 
 function showResult(){
-  const sorted=Object.entries(scores).sort((a,b)=>b[1]-a[1]);
-  const winner=sorted[0][0];
-  const arc=ARCHETYPES[winner];
-  const totalPoints=sorted.reduce((s,e)=>s+e[1],0)||1;
-
-// Main card
-  document.getElementById('r-symbol').textContent=arc.symbol;
-  document.getElementById('r-name-en').textContent=arc.name;
-  document.getElementById('r-name-th').textContent=arc.nameTh;
-  document.getElementById('r-tagline').textContent=arc.tagline;
-  document.getElementById('r-summary').textContent=arc.summary;
-  document.getElementById('r-desire').textContent=arc.desire;
-  document.getElementById('r-fear').textContent=arc.fear;
-document.getElementById('r-strength').textContent=arc.strength;
-  document.getElementById('r-weakness').textContent=arc.weakness;
-  document.getElementById('r-quote').textContent=arc.quote;
-  document.getElementById('r-sub').textContent=arc.sub;
- 
-  // MBTI badges
-  const mbtiEl=document.getElementById('r-mbti');
-  mbtiEl.innerHTML=arc.mbti.map(m=>`<span class="r-mbti-badge">${m}</span>`).join('');
-  // Enneagram badges
-  const ennEl=document.getElementById('r-enn');
-  ennEl.innerHTML=arc.enn.map(e=>`<span class="r-enn-badge">${e}</span>`).join('');
-
-  // Ranking bars
-  const rankEl=document.getElementById('rank-list');
-  rankEl.innerHTML='';
-  sorted.forEach(([key,score],i)=>{
-    const a=ARCHETYPES[key];
-    const pct=Math.round((score/totalPoints)*100);
-    const isTop=i===0;
-    const row=document.createElement('div');
-    row.className='rank-row';
-    row.innerHTML=`
-      <div class="rank-label">${a.symbol} ${a.nameTh}</div>
+  const sorted = Object.entries(scores).sort((a,b) => b[1] - a[1]);
+  const topKey = sorted[0][0];
+  const arch = ARCHETYPES[topKey];
+  
+  document.getElementById('r-symbol').textContent = arch.symbol;
+  document.getElementById('r-name-en').textContent = arch.name;
+  document.getElementById('r-name-th').textContent = arch.nameTh;
+  document.getElementById('r-tagline').textContent = arch.tagline;
+  document.getElementById('r-summary').textContent = 'คุณคือ ' + arch.nameTh + ' - ' + arch.name;
+  document.getElementById('r-desire').textContent = 'ค้นหาความหมาย';
+  document.getElementById('r-fear').textContent = 'การหมดความหวัง';
+  document.getElementById('r-strength').textContent = 'เชื่อมั่นและสติ';
+  document.getElementById('r-weakness').textContent = 'ความเก่าๆ';
+  document.getElementById('r-quote').textContent = '"อยู่เป็นตัวเอง เป็นเป้าหมายที่สูงส่งที่สุด"';
+  
+  const mbtiHtml = '<span class="r-mbti-badge">INFP</span><span class="r-mbti-badge">INFJ</span>';
+  document.getElementById('r-mbti').innerHTML = mbtiHtml;
+  document.getElementById('r-enn').innerHTML = '<span class="r-enn-badge">Type 4</span>';
+  document.getElementById('r-sub').textContent = 'Self-Preservation';
+  
+  const rankHtml = sorted.map(([k,v]) => {
+    const isTop = k === topKey ? ' top' : '';
+    const pct = Math.round((v / 5) * 100);
+    return `<div class="rank-row">
+      <div class="rank-label">${ARCHETYPES[k].nameTh}</div>
       <div class="rank-bar-wrap">
-        <div class="rank-bar-fill${isTop?' top':''}" style="width:0%" data-w="${pct}"></div>
+        <div class="rank-bar-fill${isTop}" style="width:${pct}%"></div>
       </div>
-<div class="rank-pct${isTop?' top':''}">${pct}%</div>`;
-    rankEl.appendChild(row);
-  });
-  // Animate bars after render
-  setTimeout(()=>{
-    rankEl.querySelectorAll('.rank-bar-fill').forEach(el=>{
-      el.style.width=el.dataset.w+'%';
-    });
-  },80);
- 
+      <div class="rank-pct${isTop}">${pct}%</div>
+    </div>`;
+  }).join('');
+  document.getElementById('rank-list').innerHTML = rankHtml;
+  
   goPage('page-result');
 }
- 
-function restart(){
-  startQuiz();
-}
 
-
-function unlockPremiumQuiz(){
-
-  isPremium = true;
-
-  activeQuestions = [
-    ...QUESTIONS,
-    ...PREMIUM_QUESTIONS
-  ];
-
-  goPage('page-quiz');
-
-  renderQ();
-}
-
-
-function simulatePay(){
-
-  unlockPremiumQuiz();
-
-}
-
-
-function goBack(){
-
-  if(cur > 0){
-
-    cur--;
-
-    renderQ();
-
-  }
-
-        }
-        }
+// Load first question on start
+window.addEventListener('load', () => {
+  Object.keys(ARCHETYPES).forEach(k => scores[k] = 0);
+});
 </script>
 </body>
-</html>     
+</html>

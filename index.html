@@ -1282,11 +1282,31 @@ const card=document.getElementById('q-card');
 }
  
 function pick(keys){
-  keys.forEach(k=>{if(scores[k]!==undefined)scores[k]++;});
+
+  keys.forEach(k=>{
+    if(scores[k]!==undefined) scores[k]++;
+  });
+
   cur++;
-  if(cur<QUESTIONS.length){renderQ();}
-  else{showResult();}
-}
+
+  if(cur < activeQuestions.length){
+
+    renderQ();
+
+  }else{
+
+    if(!isPremium){
+
+      goPage('page-gate');
+
+    }else{
+
+      showResult();
+
+    }
+
+  }
+        }
  
 function showResult(){
   const sorted=Object.entries(scores).sort((a,b)=>b[1]-a[1]);
@@ -1341,12 +1361,44 @@ document.getElementById('r-strength').textContent=arc.strength;
   goPage('page-result');
 }
  
-function restart(){startQuiz();}
-        function goBack(){
+function restart(){
+  startQuiz();
+}
+
+
+function unlockPremiumQuiz(){
+
+  isPremium = true;
+
+  activeQuestions = [
+    ...QUESTIONS,
+    ...PREMIUM_QUESTIONS
+  ];
+
+  goPage('page-quiz');
+
+  renderQ();
+}
+
+
+function simulatePay(){
+
+  unlockPremiumQuiz();
+
+}
+
+
+function goBack(){
+
   if(cur > 0){
+
     cur--;
+
     renderQ();
+
   }
+
+        }
         }
 </script>
 </body>

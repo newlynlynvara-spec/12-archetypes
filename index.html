@@ -856,7 +856,101 @@ creator:   {name:"The Creator",   nameTh:"ผู้สร้างสรรค�
 ]}
 ];
 
+// ── QUESTIONS (40 ข้อ 6 ตัวเลือก) ──────────────────────────
+// scoring keys: each answer maps to archetype dimensions
+// A=openness B=sensitivity C=structure D=autonomy E=connection F=depth
+const PHASES = [
+  {range:[0,9],  label:"Phase 1 — Surface Pattern & Orientation"},
+  {range:[10,19],label:"Phase 2 — Shadow & Defense"},
+  {range:[20,29],label:"Phase 3 — Projection / Core Wound"},
+  {range:[30,39],label:"Phase 4 — Individuation & Deep Structure"},
+];
 
+const QUESTIONS = [
+  // Phase 1
+  {q:"เวลาคุณเริ่มสนิทกับใคร สิ่งที่เปลี่ยนก่อนคืออะไร?",a:[
+    {t:"เริ่มเปิดโลกภายใน",k:["magician","sage","creator"]},
+    {t:"เริ่มปกป้องพื้นที่ตัวเอง",k:["outlaw","explorer","ruler"]},
+    {t:"เริ่มคาดหวังความมั่นคง",k:["everyman","caregiver","innocent"]},
+    {t:"เริ่มกลัวเสียอิสระ",k:["explorer","outlaw"]},
+    {t:"เริ่มอ่านอารมณ์อีกฝ่ายมากขึ้น",k:["caregiver","lover","sage"]},
+    {t:"เริ่มตั้งคำถามกับความสัมพันธ์",k:["sage","outlaw","creator"]},
+  ]},
+  {q:"เวลาถูกเข้าใจผิด สิ่งที่เจ็บที่สุดคืออะไร?",a:[
+{t:"ความตั้งใจถูกมองผิด",k:["caregiver","lover","hero"]},
+    {t:"ความสามารถถูกดูต่ำ",k:["hero","ruler","creator"]},
+    {t:"ความรู้สึกถูกละเลย",k:["lover","jester","everyman"]},
+    {t:"ตัวตนถูกลดทอน",k:["outlaw","magician","creator"]},
+    {t:"ความจริงถูกบิดเบือน",k:["sage","outlaw"]},
+    {t:"ความพยายามไม่มีความหมาย",k:["caregiver","hero","innocent"]},
+  ]},
+{q:"คุณมักซ่อนอะไรจากคนอื่นมากที่สุด?",a:[
+    {t:"ความอ่อนแอ",k:["hero","ruler","outlaw"]},
+    {t:"ความโกรธ",k:["caregiver","innocent","everyman"]},
+    {t:"ความต้องการการยอมรับ",k:["jester","lover","creator"]},
+    {t:"ความกลัวการถูกทิ้ง",k:["lover","innocent","caregiver"]},
+    {t:"ความทะเยอทะยาน",k:["ruler","hero","creator"]},
+    {t:"ความว่างเปล่าในใจ",k:["jester","sage","explorer"]},
+  ]},
+{q:"เวลามีปัญหา สิ่งแรกที่คุณทำคือ:",a:[
+    {t:"ถอยกลับไปคิดคนเดียว",k:["sage","creator","magician"]},
+    {t:"หาความหมายของมัน",k:["sage","magician","outlaw"]},
+    {t:"รีบแก้ให้จบ",k:["hero","ruler"]},
+    {t:"ดูผลกระทบต่อคนอื่น",k:["caregiver","everyman","lover"]},
+    {t:"เบี่ยงความสนใจตัวเอง",k:["jester","explorer","innocent"]},
+    {t:"เก็บไว้เงียบ ๆ",k:["everyman","innocent","ruler"]},
+  ]},
+{q:"อะไรทำให้คุณรู้สึก 'มีตัวตน' มากที่สุด?",a:[
+    {t:"มีคนเข้าใจลึก ๆ",k:["lover","magician","sage"]},
+    {t:"ได้สร้างบางอย่างจากตัวเอง",k:["creator","hero","magician"]},
+    {t:"ได้ช่วยใครจริง ๆ",k:["caregiver","hero","everyman"]},
+    {t:"ได้เป็นอิสระ",k:["explorer","outlaw"]},
+    {t:"ได้รับการยอมรับ",k:["jester","everyman","lover"]},
+    {t:"ได้ค้นพบบางอย่างใหม่",k:["sage","explorer","magician"]},
+  ]},
+{q:"เวลาคนอื่นควบคุมคุณมากเกินไป คุณมัก:",a:[
+    {t:"เงียบและถอยออก",k:["sage","innocent","everyman"]},
+    {t:"ต่อต้านทันที",k:["outlaw","hero"]},
+    {t:"ทำตามแต่ภายในอึดอัด",k:["caregiver","everyman","innocent"]},
+    {t:"พยายามรักษาสมดุล",k:["ruler","lover","sage"]},
+    {t:"รู้สึกผิดที่ไม่ทำตาม",k:["caregiver","innocent"]},
+    {t:"ตัดขาดทางอารมณ์",k:["explorer","magician","outlaw"]},
+  ]},
+  {q:"คุณมักเหนื่อยจากอะไรที่สุด?",a:[
+    {t:"การต้องเป็นบางอย่างตลอดเวลา",k:["jester","caregiver","hero"]},
+    {t:"การไม่มีเวลาคิด",k:["sage","creator","magician"]},
+    {t:"การถูกคาดหวัง",k:["hero","ruler","caregiver"]},
+    {t:"คนที่ใช้อารมณ์ใส่",k:["sage","creator","ruler"]},
+    {t:"ความวุ่นวายที่ควบคุมไม่ได้",k:["ruler","innocent","everyman"]},
+    {t:"ความสัมพันธ์ที่ไม่ชัดเจน",k:["lover","magician","outlaw"]},
+  ]},
+{q:"เวลาคุณล้มเหลว เสียงในหัวมักพูดว่า:",a:[
+    {t:'"ยังดีไม่พอ"',k:["hero","ruler","creator"]},
+    {t:'"ไม่มีใครเข้าใจ"',k:["magician","sage","creator"]},
+    {t:'"ควรทำได้ดีกว่านี้"',k:["hero","ruler"]},
+    {t:'"อย่าพึ่งคนอื่นอีก"',k:["explorer","outlaw","sage"]},
+    {t:'"ฉันไม่มีคุณค่า"',k:["innocent","lover","everyman"]},
+    {t:'"ทุกอย่างไร้ความหมาย"',k:["sage","outlaw","explorer"]},
+  ]},
+{q:"สิ่งที่คุณให้อภัยตัวเองยากที่สุดคือ:",a:[
+    {t:"ทำร้ายคนอื่น",k:["caregiver","lover","innocent"]},
+    {t:"ไม่เป็นตัวเอง",k:["outlaw","creator","explorer"]},
+    {t:"อ่อนแอเกินไป",k:["hero","ruler","outlaw"]},
+    {t:"ล้มเหลว",k:["hero","ruler","creator"]},
+    {t:"เสียการควบคุม",k:["ruler","sage","magician"]},
+    {t:"ทอดทิ้งตัวเอง",k:["caregiver","lover"]},
+  ]},
+{q:"เวลามีคนชอบคุณ คุณมักรู้สึก:",a:[
+    {t:"กลัวเขาจะเห็นด้านจริง",k:["magician","creator","outlaw"]},
+    {t:"ดีใจแต่ไม่เชื่อเต็มที่",k:["innocent","everyman","caregiver"]},
+    {t:"อึดอัดเมื่อใกล้เกินไป",k:["explorer","sage","outlaw"]},
+    {t:"อยากรู้ว่าเขาชอบเพราะอะไร",k:["sage","magician"]},
+    {t:"รู้สึกต้องรักษาความคาดหวัง",k:["hero","ruler","jester"]},
+    {t:"เฝ้าระวังว่าจะเสียเขาไป",k:["lover","innocent","caregiver"]},
+  ]},
+
+  
+        
         const LETTERS = ['A','B','C','D'];
 let cur = 0;
 const scores = {};

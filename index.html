@@ -1209,10 +1209,14 @@ const QUESTIONS = [
 
   
   
-        const LETTERS = ['A','B','C','D'];
-let cur = 0;
+       
+        const LETTERS = ['A','B','C','D','E','F'];
+ let cur = 0;
 const scores = {};
-Object.keys(ARCHETYPES).forEach(k => scores[k]=0);
+Object.keys(ARCHETYPES).forEach(k => scores[k] = 0);
+  let history = [];
+  let isPremium = false;
+  let activeQuestions = QUESTIONS;
  
 function goPage(id){
   document.querySelectorAll('.page').forEach(p=>{
@@ -1234,11 +1238,25 @@ function startQuiz(){
   goPage('page-quiz');renderQ();
 }
  
+function renderQ(){
 
-        function renderQ(){
-  const total=QUESTIONS.length;
-  const q=QUESTIONS[cur];
-  const pct=Math.round(((cur+1)/total)*100);
+  const total = activeQuestions.length;
+
+  const q = activeQuestions[cur];
+
+  const pct = Math.round(((cur+1)/total)*100);
+
+  document.getElementById('q-counter').innerHTML =
+    `${cur+1} <span>/ ${total}</span>`;
+
+  document.getElementById('q-pct').textContent = pct+'%';
+
+  document.getElementById('water-fill').style.width = pct+'%';
+
+  document.getElementById('q-num').textContent =
+    'ข้อที่ '+(cur+1);
+
+  document.getElementById('q-text').textContent = q.q;
  
   document.getElementById('q-counter').innerHTML=`${cur+1} <span>/ ${total}</span>`;
   document.getElementById('q-pct').textContent=pct+'%';
